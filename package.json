@@ -1,0 +1,21 @@
+{
+  "name": "winesoft-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "WineSoft Frontend Application",
+  "author": "Capa6 Development Team",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.22"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.1",
+    "vite": "^7.1.7"
+  }
+}
