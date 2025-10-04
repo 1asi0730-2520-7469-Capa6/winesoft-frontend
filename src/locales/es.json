@@ -1,0 +1,20 @@
+{
+  "option": {
+    "home": "Inicio",
+    "about": "Acerca de"
+  },
+  "authoring-phrase": {
+    "intro": "Hecho con",
+    "use": "utilizando",
+    "author": "por el Equipo de desarrollo de {brand}"
+  },
+  "home": {
+    "title": "Bienvenido",
+    "content": "Bienvenido a WineSoft, tu socio digital para la gestión de destilerías, licorerías y proveedores."
+  },
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "content": "La ruta {unavailable-route} que intentas acceder no existe.",
+    "go-home": "Ir a Inicio"
+  }
+}

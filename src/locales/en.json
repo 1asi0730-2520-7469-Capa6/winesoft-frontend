@@ -1,0 +1,20 @@
+{
+  "option": {
+    "home": "Home",
+    "about": "About"
+  },
+  "authoring-phrase": {
+    "intro": "Made with",
+    "use": "using",
+    "author": "by {brand} Development Team"
+  },
+  "home": {
+    "title": "Welcome",
+    "content": "Welcome to WineSoft, your digital partner for managing distilleries, liquor stores, and suppliers."
+  },
+  "page-not-found": {
+    "title": "Page Not Found",
+    "content": "The path {unavailable-route} you are looking for does not exist.",
+    "go-home": "Go Home"
+  }
+}
