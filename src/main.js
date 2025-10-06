@@ -7,7 +7,7 @@ import Material from '@primeuix/themes/material';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import {
-    Button,
+    Button, Calendar,
     Card,
     Checkbox,
     Column,
@@ -18,6 +18,7 @@ import {
     ToastService, Toolbar, Tooltip
 } from "primevue";
 import router from "./router.js";
+import pinia from "./pinia.js";
 
 createApp(App)
     .use(PrimeVue, { theme: { preset: Material}, ripple: true })
@@ -26,6 +27,7 @@ createApp(App)
     .use(ToastService)
     .component('pv-button', Button)
     .component('pv-card', Card)
+    .component('pv-calendar', Calendar)
     .component('pv-column', Column)
     .component('pv-confirm-dialog', ConfirmDialog)
     .component('pv-checkbox', Checkbox)
@@ -50,4 +52,5 @@ createApp(App)
     .directive('tooltip', Tooltip)
     .use(i18n)
     .use(router)
+    .use(pinia)
     .mount('#app')
