@@ -1,16 +1,60 @@
 {
   "option": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "supplies": "Supplies",
+    "stockMovements": "Stock Movements",
+    "inventory": "Inventory"
   },
   "authoring-phrase": {
     "intro": "Made with",
     "use": "using",
     "author": "by {brand} Development Team"
   },
+
   "home": {
     "title": "Welcome",
     "content": "Welcome to WineSoft, your digital partner for managing distilleries, liquor stores, and suppliers."
+  },
+  "supplies": {
+    "title": "Supply Management",
+    "list": "Supplies List",
+    "form": "Supply Form",
+    "id": "ID",
+    "productId": "Product ID",
+    "quantity": "Quantity",
+    "supplier": "Supplier",
+    "date": "Date",
+    "actions": "Actions",
+    "new": "Add Supply",
+    "edit": "Edit Supply",
+    "save": "Save Supply",
+    "cancel": "Cancel",
+    "delete-header": "Confirm Deletion",
+    "confirm-delete": "Are you sure you want to delete supply with ID {id}?"
+  },
+  "stockMovements": {
+    "title": "Stock Movements",
+    "list": "Movements List",
+    "form": "Movement Form",
+    "id": "ID",
+    "productId": "Product ID",
+    "quantity": "Quantity",
+    "type": "Type",
+    "reason": "Reason",
+    "date": "Date",
+    "actions": "Actions",
+    "new": "Register Movement",
+    "edit": "Edit Movement",
+    "save": "Save Movement",
+    "cancel": "Cancel",
+    "in": "IN",
+    "out": "OUT",
+    "delete-header": "Confirm Deletion",
+    "confirm-delete": "Are you sure you want to delete movement with ID {id}?"
+  },
+  "errors": {
+    "occurred": "Errors occurred"
   },
   "page-not-found": {
     "title": "Page Not Found",

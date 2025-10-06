@@ -1,7 +1,9 @@
 {
   "option": {
     "home": "Inicio",
-    "about": "Acerca de"
+    "supplies": "Suministros",
+    "stockMovements": "Movimientos de Stock",
+    "inventory": "Inventario"
   },
   "authoring-phrase": {
     "intro": "Hecho con",
@@ -11,6 +13,46 @@
   "home": {
     "title": "Bienvenido",
     "content": "Bienvenido a WineSoft, tu socio digital para la gestión de destilerías, licorerías y proveedores."
+  },
+  "supplies": {
+    "title": "Gestión de Suministros",
+    "list": "Lista de Suministros",
+    "form": "Formulario de Suministro",
+    "id": "ID",
+    "productId": "ID del Producto",
+    "quantity": "Cantidad",
+    "supplier": "Proveedor",
+    "date": "Fecha",
+    "actions": "Acciones",
+    "new": "Agregar Suministro",
+    "edit": "Editar Suministro",
+    "save": "Guardar Suministro",
+    "cancel": "Cancelar",
+    "delete-header": "Confirmar Eliminación",
+    "confirm-delete": "¿Estás seguro de eliminar el suministro con ID {id}?"
+  },
+  "stockMovements": {
+    "title": "Movimientos de Stock",
+    "list": "Lista de Movimientos",
+    "form": "Formulario de Movimiento",
+    "id": "ID",
+    "productId": "ID del Producto",
+    "quantity": "Cantidad",
+    "type": "Tipo",
+    "reason": "Razón",
+    "date": "Fecha",
+    "actions": "Acciones",
+    "new": "Registrar Movimiento",
+    "edit": "Editar Movimiento",
+    "save": "Guardar Movimiento",
+    "cancel": "Cancelar",
+    "in": "Entrada",
+    "out": "Salida",
+    "delete-header": "Confirmar Eliminación",
+    "confirm-delete": "¿Estás seguro de eliminar el movimiento con ID {id}?"
+  },
+  "errors": {
+    "occurred": "Ocurrieron errores"
   },
   "page-not-found": {
     "title": "Página no encontrada",
