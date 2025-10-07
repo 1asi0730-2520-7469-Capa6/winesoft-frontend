@@ -1,0 +1,57 @@
+{
+  "supplies": [
+    {
+      "id": 1,
+      "productId": 1,
+      "quantity": 50,
+      "supplier": "Distribuidora X",
+      "date": "2025-10-01"
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "quantity": 30,
+      "supplier": "Proveedor Y",
+      "date": "2025-10-02"
+    },
+    {
+      "id": 3,
+      "productId": 3,
+      "quantity": 3,
+      "supplier": "Proveedor Z",
+      "date": "2025-10-05"
+    }
+  ],
+  "stock-movements": [
+    {
+      "id": 1,
+      "productId": 1,
+      "quantity": 5,
+      "type": "OUT",
+      "reason": "Sale",
+      "date": "2025-10-03"
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "quantity": 10,
+      "type": "IN",
+      "reason": "Restock",
+      "date": "2025-10-04"
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "quantity": 2,
+      "type": "OUT",
+      "reason": "Test Movement",
+      "date": "2025-10-13"
+    },
+    {
+      "id": 4,
+      "productId": "2",
+      "quantity": 10,
+      "date": "2025-10-05"
+    }
+  ]
+}
