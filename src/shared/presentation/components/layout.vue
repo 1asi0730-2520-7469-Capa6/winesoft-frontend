@@ -8,6 +8,8 @@ const {t} = useI18n();
 const drawer = ref(false);
 const items = [
   {label: 'option.home', to: '/home'},
+  {label: 'option.supplies', to: '/inventory/supplies'},
+  {label: 'option.stockMovements', to: '/inventory/stock-movements'},
 ];
 </script>
 
