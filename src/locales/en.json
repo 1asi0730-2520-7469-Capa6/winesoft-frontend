@@ -11,10 +11,11 @@
     "use": "using",
     "author": "by {brand} Development Team"
   },
-
   "home": {
-    "title": "Welcome",
-    "content": "Welcome to WineSoft, your digital partner for managing distilleries, liquor stores, and suppliers."
+    "title": "Welcome to WineSoft 🍷",
+    "content": "Easily manage your supplies and track your winery stock movements. Keep everything organized and optimize your inventory in real time.",
+    "manage-supplies": "Manage Supplies",
+    "view-stock": "View Stock"
   },
   "supplies": {
     "title": "Supply Management",

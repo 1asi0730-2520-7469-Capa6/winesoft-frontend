@@ -11,8 +11,10 @@
     "author": "por el Equipo de desarrollo de {brand}"
   },
   "home": {
-    "title": "Bienvenido",
-    "content": "Bienvenido a WineSoft, tu socio digital para la gestión de destilerías, licorerías y proveedores."
+    "title": "Bienvenido a WineSoft 🍷",
+    "content": "Administra tus suministros y controla el movimiento de stock de tu bodega con facilidad. Mantén todo organizado y optimiza tu inventario en tiempo real.",
+    "manage-supplies": "Gestionar Insumos",
+    "view-stock": "Ver Stock"
   },
   "supplies": {
     "title": "Gestión de Suministros",
