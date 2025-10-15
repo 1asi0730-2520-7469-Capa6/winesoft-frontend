@@ -6,9 +6,15 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <layout/>
+  <div class="app-flex-layout">
+    <layout/>
+  </div>
 </template>
 
 <style scoped>
-
+.app-flex-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 </style>

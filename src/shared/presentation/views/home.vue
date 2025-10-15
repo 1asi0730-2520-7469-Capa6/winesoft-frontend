@@ -59,7 +59,9 @@ const goToStock = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 140px);
+  min-height: 100vh; /* Centrado vertical absoluto */
+  padding-top: 80px; /* Espacio para header */
+  padding-bottom: 80px; /* Espacio para footer */
   background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
   color: #ededed;
 }
@@ -71,6 +73,7 @@ const goToStock = () => {
   padding: 2rem;
   width: 90%;
   max-width: 700px;
+  margin: 0; /* Eliminar márgenes que afecten el centrado */
 }
 
 .fade-enter-active, .fade-leave-active {
