@@ -3,6 +3,7 @@ import {useI18n} from "vue-i18n";
 import {ref} from "vue";
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
+import NotificationCenter from "./notification-center.vue";
 
 const {t} = useI18n();
 const drawer = ref(false);
@@ -35,6 +36,7 @@ const items = [
             </router-link>
           </pv-button>
         </div>
+        <notification-center class="mr-3" />
         <language-switcher/>
       </template>
     </pv-toolbar>

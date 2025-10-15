@@ -60,5 +60,12 @@
     "title": "Página no encontrada",
     "content": "La ruta {unavailable-route} que intentas acceder no existe.",
     "go-home": "Ir a Inicio"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "empty": "No tienes notificaciones nuevas.",
+    "markAsRead": "Marcar como leída",
+    "markAllAsRead": "Marcar todas como leídas",
+    "clearAll": "Borrar todas"
   }
 }

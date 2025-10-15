@@ -61,5 +61,12 @@
     "title": "Page Not Found",
     "content": "The path {unavailable-route} you are looking for does not exist.",
     "go-home": "Go Home"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "You have no new notifications.",
+    "markAsRead": "Mark as read",
+    "markAllAsRead": "Mark all as read",
+    "clearAll": "Clear all"
   }
 }
