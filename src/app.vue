@@ -18,3 +18,9 @@ const { t } = useI18n();
   flex-direction: column;
 }
 </style>
+
+<style>
+html, body {
+  overflow-x: hidden;
+}
+</style>
