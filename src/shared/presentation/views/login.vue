@@ -1,24 +1,26 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 const router = useRouter();
+const { t } = useI18n();
 const email = ref('');
 const password = ref('');
 
-const GITHUB_INFO_URL = 'https://1asi0730-2520-7469-capa6.github.io/WineSoft-LandingPage/';
+const GITHUB_INFO_URL = 'https://github.com/1asi0730-2520-7469-Capa6/WineSoft-LandingPage';
 
 function openMoreInfo() {
   window.open(GITHUB_INFO_URL, '_blank');
 }
 
 function onIngresar() {
-
+  // For now we ignore credentials and navigate to home as requested
   router.push({ path: '/home' });
 }
 
 function onCrearCuenta() {
-
+  // intentionally empty — feature to implement later
 }
 </script>
 
@@ -26,25 +28,25 @@ function onCrearCuenta() {
   <div class="login-page">
     <div class="login-left">
       <img src="/winesoft-logo.png" alt="WineSoft" class="logo" />
-      <h1 class="discover">Deseas conocer más<br/>visite nuestra LandingPage</h1>
+      <h1 class="discover">{{ t('login.discoverLine1') }}<br/>{{ t('login.discoverLine2') }}</h1>
 
-      <button class="info-btn" @click="openMoreInfo">Más información</button>
+      <button class="info-btn" @click="openMoreInfo">{{ t('login.moreInfo') }}</button>
     </div>
 
     <div class="login-right">
       <div class="login-card">
-        <h2>Bienvenido a WineSoft!!!</h2>
-        <p class="sub">Inicie sesion para poder acceder a la plataforma</p>
+        <h2>{{ t('login.welcome') }}</h2>
+        <p class="sub">{{ t('login.sub') }}</p>
 
-        <label class="input-label">Correo Electronico</label>
-        <input v-model="email" class="text-input" placeholder="Correo Electronico" />
+        <label class="input-label">{{ t('login.email') }}</label>
+        <input v-model="email" class="text-input" :placeholder="t('login.emailPlaceholder')" />
 
-        <label class="input-label">Contraseña</label>
-        <input v-model="password" type="password" class="text-input" placeholder="Contraseña" />
+        <label class="input-label">{{ t('login.password') }}</label>
+        <input v-model="password" type="password" class="text-input" :placeholder="t('login.passwordPlaceholder')" />
 
-        <button class="ingresar-btn" @click="onIngresar">Ingresar</button>
+        <button class="ingresar-btn" @click="onIngresar">{{ t('login.signIn') }}</button>
 
-        <button class="link-btn" @click="onCrearCuenta">Crear una cuenta</button>
+        <button class="link-btn" @click="onCrearCuenta">{{ t('login.createAccount') }}</button>
       </div>
     </div>
   </div>
@@ -67,30 +69,36 @@ function onCrearCuenta() {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center; /* center horizontally */
+  justify-content: center; /* center vertically */
   padding: 40px;
+  text-align: center;
 }
 
 .logo {
-  width: 120px;
-  margin-bottom: 30px;
+  width: 140px;
+  max-width: 30%;
+  margin-bottom: 24px;
 }
 
 .discover {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 300;
   line-height: 1.2;
-  margin: 0 0 40px 0;
+  margin: 0 0 28px 0;
   color: #fff;
+  max-width: 90%;
 }
 
 .info-btn {
   background: #2e2e2e;
   color: #fff;
   border: 4px solid #000;
-  padding: 18px 36px;
-  font-size: 28px;
+  padding: 14px 36px;
+  font-size: 24px;
+  width: 420px;
+  max-width: 85%;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -172,5 +180,8 @@ function onCrearCuenta() {
     width: 100%;
     margin-top: 20px;
   }
+  .logo { width: 90px; margin-bottom: 18px; }
+  .discover { font-size: 28px; margin-bottom: 18px; }
+  .info-btn { font-size: 20px; width: 80%; padding: 12px 20px; }
 }
 </style>

@@ -72,5 +72,18 @@
   "auth": {
     "login": "Login",
     "signUp": "Sign up"
+  },
+  "login": {
+    "discoverLine1": "Want to know more",
+    "discoverLine2": "visit our Landing Page",
+    "moreInfo": "More information",
+    "welcome": "Welcome to WineSoft!!!",
+    "sub": "Sign in to access the platform",
+    "email": "Email",
+    "emailPlaceholder": "Email address",
+    "password": "Password",
+    "passwordPlaceholder": "Password",
+    "signIn": "Sign In",
+    "createAccount": "Create an account"
   }
 }
