@@ -85,5 +85,18 @@
     "passwordPlaceholder": "Password",
     "signIn": "Sign In",
     "createAccount": "Create an account"
+  },
+  "register": {
+    "title": "Create Account",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "First name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Last name",
+    "email": "Email",
+    "emailPlaceholder": "Email address",
+    "createPassword": "Create password",
+    "passwordPlaceholder": "Password",
+    "confirmPassword": "Confirm password",
+    "next": "Next"
   }
 }

@@ -84,5 +84,18 @@
     "passwordPlaceholder": "Contraseña",
     "signIn": "Ingresar",
     "createAccount": "Crear una cuenta"
+  },
+  "register": {
+    "title": "Crear Cuenta",
+    "firstName": "Nombres",
+    "firstNamePlaceholder": "Nombres",
+    "lastName": "Apellidos",
+    "lastNamePlaceholder": "Apellidos",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Correo electrónico",
+    "createPassword": "Crear contraseña",
+    "passwordPlaceholder": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "next": "Siguiente"
   }
 }

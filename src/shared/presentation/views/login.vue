@@ -15,12 +15,11 @@ function openMoreInfo() {
 }
 
 function onIngresar() {
-  // For now we ignore credentials and navigate to home as requested
   router.push({ path: '/home' });
 }
 
 function onCrearCuenta() {
-  // intentionally empty — feature to implement later
+  router.push({ path: '/register' });
 }
 </script>
 
