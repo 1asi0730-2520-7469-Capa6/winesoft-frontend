@@ -67,5 +67,9 @@
     "markAsRead": "Marcar como leída",
     "markAllAsRead": "Marcar todas como leídas",
     "clearAll": "Borrar todas"
+  },
+  "auth": {
+    "login": "Iniciar Sesion",
+    "signUp": "Crear una cuenta"
   }
 }

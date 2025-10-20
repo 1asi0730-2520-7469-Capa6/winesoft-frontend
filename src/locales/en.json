@@ -68,5 +68,9 @@
     "markAsRead": "Mark as read",
     "markAllAsRead": "Mark all as read",
     "clearAll": "Clear all"
+  },
+  "auth": {
+    "login": "Login",
+    "signUp": "Sign up"
   }
 }

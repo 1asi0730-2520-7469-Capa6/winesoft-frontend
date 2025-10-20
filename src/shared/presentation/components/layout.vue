@@ -1,17 +1,33 @@
 <script setup>
 import {useI18n} from "vue-i18n";
-import {ref} from "vue";
+import {ref, computed} from "vue";
+import { useRoute, useRouter } from 'vue-router';
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
 import NotificationCenter from "./notification-center.vue";
 
 const {t} = useI18n();
 const drawer = ref(false);
+const router = useRouter();
+const route = useRoute();
 const items = [
   {label: 'option.home', to: '/home'},
   {label: 'option.supplies', to: '/inventory/supplies'},
   {label: 'option.stockMovements', to: '/inventory/stock-movements'},
 ];
+
+
+const isAuthView = computed(() => {
+  const p = route.path.toLowerCase();
+  return p === '/login' || p === '/register';
+});
+
+function goToLogin() {
+  router.push({ path: '/login' });
+}
+function goToRegister() {
+  router.push({ path: '/register' });
+}
 </script>
 
 <template>
@@ -24,8 +40,9 @@ const items = [
           <img class="logo" src="/winesoft-logo.png" alt="WineSoft Logo"/>
           <h3>WineSoft</h3>
         </template>
+
         <template #end>
-          <div class="flex-column mr-3">
+          <div v-if="!isAuthView" class="flex-column mr-3">
             <pv-button
                 v-for="item in items"
                 :key="item.label"
@@ -37,7 +54,13 @@ const items = [
               </router-link>
             </pv-button>
           </div>
-          <notification-center class="mr-3" />
+
+          <div v-else class="auth-actions mr-3">
+            <pv-button class="p-button-text p-button-plain" @click="goToLogin">{{ t('auth.login') }}</pv-button>
+            <pv-button class="p-button-text p-button-plain" @click="goToRegister">{{ t('auth.signUp') }}</pv-button>
+          </div>
+
+          <notification-center v-if="!isAuthView" class="mr-3" />
           <language-switcher/>
         </template>
       </pv-toolbar>
@@ -78,5 +101,9 @@ const items = [
 .footer-fixed {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+}
+
+.auth-actions > * {
+  margin-left: 12px;
 }
 </style>
