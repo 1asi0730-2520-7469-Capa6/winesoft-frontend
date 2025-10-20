@@ -97,6 +97,13 @@
     "createPassword": "Create password",
     "passwordPlaceholder": "Password",
     "confirmPassword": "Confirm password",
-    "next": "Next"
+    "next": "Next",
+    "passwordRequirementsTitle": "Password requirements",
+    "passwordReqLength": "Between 8-20 characters",
+    "passwordReqUpper": "Include uppercase and lowercase letters",
+    "passwordReqLower": "Include lowercase and uppercase letters",
+    "passwordReqSpecial": "Include a special character",
+    "passwordMismatch": "Passwords do not match",
+    "emailInvalid": "Not a valid email"
   }
 }

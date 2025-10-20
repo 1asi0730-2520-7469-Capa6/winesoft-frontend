@@ -96,6 +96,13 @@
     "createPassword": "Crear contraseña",
     "passwordPlaceholder": "Contraseña",
     "confirmPassword": "Confirmar contraseña",
-    "next": "Siguiente"
+    "next": "Siguiente",
+    "passwordRequirementsTitle": "Requisitos de la contraseña",
+    "passwordReqLength": "Entre 8 y 20 caracteres",
+    "passwordReqUpper": "Incluir mayúsculas y minúsculas",
+    "passwordReqLower": "Incluir minúsculas y mayúsculas",
+    "passwordReqSpecial": "Incluir un carácter especial",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "emailInvalid": "No es un correo real"
   }
 }
