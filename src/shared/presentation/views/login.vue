@@ -55,7 +55,7 @@ function onCrearCuenta() {
 .login-page {
   display: flex;
   min-height: 100vh;
-  background: #b0356d; /* vino */
+  background: #b0356d;
   color: #fff;
   align-items: center;
   justify-content: center;
@@ -68,8 +68,8 @@ function onCrearCuenta() {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center; /* center horizontally */
-  justify-content: center; /* center vertically */
+  align-items: center;
+  justify-content: center;
   padding: 40px;
   text-align: center;
 }
@@ -165,7 +165,6 @@ function onCrearCuenta() {
   cursor: pointer;
 }
 
-/* responsive */
 @media (max-width: 900px) {
   .login-page {
     flex-direction: column;

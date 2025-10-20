@@ -12,7 +12,6 @@ const email = ref('');
 const password = ref('');
 const passwordConfirm = ref('');
 
-// tooltip / focus state
 const showTooltip = ref(false);
 const tooltipHover = ref(false);
 const passwordFocused = ref(false);
@@ -21,7 +20,6 @@ const flipLeft = ref(false);
 const popoverRef = ref(null);
 const passwordInputRef = ref(null);
 
-// validation computed
 const hasLength = computed(() => password.value.length >= 8 && password.value.length <= 20);
 const hasUpper = computed(() => /[A-Z]/.test(password.value));
 const hasLower = computed(() => /[a-z]/.test(password.value));
@@ -32,7 +30,6 @@ const passwordsMatch = computed(() => password.value === passwordConfirm.value &
 const isPasswordValid = computed(() => hasLength.value && hasUpper.value && hasLower.value && hasSpecial.value);
 const isFormValid = computed(() => isPasswordValid.value && passwordsMatch.value && emailValid.value);
 
-// animation flag for button when form becomes valid
 const animateButton = ref(false);
 let prevValid = false;
 watch(isFormValid, (newVal) => {
@@ -48,7 +45,7 @@ function onSiguiente() {
 
 async function positionPopover() {
   await nextTick();
-  flipLeft.value = false; // default
+  flipLeft.value = false;
   const pop = popoverRef.value;
   if (!pop) return;
   const rect = pop.getBoundingClientRect();
@@ -117,7 +114,6 @@ onBeforeUnmount(() => {
         </div>
 
         <div class="col right" style="position: relative;">
-          <!-- password requirements tooltip (popover): hidden until input focus/click -->
           <div
             ref="popoverRef"
             class="tooltip"
@@ -193,7 +189,7 @@ onBeforeUnmount(() => {
   border: 4px solid #000;
   padding: 28px;
   box-sizing: border-box;
-  position: relative; /* allow popover to be positioned outside the card */
+  position: relative;
 }
 
 .register-columns {
@@ -223,13 +219,11 @@ onBeforeUnmount(() => {
   margin-bottom: 24px;
 }
 
-/* tooltip (popover style) */
 .tooltip {
   position: absolute;
-  /* anchor popover to the right edge of the card by default */
-  top: 28px; /* align with card padding */
-  left: 100%; /* place immediately after the card's right edge */
-  margin-left: 28px; /* gap between card and popover */
+  top: 28px;
+  left: 100%;
+  margin-left: 28px;
   width: 360px;
   background: rgba(0,0,0,0.65);
   border-radius: 10px;
@@ -246,7 +240,6 @@ onBeforeUnmount(() => {
 }
 .tooltip.show { transform: scale(1); opacity: 1; }
 .tooltip::before {
-  /* small arrow pointing left towards the input area */
   content: "";
   position: absolute;
   left: -12px;
@@ -258,7 +251,6 @@ onBeforeUnmount(() => {
   border-right: 12px solid rgba(0,0,0,0.65);
 }
 
-/* flip to left when not enough space on right */
 .tooltip.flip-left {
   left: auto;
   right: 100%;
@@ -274,7 +266,7 @@ onBeforeUnmount(() => {
 }
 
 .mismatch {
-  color: #ff2e2e; /* light red */
+  color: #ff2e2e;
   margin-top: 8px;
   font-size: 16px;
 }
@@ -308,14 +300,12 @@ onBeforeUnmount(() => {
   100% { transform: scale(1); filter: none; }
 }
 
-/* Responsive adjustments */
 @media (max-width: 900px) {
   .register-columns { flex-direction: column; }
   .actions { justify-content: center; margin-top: 12px; }
   .field-label { font-size: 22px; }
   .field-input { height: 44px; }
   .register-title { font-size: 36px; }
-  /* on small screens place popover below the input as block */
   .tooltip { position: relative; width: 100%; top: auto; right: auto; left: auto; transform: none; opacity: 1; box-shadow: none; }
   .tooltip::before { display: none; }
 }
