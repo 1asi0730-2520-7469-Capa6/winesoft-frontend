@@ -10,6 +10,7 @@ const routes = [
     { path: '/home',            name: 'home',       component: Home,            meta: { title: 'Home' } },
     { path: '/login',           name: 'login',      component: Login,           meta: { title: 'Login' } },
     { path: '/register',        name: 'register',   component: Register,        meta: { title: 'Register' } },
+    { path: '/register/user-type', name: 'register-user-type', component: () => import('./shared/presentation/views/register/user-type.vue'), meta: { title: 'Tipo de Usuario' } },
     { path: '/inventory',      name: 'inventory', children: inventoryRoutes },
     { path: '/',                redirect: '/login'},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: pageNotFound,    meta: { title: 'Page Not Found' } },

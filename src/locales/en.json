@@ -104,6 +104,9 @@
     "passwordReqLower": "Include lowercase and uppercase letters",
     "passwordReqSpecial": "Include a special character",
     "passwordMismatch": "Passwords do not match",
-    "emailInvalid": "Not a valid email"
+    "emailInvalid": "Not a valid email",
+    "userTypeTitle": "What type of user are you?",
+    "owner": "Owner",
+    "provider": "Provider"
   }
 }
