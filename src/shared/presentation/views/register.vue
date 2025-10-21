@@ -41,6 +41,8 @@ watch(isFormValid, (newVal) => {
 });
 
 function onSiguiente() {
+  // Navegar a la vista de selección de tipo de usuario
+  router.push({ name: 'register-user-type' });
 }
 
 async function positionPopover() {

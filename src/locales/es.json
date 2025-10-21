@@ -103,6 +103,9 @@
     "passwordReqLower": "Incluir minúsculas y mayúsculas",
     "passwordReqSpecial": "Incluir un carácter especial",
     "passwordMismatch": "Las contraseñas no coinciden",
-    "emailInvalid": "No es un correo real"
+    "emailInvalid": "No es un correo válido",
+    "userTypeTitle": "¿Qué tipo de usuario es usted?",
+    "owner": "Dueño",
+    "provider": "Proveedor"
   }
 }
