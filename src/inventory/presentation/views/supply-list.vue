@@ -55,8 +55,9 @@ const confirmDelete = (supply) => {
         :rows-per-page-options="[5, 10, 20]"
     >
       <pv-column field="id" :header="t('supplies.id')" sortable />
-      <pv-column field="productId" :header="t('supplies.productId')" sortable />
+      <pv-column field="supplyName" :header="t('supplies.supplyName')" />
       <pv-column field="quantity" :header="t('supplies.quantity')" />
+      <pv-column field="unit" :header="t('supplies.unit')" />
       <pv-column field="supplier" :header="t('supplies.supplier')" />
       <pv-column field="date" :header="t('supplies.date')">
         <template #body="slotProps">

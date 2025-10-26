@@ -1,48 +1,65 @@
 import { Supply } from "../domain/model/supply.entity.js";
 
 /**
- * Assembler class to convert supply resources and responses into Supply entities.
+ * SupplyAssembler
+ * Converts supply resources and responses into Supply domain entities.
  * @class
  *
  * @example
  * // Convert a single resource to an entity
- * const resource = { id: 1, supplierName: "Distribuidora X", liquorName: "Whisky", quantity: 50, unit: "bottles", date: "2025-10-01" };
- * const supplyEntity = SupplyAssembler.toEntityFromResource(resource);
+ * const resource = {
+ *   id: 1,
+ *   supplyName: 'Whisky Jack Daniel's',
+ *   quantity: 50,
+ *   unit: 'bottles',
+ *   supplier: 'Distribuidora Andina',
+ *   date: '2025-10-05'
+ * };
+ * const entity = SupplyAssembler.toEntityFromResource(resource);
  *
  * // Convert a response containing multiple resources to entities
  * const response = {
  *   status: 200,
  *   data: [
- *     { id: 1, supplierName: "Distribuidora X", liquorName: "Whisky", quantity: 50, unit: "bottles", date: "2025-10-01" },
- *     { id: 2, supplierName: "Proveedor Y", liquorName: "Vodka", quantity: 30, unit: "boxes", date: "2025-10-02" }
+ *     { id: 1, supplier: "Distribuidora X", supplyName: "Whisky Jack Daniels", quantity: 50, unit: "bottles", date: "2025-10-01" },
+ *     { id: 2, supplier: "Proveedor Y", supplyName: "Vodka Absolut", quantity: 30, unit: "boxes", date: "2025-10-02" }
  *   ]
  * };
- * const supplyEntities = SupplyAssembler.toEntitiesFromResponse(response);
+ * const entities = SupplyAssembler.toEntitiesFromResponse(response);
  */
 export class SupplyAssembler {
     /**
-     * Convert a single supply resource into a Supply entity.
+     * Converts a single supply resource into a Supply entity.
+     * Includes liquorName instead of productId for better readability in the UI.
      * @param {Object} resource - The supply resource object.
      * @returns {Supply} - The converted Supply entity.
      */
     static toEntityFromResource(resource) {
         return new Supply({
-            ...resource,
+            id: resource.id,
+            supplyName: resource.supplyName,
+            quantity: resource.quantity ?? 0,
+            unit: resource.unit ?? "",
+            supplier: resource.supplier,
             date: resource.date ? new Date(resource.date) : null
         });
     }
 
     /**
-     * Convert a response containing multiple supply resources into an array of Supply entities.
-     * @param {Object} response - The response object containing supply resources.
-     * @returns {Supply[]} - An array of converted Supply entities.
+     * Converts an API response containing multiple supply resources into Supply entities.
+     * @param {Object} response - The response object containing supply data.
+     * @returns {Supply[]} - Array of Supply entities.
      */
     static toEntitiesFromResponse(response) {
         if (response.status !== 200) {
             console.error(`${response.status}: ${response.statusText}`);
             return [];
         }
-        let resources = Array.isArray(response.data) ? response.data : response.data['supplies'];
+
+        const resources = Array.isArray(response.data)
+            ? response.data
+            : response.data?.supplies ?? [];
+
         return resources.map(resource => this.toEntityFromResource(resource));
     }
 }
