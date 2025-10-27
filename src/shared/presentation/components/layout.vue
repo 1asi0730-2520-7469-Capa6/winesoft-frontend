@@ -12,6 +12,7 @@ const router = useRouter();
 const route = useRoute();
 const items = [
   {label: 'option.home', to: '/home'},
+  {label: 'option.dashboard', to: '/dashboard'},
   {label: 'option.supplies', to: '/inventory/supplies'},
   {label: 'option.stockMovements', to: '/inventory/stock-movements'},
 ];
