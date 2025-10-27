@@ -42,7 +42,7 @@ watch(isFormValid, (newVal) => {
 
 function onSiguiente() {
   // Navegar a la vista de selección de tipo de usuario
-  router.push({ name: 'register-user-type' });
+  router.push({ path: '/register/user-type' });
 }
 
 async function positionPopover() {
@@ -153,9 +153,9 @@ onBeforeUnmount(() => {
 
           <div class="actions">
             <button
-              :disabled="!isFormValid"
-              :class="[{disabled: !isFormValid}, {animate: animateButton} ]"
-              @click="onSiguiente"
+              :disabled="false"
+              :class="{ animate: animateButton }"
+              @click.prevent="onSiguiente"
             >
               {{ t('register.next') }}
             </button>

@@ -8,10 +8,12 @@ const { t } = useI18n();
 const email = ref('');
 const password = ref('');
 
-const GITHUB_INFO_URL = 'https://github.com/1asi0730-2520-7469-Capa6/WineSoft-LandingPage';
+// Use the Landing Page URL provided by the user
+const INFO_URL = 'https://1asi0730-2520-7469-capa6.github.io/WineSoft-LandingPage/';
 
 function openMoreInfo() {
-  window.open(GITHUB_INFO_URL, '_blank');
+  // open in a new tab and avoid giving the opened page access to window.opener
+  window.open(INFO_URL, '_blank', 'noopener,noreferrer');
 }
 
 function onIngresar() {
