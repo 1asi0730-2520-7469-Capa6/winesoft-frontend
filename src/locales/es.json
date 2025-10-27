@@ -107,5 +107,32 @@
     "userTypeTitle": "¿Qué tipo de usuario es usted?",
     "owner": "Dueño",
     "provider": "Proveedor"
+  },
+  "dashboard": {
+    "title": "Dashboard de Métricas",
+    "loading": "Cargando métricas...",
+    "pendingOrders": "Pedidos Pendientes",
+    "monthlyCosts": "Costos del Mes",
+    "supplyLevelsTitle": "Nivel de Suministros",
+    "supplyStock": "Stock Actual",
+    "alertsTitle": "Alertas de Stock Bajo",
+    "lowStockAlert": "Stock Bajo",
+    "requestSupplies": "Solicitar Insumos",
+    "dailyRotationTitle": "Rotación Diaria de Suministros (Últimos 7 Días)",
+    "dailyMovements": "Movimientos por Día",
+    "noLowStock": "No hay insumos con stock bajo.",
+    "generateReport": "Generar Reporte",
+    "errorGeneratingReport": "No se puede generar el reporte: datos no cargados o existen errores.",
+    "reportGeneratedTitle": "Reporte de Dashboard - WineSoft",
+    "reportGeneratedDate": "Generado el: {date}",
+    "reportSectionSummary": "Resumen",
+    "reportSupplyName": "Suministro",
+    "reportSupplyCurrent": "Actual",
+    "reportSupplyMin": "Mín.",
+    "reportSupplyStatus": "Estado",
+    "reportStatusLow": "BAJO",
+    "reportStatusOK": "OK",
+    "reportDate": "Fecha",
+    "reportMovements": "Movimientos"
   }
 }

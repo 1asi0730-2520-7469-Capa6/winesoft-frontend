@@ -4,7 +4,8 @@
     "about": "About",
     "supplies": "Supplies",
     "stockMovements": "Stock Movements",
-    "inventory": "Inventory"
+    "inventory": "Inventory",
+    "dashboard": "Dashboard"
   },
   "authoring-phrase": {
     "intro": "Made with",
@@ -108,5 +109,33 @@
     "userTypeTitle": "What type of user are you?",
     "owner": "Owner",
     "provider": "Provider"
+  },
+  "dashboard": {
+    "title": "Metrics Dashboard",
+    "loading": "Loading metrics...",
+    "pendingOrders": "Pending Orders",
+    "monthlyCosts": "Monthly Costs",
+    "monthlyTotal": "Total Estimated",
+    "supplyLevelsTitle": "Supply Levels",
+    "supplyStock": "Current Stock",
+    "alertsTitle": "Low Stock Alerts",
+    "lowStockAlert": "Low Stock",
+    "requestSupplies": "Request Supplies",
+    "dailyRotationTitle": "Daily Supply Rotation (Last 7 Days)",
+    "dailyMovements": "Movements per Day",
+    "noLowStock": "No supplies are low on stock.",
+    "generateReport": "Generate Report",
+    "errorGeneratingReport": "Cannot generate report: data not loaded or errors occurred.",
+    "reportGeneratedTitle": "WineSoft Dashboard Report",
+    "reportGeneratedDate": "Generated on: {date}",
+    "reportSectionSummary": "Summary",
+    "reportSupplyName": "Supply Name",
+    "reportSupplyCurrent": "Current",
+    "reportSupplyMin": "Min.",
+    "reportSupplyStatus": "Status",
+    "reportStatusLow": "LOW",
+    "reportStatusOK": "OK",
+    "reportDate": "Date",
+    "reportMovements": "Movements"
   }
 }
