@@ -3,7 +3,8 @@
     "home": "Inicio",
     "supplies": "Suministros",
     "stockMovements": "Movimientos de Stock",
-    "inventory": "Inventario"
+    "inventory": "Inventario",
+    "orders": "Pedidos"
   },
   "authoring-phrase": {
     "intro": "Hecho con",
@@ -52,6 +53,26 @@
     "out": "Salida",
     "delete-header": "Confirmar Eliminación",
     "confirm-delete": "¿Estás seguro de eliminar el movimiento con ID {id}?"
+  },
+  "orders": {
+    "title": "Gestión de Pedidos",
+    "list": "Lista de Pedidos",
+    "form": "Formulario de Pedido",
+    "id": "ID",
+    "supplyId": "ID de Suministro",
+    "supplierId": "ID de Proveedor",
+    "quantity": "Cantidad",
+    "status": "Estado",
+    "actions": "Acciones",
+    "new": "Crear Pedido",
+    "edit": "Editar Pedido",
+    "save": "Guardar Pedido",
+    "cancel": "Cancelar",
+    "delete-header": "Confirmar Eliminación",
+    "confirm-delete": "¿Estás seguro de eliminar el pedido con ID {id}?",
+    "status-pending": "Pendiente",
+    "status-in-transit": "En Tránsito",
+    "status-delivered": "Entregado"
   },
   "errors": {
     "occurred": "Ocurrieron errores"
