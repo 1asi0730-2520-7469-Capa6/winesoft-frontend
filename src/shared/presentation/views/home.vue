@@ -41,7 +41,7 @@ const goToStock = () => {
                 @click="goToSupplies"
             />
             <pv-button
-                :label="`📊 ${t('home.view-stock')}`"
+                :label="`📊 ${t('home.views-stock')}`"
                 icon="pi pi-chart-line"
                 severity="secondary"
                 @click="goToStock"

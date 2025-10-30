@@ -11,6 +11,7 @@ export class OrderAssembler {
      * @returns {Order} - The converted Order entity.
      */
     static toEntityFromResource(resource) {
+        // El resource de la API simulada ahora coincide con la entidad
         return new Order({ ...resource });
     }
 
