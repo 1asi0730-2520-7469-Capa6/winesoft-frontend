@@ -20,6 +20,13 @@
       "quantity": 3,
       "supplier": "Proveedor Z",
       "date": "2025-10-05"
+    },
+    {
+      "id": 4,
+      "productId": 1,
+      "quantity": 2,
+      "supplier": "Dada",
+      "date": "2025-10-30T05:00:00.000Z"
     }
   ],
   "stock-movements": [
@@ -53,5 +60,9 @@
       "quantity": 10,
       "date": "2025-10-05"
     }
+  ],
+  "orders": [
+    { "id": 1, "productId": 1, "quantity": 200, "status": "pending", "supplier": "Distribuidora X" },
+    { "id": 2, "productId": 3, "quantity": 50, "status": "delivered", "supplier": "Proveedor Z" }
   ]
 }
