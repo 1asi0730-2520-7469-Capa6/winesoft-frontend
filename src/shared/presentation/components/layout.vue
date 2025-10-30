@@ -14,6 +14,7 @@ const items = [
   {label: 'option.home', to: '/home'},
   {label: 'option.supplies', to: '/inventory/supplies'},
   {label: 'option.stockMovements', to: '/inventory/stock-movements'},
+  {label: 'option.orders', to: '/orders'}, // AÑADIR ESTA LÍNEA
 ];
 
 
