@@ -15,11 +15,12 @@ import {
     ConfirmationService,
     ConfirmDialog, DataTable, Dialog,
     DialogService, Drawer, FileUpload, FloatLabel, IconField, InputIcon, InputNumber, InputText, Menu,
-    Rating, Row, Select, SelectButton, Tag, Textarea, Toast,
+    Rating, Row, Select, SelectButton, Tag, Textarea, ProgressSpinner, Toast,
     ToastService, Toolbar, Tooltip
 } from "primevue";
 import router from "./router.js";
 import pinia from "./pinia.js";
+import Chart from "primevue/chart";
 
 const WineSoftPreset = definePreset(Material, {
     semantic: {
@@ -88,6 +89,8 @@ createApp(App)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
+    .component('pv-chart', Chart)
+    .component('pv-spinner', ProgressSpinner)
     .directive('tooltip', Tooltip)
     .use(i18n)
     .use(router)

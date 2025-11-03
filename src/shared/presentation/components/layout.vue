@@ -1,14 +1,34 @@
 <script setup>
 import {useI18n} from "vue-i18n";
+import {ref, computed} from "vue";
+import { useRoute, useRouter } from 'vue-router';
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
+import NotificationCenter from "./notification-center.vue";
 
 const {t} = useI18n();
-const items = [{label: "option.home", to: "/home", icon: "pi pi-home"}, {
-  label: "option.supplies",
-  to: "/inventory/supplies",
-  icon: "pi pi-box"
-}, {label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},]; </script>
+const drawer = ref(false);
+const router = useRouter();
+const route = useRoute();
+
+const items = [{label: "option.home", to: "/home", icon: "pi pi-home"},
+               {label: "option.dashboard", to: "/dashboard"},
+               {label: "option.supplies", to: "/inventory/supplies", icon: "pi pi-box"},
+               {label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},
+              ];
+
+const isAuthView = computed(() => {
+  const p = route.path.toLowerCase();
+  return p === '/login' || p === '/register';
+});
+
+function goToLogin() {
+  router.push({ path: '/login' });
+}
+function goToRegister() {
+  router.push({ path: '/register' });
+}
+</script>
 <template>
   <div class="layout-container">
     <aside class="sidebar">

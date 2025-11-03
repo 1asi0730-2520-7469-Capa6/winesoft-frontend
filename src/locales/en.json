@@ -4,7 +4,8 @@
     "about": "About",
     "supplies": "Supplies",
     "stockMovements": "Stock Movements",
-    "inventory": "Inventory"
+    "inventory": "Inventory",
+    "dashboard": "Dashboard"
   },
   "authoring-phrase": {
     "intro": "Made with",
@@ -66,5 +67,80 @@
     "title": "Page Not Found",
     "content": "The path {unavailable-route} you are looking for does not exist.",
     "go-home": "Go Home"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "You have no new notifications.",
+    "markAsRead": "Mark as read",
+    "markAllAsRead": "Mark all as read",
+    "clearAll": "Clear all"
+  },
+  "auth": {
+    "login": "Login",
+    "signUp": "Sign up"
+  },
+  "login": {
+    "discoverLine1": "Want to know more",
+    "discoverLine2": "visit our Landing Page",
+    "moreInfo": "More information",
+    "welcome": "Welcome to WineSoft!!!",
+    "sub": "Sign in to access the platform",
+    "email": "Email",
+    "emailPlaceholder": "Email address",
+    "password": "Password",
+    "passwordPlaceholder": "Password",
+    "signIn": "Sign In",
+    "createAccount": "Create an account"
+  },
+  "register": {
+    "title": "Create Account",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "First name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Last name",
+    "email": "Email",
+    "emailPlaceholder": "Email address",
+    "createPassword": "Create password",
+    "passwordPlaceholder": "Password",
+    "confirmPassword": "Confirm password",
+    "next": "Next",
+    "passwordRequirementsTitle": "Password requirements",
+    "passwordReqLength": "Between 8-20 characters",
+    "passwordReqUpper": "Include uppercase and lowercase letters",
+    "passwordReqLower": "Include lowercase and uppercase letters",
+    "passwordReqSpecial": "Include a special character",
+    "passwordMismatch": "Passwords do not match",
+    "emailInvalid": "Not a valid email",
+    "userTypeTitle": "What type of user are you?",
+    "owner": "Owner",
+    "provider": "Provider"
+  },
+  "dashboard": {
+    "title": "Metrics Dashboard",
+    "loading": "Loading metrics...",
+    "pendingOrders": "Pending Orders",
+    "monthlyCosts": "Monthly Costs",
+    "monthlyTotal": "Total Estimated",
+    "supplyLevelsTitle": "Supply Levels",
+    "supplyStock": "Current Stock",
+    "alertsTitle": "Low Stock Alerts",
+    "lowStockAlert": "Low Stock",
+    "requestSupplies": "Request Supplies",
+    "dailyRotationTitle": "Daily Supply Rotation (Last 7 Days)",
+    "dailyMovements": "Movements per Day",
+    "noLowStock": "No supplies are low on stock.",
+    "generateReport": "Generate Report",
+    "errorGeneratingReport": "Cannot generate report: data not loaded or errors occurred.",
+    "reportGeneratedTitle": "WineSoft Dashboard Report",
+    "reportGeneratedDate": "Generated on: {date}",
+    "reportSectionSummary": "Summary",
+    "reportSupplyName": "Supply Name",
+    "reportSupplyCurrent": "Current",
+    "reportSupplyMin": "Min.",
+    "reportSupplyStatus": "Status",
+    "reportStatusLow": "LOW",
+    "reportStatusOK": "OK",
+    "reportDate": "Date",
+    "reportMovements": "Movements"
   }
 }
