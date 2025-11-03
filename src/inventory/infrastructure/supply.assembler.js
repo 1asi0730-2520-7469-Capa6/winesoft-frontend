@@ -41,6 +41,7 @@ export class SupplyAssembler {
             quantity: resource.quantity ?? 0,
             unit: resource.unit ?? "",
             supplier: resource.supplier,
+            price: resource.price ?? 0,
             date: resource.date ? new Date(resource.date) : null
         });
     }

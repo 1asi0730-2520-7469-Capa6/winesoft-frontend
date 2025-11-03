@@ -59,6 +59,7 @@ const confirmDelete = (supply) => {
       <pv-column field="quantity" :header="t('supplies.quantity')" />
       <pv-column field="unit" :header="t('supplies.unit')" />
       <pv-column field="supplier" :header="t('supplies.supplier')" />
+      <pv-column field="price" :header="t('supplies.price')" />
       <pv-column field="date" :header="t('supplies.date')">
         <template #body="slotProps">
           {{ new Date(slotProps.data.date).toLocaleDateString('es-PE', {

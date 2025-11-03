@@ -11,7 +11,7 @@ const router = useRouter();
 const store = useInventoryStore();
 const { errors, addSupply, updateSupply } = store;
 
-const form = ref({ supplyName: null, quantity: 0, unit:"", supplier: "", date: "" });
+const form = ref({ supplyName: null, quantity: 0, unit:"", supplier: "", price: 0, date: "" });
 const isEdit = computed(() => !!route.params.id);
 
 onMounted(() => {
@@ -22,6 +22,7 @@ onMounted(() => {
       form.value.quantity = supply.quantity;
       form.value.unit = supply.unit;
       form.value.supplier = supply.supplier;
+      form.value.price = supply.price;
       form.value.date = supply.date;
     } else router.push({ name: "inventory-supplies" });
   }
@@ -34,6 +35,7 @@ const saveSupply = () => {
     quantity: form.value.quantity,
     unit: form.value.unit,
     supplier: form.value.supplier,
+    price: form.value.price,
     date: form.value.date,
   });
   if (isEdit.value) updateSupply(supply);
@@ -65,6 +67,10 @@ const navigateBack = () => {
       <div class="field mb-3">
         <label for="supplier">{{ t("supplies.supplier") }}</label>
         <pv-input-text id="supplier" v-model="form.supplier" required class="w-full" />
+      </div>
+      <div class="field mb-3">
+        <label for="price">{{ t("supplies.price") }}</label>
+        <pv-input-number id="price" v-model="form.price" required class="w-full" />
       </div>
       <div class="field mb-3">
         <label for="date">{{ t("supplies.date") }}</label>
