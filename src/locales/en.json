@@ -29,6 +29,7 @@
     "quantity": "Quantity",
     "unit": "Unit",
     "supplier": "Supplier",
+    "price": "Price",
     "date": "Date",
     "actions": "Actions",
     "new": "Add Supply",

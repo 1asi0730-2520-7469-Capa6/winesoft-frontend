@@ -28,6 +28,7 @@
     "quantity": "Cantidad",
     "unit": "Unidad",
     "supplier": "Proveedor",
+    "price": "Precio",
     "date": "Fecha",
     "actions": "Acciones",
     "new": "Agregar Insumo",
