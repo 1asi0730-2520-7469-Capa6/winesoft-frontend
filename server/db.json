@@ -2,23 +2,29 @@
   "supplies": [
     {
       "id": 1,
-      "productId": 1,
+      "supplyName": "Red Wine",
       "quantity": 50,
+      "unit": "bottles",
       "supplier": "Distribuidora X",
+      "price": 1000,
       "date": "2025-10-01"
     },
     {
       "id": 2,
-      "productId": 2,
+      "supplyName": "White Wine",
       "quantity": 30,
+      "unit": "boxes",
       "supplier": "Proveedor Y",
+      "price": 1000,
       "date": "2025-10-02"
     },
     {
       "id": 3,
-      "productId": 3,
+      "supplyName": "Rosé Wine",
       "quantity": 3,
+      "unit": "bottles",
       "supplier": "Proveedor Z",
+      "price": 2000,
       "date": "2025-10-05"
     }
   ],
@@ -46,12 +52,6 @@
       "type": "OUT",
       "reason": "Test Movement",
       "date": "2025-10-13"
-    },
-    {
-      "id": 4,
-      "productId": "2",
-      "quantity": 10,
-      "date": "2025-10-05"
     }
   ],
 

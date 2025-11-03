@@ -10,6 +10,9 @@
     "use": "utilizando",
     "author": "por el Equipo de desarrollo de {brand}"
   },
+  "footer": {
+    "rights": "Todos los derechos reservados"
+  },
   "home": {
     "title": "Bienvenido a WineSoft 🍷",
     "content": "Administra tus suministros y controla el movimiento de stock de tu bodega con facilidad. Mantén todo organizado y optimiza tu inventario en tiempo real.",
@@ -17,21 +20,23 @@
     "view-stock": "Ver Stock"
   },
   "supplies": {
-    "title": "Gestión de Suministros",
+    "title": "Gestión de Insumos",
     "list": "Lista de Suministros",
-    "form": "Formulario de Suministro",
+    "form": "Formulario de Insumo",
     "id": "ID",
-    "productId": "ID del Producto",
+    "supplyName": "Nombre del Insumo",
     "quantity": "Cantidad",
+    "unit": "Unidad",
     "supplier": "Proveedor",
+    "price": "Precio",
     "date": "Fecha",
     "actions": "Acciones",
-    "new": "Agregar Suministro",
-    "edit": "Editar Suministro",
-    "save": "Guardar Suministro",
+    "new": "Agregar Insumo",
+    "edit": "Editar Insumo",
+    "save": "Guardar Insumo",
     "cancel": "Cancelar",
     "delete-header": "Confirmar Eliminación",
-    "confirm-delete": "¿Estás seguro de eliminar el suministro con ID {id}?"
+    "confirm-delete": "¿Estás seguro de eliminar el insumo con ID {id}?"
   },
   "stockMovements": {
     "title": "Movimientos de Stock",

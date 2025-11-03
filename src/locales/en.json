@@ -12,6 +12,9 @@
     "use": "using",
     "author": "by {brand} Development Team"
   },
+  "footer": {
+    "rights": "All rights reserved"
+  },
   "home": {
     "title": "Welcome to WineSoft 🍷",
     "content": "Easily manage your supplies and track your winery stock movements. Keep everything organized and optimize your inventory in real time.",
@@ -23,9 +26,11 @@
     "list": "Supplies List",
     "form": "Supply Form",
     "id": "ID",
-    "productId": "Product ID",
+    "supplyName": "Supply Name",
     "quantity": "Quantity",
+    "unit": "Unit",
     "supplier": "Supplier",
+    "price": "Price",
     "date": "Date",
     "actions": "Actions",
     "new": "Add Supply",
