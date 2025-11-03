@@ -23,7 +23,7 @@ const useInventoryStore = defineStore("inventory", () => {
     const stockMovements = ref([]);
     const errors = ref([]);
     const suppliesLoaded = ref(false);
-    const movementsLoaded = ref(false);
+    const stockMovementsLoaded = ref(false);
 
     // Properties
     const suppliesCount = computed(() =>
@@ -31,7 +31,7 @@ const useInventoryStore = defineStore("inventory", () => {
     );
 
     const movementsCount = computed(() =>
-        movementsLoaded.value ? stockMovements.value.length : 0
+        stockMovementsLoaded.value ? stockMovements.value.length : 0
     );
 
     // Actions
@@ -53,7 +53,7 @@ const useInventoryStore = defineStore("inventory", () => {
             .then((response) => {
                 stockMovements.value =
                     StockMovementAssembler.toEntitiesFromResponse(response);
-                movementsLoaded.value = true;
+                stockMovementsLoaded.value = true;
             })
             .catch((error) => {
                 errors.value.push(error);
@@ -160,7 +160,7 @@ const useInventoryStore = defineStore("inventory", () => {
         stockMovements,
         errors,
         suppliesLoaded,
-        movementsLoaded,
+        stockMovementsLoaded,
         // Properties
         suppliesCount,
         movementsCount,
