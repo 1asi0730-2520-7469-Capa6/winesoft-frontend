@@ -3,6 +3,13 @@
   line-height: 1.5;
   font-weight: 400;
 
+    --text-color: #212121;
+    --text-color-secondary: #757575;
+    --surface-hover: rgba(0, 0, 0, 0.04);
+    --primary-color: #b0356d;
+    --primary-color-faint: #f2d6e3;
+    --surface-d: #2C2C2C;
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;

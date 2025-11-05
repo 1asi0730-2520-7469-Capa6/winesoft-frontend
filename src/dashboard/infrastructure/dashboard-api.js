@@ -1,7 +1,6 @@
 import { BaseApi } from "../../shared/infrastructure/base-api.js";
 import { BaseEndpoint } from "../../shared/infrastructure/base-endpoint.js";
 
-// Apunta a la nueva variable
 const dashboardEndpointPath = import.meta.env.VITE_DASHBOARD_ENDPOINT_PATH;
 
 /**
@@ -20,7 +19,10 @@ export class DashboardApi extends BaseApi {
      * Fetches the dashboard data object from the dashboard endpoint.
      * getAll() hace un GET a /dashboard
      */
-    getDashboardData() {
-        return this.#dashboardEndpoint.getAll();
+    getDashboardData(startDate = null, endDate = null) {
+        const params = {};
+        if (startDate) params.startDate = startDate;// ej: "2025-10-01"
+        if (endDate) params.endDate = endDate;// ej: "2025-10-31"
+        return this.http.get(this.#dashboardEndpoint.endpointPath, { params });
     }
 }

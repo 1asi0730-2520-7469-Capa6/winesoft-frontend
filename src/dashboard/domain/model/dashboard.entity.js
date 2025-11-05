@@ -1,3 +1,21 @@
+/** Order Entity (Value Object for Dashboard)
+* @property {number} id
+* @property {string} status
+* @property {string} orderDate
+* @property {number} productId
+* @property {number} quantity
+*/
+export class Order {
+    constructor({ id, status, orderDate, productId, quantity, total }) {
+        this.id = id;
+        this.status = status;
+        this.orderDate = orderDate;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.total = total;
+    }
+}
+
 /**
  * SupplyLevel: Represents the stock level for one supply item.
  * Think of it like a small container holding info about one product's stock.
@@ -38,16 +56,17 @@ export class Dashboard {
     /**
      * @param {Object} param0 - The data object used to create the Dashboard.
      * @param {Object} param0.summary - Quick summary numbers.
-     * @param {number} param0.summary.pendingOrders - How many orders are waiting.
      * @param {number} param0.summary.monthlyCosts - Estimated costs for the month.
-     * @param {SupplyLevel[]} param0.supplyLevels - A list (array) of SupplyLevel objects.
-     * @param {DailyRotation[]} param0.dailyRotation - A list (array) of DailyRotation objects.
+     * @param {SupplyLevel[]} param0.supplyLevels - A list of SupplyLevel objects.
+     * @param {DailyRotation[]} param0.dailyRotation - A list of DailyRotation objects.
+     * @param {Order[]} param0.orders
      */
     // This runs when we create the main Dashboard object.
     // It sets default values if nothing is provided.
-    constructor({ summary = { pendingOrders: 0, monthlyCosts: 0 }, supplyLevels = [], dailyRotation = [] } = {}) {
+    constructor({ summary = { monthlyCosts: 0 }, supplyLevels = [], dailyRotation = [], orders = [] } = {} ) {
         this.summary = summary; // Store the summary info
         this.supplyLevels = supplyLevels; // Store the list of supply levels
-        this.dailyRotation = dailyRotation; // Store the list of daily rotations
+        this.dailyRotation = dailyRotation;
+        this.orders = orders;// Store the list of daily rotations
     }
 }

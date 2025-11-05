@@ -1,4 +1,4 @@
-import { Dashboard, SupplyLevel, DailyRotation } from "../domain/model/dashboard.entity.js";
+import { Dashboard, SupplyLevel, DailyRotation, Order } from "../domain/model/dashboard.entity.js";
 
 /**
  * Assembler class: Used to convert raw data coming from the API
@@ -12,12 +12,10 @@ export class DashboardAssembler {
         const summary = resource.summary || { pendingOrders: 0, monthlyCosts: 0 };
         return new Dashboard({
             summary: {
-                pendingOrders: summary.pendingOrders,
                 monthlyCosts: summary.monthlyCosts
             },
             // Check if supplyLevels is a list (array).
             // If yes, loop through each item ('s') and create a new SupplyLevel object for it.
-            // If not an array, leave the list empty ([]).
             supplyLevels: Array.isArray(resource.supplyLevels)
                 ? resource.supplyLevels.map(s => new SupplyLevel(s))
                 : [],
@@ -25,6 +23,9 @@ export class DashboardAssembler {
             // Check if it's an array and create DailyRotation objects for each item ('d').
             dailyRotation: Array.isArray(resource.dailyRotation)
                 ? resource.dailyRotation.map(d => new DailyRotation(d))
+                : [],
+            orders: Array.isArray(resource.orders)
+                ? resource.orders.map(o => new Order(o))
                 : []
         });
     }
