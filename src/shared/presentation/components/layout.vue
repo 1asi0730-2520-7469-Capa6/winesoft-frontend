@@ -20,14 +20,14 @@ const items = [
 
 const isAuthView = computed(() => {
   const p = route.path.toLowerCase();
-  return p === '/login' || p === '/register';
+  return p === '/sign-up' || p === '/sign-in';
 });
 
-function goToLogin() {
-  router.push({ path: '/login' });
+function goToSignUp() {
+  router.push({ path: '/sign-up' });
 }
-function goToRegister() {
-  router.push({ path: '/register' });
+function goToSignIn() {
+  router.push({ path: '/sign-in' });
 }
 </script>
 
@@ -57,8 +57,8 @@ function goToRegister() {
           </div>
 
           <div v-else class="auth-actions mr-3">
-            <pv-button class="p-button-text p-button-plain" @click="goToLogin">{{ t('auth.login') }}</pv-button>
-            <pv-button class="p-button-text p-button-plain" @click="goToRegister">{{ t('auth.signUp') }}</pv-button>
+            <pv-button class="p-button-text p-button-plain" @click="goToSignUp">{{ t('auth.signUp') }}</pv-button>
+            <pv-button class="p-button-text p-button-plain" @click="goToSignIn">{{ t('auth.signIn') }}</pv-button>
           </div>
 
           <notification-center v-if="!isAuthView" class="mr-3" />

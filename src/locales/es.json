@@ -90,10 +90,10 @@
     "clearAll": "Borrar todas"
   },
   "auth": {
-    "login": "Iniciar Sesion",
-    "signUp": "Crear una cuenta"
+    "signUp": "Iniciar Sesión",
+    "signIn": "Crear una cuenta"
   },
-  "login": {
+  "signUp": {
     "discoverLine1": "Deseas conocer más",
     "discoverLine2": "visite nuestra LandingPage",
     "moreInfo": "Más información",
@@ -104,9 +104,10 @@
     "password": "Contraseña",
     "passwordPlaceholder": "Contraseña",
     "signIn": "Ingresar",
-    "createAccount": "Crear una cuenta"
+    "createAccount": "Crear una cuenta",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
   },
-  "register": {
+  "signIn": {
     "title": "Crear Cuenta",
     "firstName": "Nombres",
     "firstNamePlaceholder": "Nombres",

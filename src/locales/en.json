@@ -91,10 +91,10 @@
     "clearAll": "Clear all"
   },
   "auth": {
-    "login": "Login",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "signIn": "Sign in"
   },
-  "login": {
+  "signUp": {
     "discoverLine1": "Want to know more",
     "discoverLine2": "visit our Landing Page",
     "moreInfo": "More information",
@@ -105,9 +105,10 @@
     "password": "Password",
     "passwordPlaceholder": "Password",
     "signIn": "Sign In",
-    "createAccount": "Create an account"
+    "createAccount": "Create an account",
+    "forgotPassword": "Forgot your password?"
   },
-  "register": {
+  "signIn": {
     "title": "Create Account",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
