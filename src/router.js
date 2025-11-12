@@ -15,7 +15,7 @@ const routes = [
     { path: '/recovery-password', name: 'recovery-password', component: () => import('./identity/presentation/views/recovery-password.vue'), meta: { title: 'Recuperar Contraseña' } },
     { path: '/inventory',      name: 'inventory', children: inventoryRoutes },
     { path: '/orders',         name: 'orders',    children: ordersRoutes },
-    { path: '/',                redirect: '/sign-up'},
+    { path: '/',                redirect: '/sign-in'},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: pageNotFound,    meta: { title: 'Page Not Found' } },
 ];
 
