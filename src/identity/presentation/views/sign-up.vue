@@ -8,7 +8,6 @@ const { t } = useI18n();
 const email = ref('');
 const password = ref('');
 
-// Use the Landing Page URL provided by the user
 const INFO_URL = 'https://1asi0730-2520-7469-capa6.github.io/WineSoft-LandingPage/';
 
 function openMoreInfo() {
@@ -32,27 +31,27 @@ function onRecuperar() {
   <div class="login-page">
     <div class="login-left">
       <img src="/winesoft-logo.png" alt="WineSoft" class="logo" />
-      <h1 class="discover">{{ t('signUp.discoverLine1') }}<br/>{{ t('signUp.discoverLine2') }}</h1>
+      <h1 class="discover">{{ t('signIn.discoverLine1') }}<br/>{{ t('signIn.discoverLine2') }}</h1>
 
-      <button class="info-btn" @click="openMoreInfo">{{ t('signUp.moreInfo') }}</button>
+      <button class="info-btn" @click="openMoreInfo">{{ t('signIn.moreInfo') }}</button>
     </div>
 
     <div class="login-right">
       <div class="login-card">
-        <h2>{{ t('signUp.welcome') }}</h2>
-        <p class="sub">{{ t('signUp.sub') }}</p>
+        <h2>{{ t('signIn.welcome') }}</h2>
+        <p class="sub">{{ t('signIn.sub') }}</p>
 
-        <label class="input-label">{{ t('signUp.email') }}</label>
-        <input v-model="email" class="text-input" :placeholder="t('signUp.emailPlaceholder')" />
+        <label class="input-label">{{ t('signIn.email') }}</label>
+        <input v-model="email" class="text-input" :placeholder="t('signIn.emailPlaceholder')" />
 
-        <label class="input-label">{{ t('signUp.password') }}</label>
-        <input v-model="password" type="password" class="text-input" :placeholder="t('signUp.passwordPlaceholder')" />
+        <label class="input-label">{{ t('signIn.password') }}</label>
+        <input v-model="password" type="password" class="text-input" :placeholder="t('signIn.passwordPlaceholder')" />
 
-        <button class="ingresar-btn" @click="onIngresar">{{ t('signUp.signIn') }}</button>
+        <button class="ingresar-btn" @click="onIngresar">{{ t('signIn.signIn') }}</button>
 
-        <button class="forgot-btn" @click="onRecuperar">{{ t('signUp.forgotPassword') }}</button>
+        <button class="forgot-btn" @click="onRecuperar">{{ t('signIn.forgotPassword') }}</button>
 
-        <button class="link-btn" @click="onCrearCuenta">{{ t('signUp.createAccount') }}</button>
+        <button class="link-btn" @click="onCrearCuenta">{{ t('signIn.createAccount') }}</button>
       </div>
     </div>
   </div>

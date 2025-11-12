@@ -90,24 +90,10 @@
     "clearAll": "Borrar todas"
   },
   "auth": {
-    "signUp": "Iniciar Sesión",
-    "signIn": "Crear una cuenta"
+    "signUp": "Crear Cuenta",
+    "signIn": "Iniciar sesión"
   },
   "signUp": {
-    "discoverLine1": "Deseas conocer más",
-    "discoverLine2": "visite nuestra LandingPage",
-    "moreInfo": "Más información",
-    "welcome": "¡Bienvenido a WineSoft!!!",
-    "sub": "Inicia sesión para poder acceder a la plataforma",
-    "email": "Correo Electrónico",
-    "emailPlaceholder": "Correo Electrónico",
-    "password": "Contraseña",
-    "passwordPlaceholder": "Contraseña",
-    "signIn": "Ingresar",
-    "createAccount": "Crear una cuenta",
-    "forgotPassword": "¿Olvidaste tu contraseña?"
-  },
-  "signIn": {
     "title": "Crear Cuenta",
     "firstName": "Nombres",
     "firstNamePlaceholder": "Nombres",
@@ -129,5 +115,31 @@
     "userTypeTitle": "¿Qué tipo de usuario es usted?",
     "owner": "Dueño",
     "provider": "Proveedor"
+  },
+  "signIn": {
+    "discoverLine1": "Deseas conocer más",
+    "discoverLine2": "visite nuestra LandingPage",
+    "moreInfo": "Más información",
+    "welcome": "¡Bienvenido a WineSoft!!!",
+    "sub": "Inicia sesión para poder acceder a la plataforma",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "Correo Electrónico",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Contraseña",
+    "signIn": "Ingresar",
+    "createAccount": "Crear una cuenta",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
+  },
+  "recovery": {
+    "title": "Restablecer tu contraseña",
+    "subtitle": "Introduce el correo asociado a tu cuenta y te enviaremos instrucciones para restablecer la contraseña.",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tucorreo@empresa.com",
+    "send": "Enviar enlace de restablecimiento",
+    "sending": "Enviando...",
+    "back": "Volver a registrarse",
+    "sentTitle": "Revisa tu bandeja de entrada",
+    "sentMessage": "Hemos enviado un enlace para restablecer la contraseña a {email}. Sigue las instrucciones para cambiar tu contraseña.",
+    "invalidEmail": "Por favor ingresa una dirección de correo válida"
   }
 }

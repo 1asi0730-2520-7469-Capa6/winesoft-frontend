@@ -1,12 +1,12 @@
 <script setup>
-import {useI18n} from "vue-i18n";
-import {ref, computed} from "vue";
+import {useI18n}from "vue-i18n";
+import {ref, computed, watch} from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
 import NotificationCenter from "./notification-center.vue";
 
-const {t} = useI18n();
+const {t, locale} = useI18n();
 const drawer = ref(false);
 const router = useRouter();
 const route = useRoute();
@@ -14,9 +14,8 @@ const items = [
   {label: 'option.home', to: '/home'},
   {label: 'option.supplies', to: '/inventory/supplies'},
   {label: 'option.stockMovements', to: '/inventory/stock-movements'},
-  {label: 'option.orders', to: '/orders'}, // AÑADIR ESTA LÍNEA
+  {label: 'option.orders', to: '/orders'},
 ];
-
 
 const isAuthView = computed(() => {
   const p = route.path.toLowerCase();
@@ -29,6 +28,33 @@ function goToSignUp() {
 function goToSignIn() {
   router.push({ path: '/sign-in' });
 }
+
+function normalizeLocale(raw) {
+  const s = raw && raw.value ? String(raw.value) : String(raw || 'en');
+  return s.split('-')[0];
+}
+
+// Fallback local header labels (fuente de verdad para la cabecera)
+const headerLabels = {
+  en: { signUp: 'Sign up', signIn: 'Sign in' },
+  es: { signUp: 'Crear Cuenta', signIn: 'Iniciar sesión' }
+};
+
+const headerSignUp = computed(() => {
+  const l = normalizeLocale(locale) || 'en';
+  return (headerLabels[l] && headerLabels[l].signUp) || 'Sign up';
+});
+const headerSignIn = computed(() => {
+  const l = normalizeLocale(locale) || 'en';
+  return (headerLabels[l] && headerLabels[l].signIn) || 'Sign in';
+});
+
+// Debug: log values when locale changes to help verificar traducciones
+watch(locale, (newLocale) => {
+  const l = (newLocale && typeof newLocale === 'string') ? newLocale.split('-')[0] : (newLocale && newLocale.value ? String(newLocale.value).split('-')[0] : 'en');
+  console.log('[i18n debug] headerSignUp ->', headerSignUp.value);
+  console.log('[i18n debug] headerSignIn ->', headerSignIn.value);
+});
 </script>
 
 <template>
@@ -57,8 +83,8 @@ function goToSignIn() {
           </div>
 
           <div v-else class="auth-actions mr-3">
-            <pv-button class="p-button-text p-button-plain" @click="goToSignUp">{{ t('auth.signUp') }}</pv-button>
-            <pv-button class="p-button-text p-button-plain" @click="goToSignIn">{{ t('auth.signIn') }}</pv-button>
+            <pv-button class="p-button-text p-button-plain" @click="goToSignUp">{{ headerSignUp }}</pv-button>
+            <pv-button class="p-button-text p-button-plain" @click="goToSignIn">{{ headerSignIn }}</pv-button>
           </div>
 
           <notification-center v-if="!isAuthView" class="mr-3" />

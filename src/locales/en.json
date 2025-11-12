@@ -95,20 +95,6 @@
     "signIn": "Sign in"
   },
   "signUp": {
-    "discoverLine1": "Want to know more",
-    "discoverLine2": "visit our Landing Page",
-    "moreInfo": "More information",
-    "welcome": "Welcome to WineSoft!!!",
-    "sub": "Sign in to access the platform",
-    "email": "Email",
-    "emailPlaceholder": "Email address",
-    "password": "Password",
-    "passwordPlaceholder": "Password",
-    "signIn": "Sign In",
-    "createAccount": "Create an account",
-    "forgotPassword": "Forgot your password?"
-  },
-  "signIn": {
     "title": "Create Account",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
@@ -130,5 +116,31 @@
     "userTypeTitle": "What type of user are you?",
     "owner": "Owner",
     "provider": "Provider"
+  },
+  "signIn": {
+    "discoverLine1": "Want to know more",
+    "discoverLine2": "visit our Landing Page",
+    "moreInfo": "More information",
+    "welcome": "Welcome to WineSoft!!!",
+    "sub": "Sign in to access the platform",
+    "email": "Email",
+    "emailPlaceholder": "Email address",
+    "password": "Password",
+    "passwordPlaceholder": "Password",
+    "signIn": "Sign In",
+    "createAccount": "Create an account",
+    "forgotPassword": "Forgot your password?"
+  },
+  "recovery": {
+    "title": "Reset your password",
+    "subtitle": "Enter the email associated with your account and we'll send instructions to reset your password.",
+    "email": "Email address",
+    "emailPlaceholder": "you@company.com",
+    "send": "Send reset link",
+    "sending": "Sending...",
+    "back": "Back to sign up",
+    "sentTitle": "Check your inbox",
+    "sentMessage": "We sent a password reset link to {email}. Follow the instructions to reset your password.",
+    "invalidEmail": "Please enter a valid email address"
   }
 }

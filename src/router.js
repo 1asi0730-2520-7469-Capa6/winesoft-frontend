@@ -1,6 +1,6 @@
 import Home from "./shared/presentation/views/home.vue";
-import SignUp from "./identity/presentation/views/sign-up.vue";
-import SignIn from "./identity/presentation/views/sign-in.vue";
+import SignUp from "./identity/presentation/views/sign-in.vue";
+import SignIn from "./identity/presentation/views/sign-up.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import inventoryRoutes from "./inventory/presentation/inventory.routes.js";
 import ordersRoutes from "./orders/presentation/orders.routes.js";

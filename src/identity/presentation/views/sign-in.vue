@@ -98,20 +98,20 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="register-page">
-    <div class="register-title">{{ t('signIn.title') }}</div>
+    <div class="register-title">{{ t('signUp.title') }}</div>
 
     <div class="register-card">
       <div class="register-columns">
         <div class="col left">
-          <label class="field-label">{{ t('signIn.firstName') }}</label>
-          <input class="field-input" v-model="firstName" :placeholder="t('signIn.firstNamePlaceholder')" />
+          <label class="field-label">{{ t('signUp.firstName') }}</label>
+          <input class="field-input" v-model="firstName" :placeholder="t('signUp.firstNamePlaceholder')" />
 
-          <label class="field-label">{{ t('signIn.lastName') }}</label>
-          <input class="field-input" v-model="lastName" :placeholder="t('signIn.lastNamePlaceholder')" />
+          <label class="field-label">{{ t('signUp.lastName') }}</label>
+          <input class="field-input" v-model="lastName" :placeholder="t('signUp.lastNamePlaceholder')" />
 
-          <label class="field-label">{{ t('signIn.email') }}</label>
-          <input class="field-input" v-model="email" :placeholder="t('signIn.emailPlaceholder')" />
-          <div v-if="email && !emailValid" class="mismatch">{{ t('signIn.emailInvalid') }}</div>
+          <label class="field-label">{{ t('signUp.email') }}</label>
+          <input class="field-input" v-model="email" :placeholder="t('signUp.emailPlaceholder')" />
+          <div v-if="email && !emailValid" class="mismatch">{{ t('signUp.emailInvalid') }}</div>
         </div>
 
         <div class="col right" style="position: relative;">
@@ -124,31 +124,31 @@ onBeforeUnmount(() => {
             @mouseenter="onTooltipEnter"
             @mouseleave="onTooltipLeave"
           >
-            <div class="tooltip-title">{{ t('signIn.passwordRequirementsTitle') }}</div>
+            <div class="tooltip-title">{{ t('signUp.passwordRequirementsTitle') }}</div>
             <ul class="requirements">
-              <li :class="{ok: hasLength}">● {{ t('signIn.passwordReqLength') }}</li>
-              <li :class="{ok: hasUpper}">● {{ t('signIn.passwordReqUpper') }}</li>
-              <li :class="{ok: hasLower}">● {{ t('signIn.passwordReqLower') }}</li>
-              <li :class="{ok: hasSpecial}">● {{ t('signIn.passwordReqSpecial') }}</li>
+              <li :class="{ok: hasLength}">● {{ t('signUp.passwordReqLength') }}</li>
+              <li :class="{ok: hasUpper}">● {{ t('signUp.passwordReqUpper') }}</li>
+              <li :class="{ok: hasLower}">● {{ t('signUp.passwordReqLower') }}</li>
+              <li :class="{ok: hasSpecial}">● {{ t('signUp.passwordReqSpecial') }}</li>
             </ul>
           </div>
 
-          <label class="field-label">{{ t('signIn.createPassword') }}</label>
+          <label class="field-label">{{ t('signUp.createPassword') }}</label>
           <input
             ref="passwordInputRef"
             class="field-input"
             type="password"
             v-model="password"
-            :placeholder="t('signIn.passwordPlaceholder')"
+            :placeholder="t('signUp.passwordPlaceholder')"
             @focus="onPasswordFocus"
             @blur="onPasswordBlur"
             @click="onPasswordFocus"
           />
 
-          <label class="field-label">{{ t('signIn.confirmPassword') }}</label>
-          <input class="field-input" type="password" v-model="passwordConfirm" :placeholder="t('signIn.passwordPlaceholder')" />
+          <label class="field-label">{{ t('signUp.confirmPassword') }}</label>
+          <input class="field-input" type="password" v-model="passwordConfirm" :placeholder="t('signUp.passwordPlaceholder')" />
 
-          <div v-if="passwordConfirm && !passwordsMatch" class="mismatch">{{ t('signIn.passwordMismatch') }}</div>
+          <div v-if="passwordConfirm && !passwordsMatch" class="mismatch">{{ t('signUp.passwordMismatch') }}</div>
 
           <div class="actions">
             <button
@@ -156,7 +156,7 @@ onBeforeUnmount(() => {
               :class="[{disabled: !isFormValid}, {animate: animateButton} ]"
               @click="onSiguiente"
             >
-              {{ t('signIn.next') }}
+              {{ t('signUp.next') }}
             </button>
           </div>
         </div>
