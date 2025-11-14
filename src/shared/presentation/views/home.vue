@@ -1,91 +1,88 @@
 <script setup>
-import { useI18n } from "vue-i18n";
-import { ref, onMounted } from "vue";
-import router from "../../../router.js";
+import {useI18n} from "vue-i18n";
 
-const { t } = useI18n();
-const show = ref(false);
-
-onMounted(() => {
-  setTimeout(() => (show.value = true), 150);
-});
-
-const goToSupplies = () => {
-  router.push("/inventory/supplies");
-};
-
-const goToStock = () => {
-  router.push("/inventory/stock-movements");
-};
-
+const {t} = useI18n();
 </script>
 
 <template>
   <div class="home-container">
-    <transition name="fade">
-      <pv-card v-if="show" class="home-card shadow-4 home-card-large">
-        <template #title>
-          <h1 class="text-5xl font-bold text-primary text-center mb-2">
-            {{ t('home.title') }}
-          </h1>
-        </template>
-        <template #content>
-          <p class="text-xl text-gray-300 text-center mt-2 leading-relaxed max-w-3xl mx-auto">
-            {{ t('home.content') }}
-          </p>
-          <div class="mt-8 flex justify-center gap-5 home-options-center">
-            <pv-button
-                :label="`📦 ${t('home.manage-supplies')}`"
-                icon="pi pi-box"
-                severity="primary"
-                @click="goToSupplies"
-            />
-            <pv-button
-                :label="`📊 ${t('home.view-stock')}`"
-                icon="pi pi-chart-line"
-                severity="secondary"
-                @click="goToStock"
-            />
-          </div>
-        </template>
-      </pv-card>
-    </transition>
+    <section class="welcome-card">
+      <img src="/winesoft-logo.png" alt="WineSoft Logo" class="logo"/>
+      <h1 class="title">WineSoft</h1>
+      <p class="subtitle">
+        {{ t("home.title") }}
+      </p>
+      <p class="subtitle">
+        {{ t("home.content") }}
+      </p>
+
+      <div class="actions">
+        <router-link to="/inventory/supplies">
+          <pv-button>
+            {{ t("home.manage-supplies") }}
+          </pv-button>
+        </router-link>
+
+        <router-link to="/inventory/stock-movements">
+          <pv-button>
+            {{ t("home.view-stock") }}
+          </pv-button>
+        </router-link>
+      </div>
+    </section>
   </div>
 </template>
 
 <style scoped>
+
 .home-container {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  min-height: 100vh;
-  padding-top: 60px;
-  padding-bottom: 80px;
-  background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
-  color: #ededed;
-}
-.home-card {
-  background: rgba(28, 28, 28, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 1rem;
-  padding: 2.5rem 2.5rem 2rem 2.5rem;
-  width: 100%;
-  max-width: 900px;
-  margin: 0;
-}
-.home-card-large {
-  min-height: 420px;
-}
-.home-options-center {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  min-height: 100%;
+  background: radial-gradient(circle at top left, #141029 0%, #0b0918 100%);
+  color: #f5f3ff;
+  padding: 2rem;
+}
+
+.welcome-card {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 3rem 2.5rem;
+  max-width: 600px;
   width: 100%;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+  border: 1px solid rgba(147, 197, 253, 0.15);
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s ease;
+
+.logo {
+  width: 100px;
+  margin-bottom: 1.2rem;
+  filter: drop-shadow(0 0 5px rgba(147, 197, 253, 0.3));
 }
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 </style>
