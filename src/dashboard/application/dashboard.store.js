@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { DashboardApi } from "../infrastructure/dashboard-api.js";
 import { DashboardAssembler } from "../infrastructure/dashboard.assembler.js";
 import { Dashboard } from "../domain/model/dashboard.entity.js";
+import { formatISO } from 'date-fns';
 
 const dashboardApi = new DashboardApi();
 
@@ -16,10 +17,14 @@ export const useDashboardStore = defineStore("dashboard", () => {
     const dataLoaded = ref(false);
 
     // Actions
-    function fetchDashboardData() {
-        if (dataLoaded.value) return;
+    function fetchDashboardData(startDate = null, endDate = null) {
 
+        dataLoaded.value = false;
         errors.value = [];
+
+        const startStr = startDate ? formatISO(startDate, { representation: 'date' }) : null;
+        const endStr = endDate ? formatISO(endDate, { representation: 'date' }) : null;
+
         dashboardApi
             .getDashboardData()
             .then((response) => {
@@ -28,6 +33,7 @@ export const useDashboardStore = defineStore("dashboard", () => {
             })
             .catch((error) => {
                 errors.value.push(error);
+                dataLoaded.value = true;
             });
     }
 

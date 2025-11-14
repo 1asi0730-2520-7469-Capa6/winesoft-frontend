@@ -8,8 +8,8 @@ import { definePreset } from '@primeuix/themes';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import {
-    Button, Calendar,
-    Card,
+    Button, DatePicker,
+    Card, Popover,
     Checkbox,
     Column,
     ConfirmationService,
@@ -67,7 +67,8 @@ createApp(App)
     .use(ToastService)
     .component('pv-button', Button)
     .component('pv-card', Card)
-    .component('pv-calendar', Calendar)
+    .component('pv-date-picker', DatePicker)
+    .component('pv-popover', Popover)
     .component('pv-column', Column)
     .component('pv-confirm-dialog', ConfirmDialog)
     .component('pv-checkbox', Checkbox)
