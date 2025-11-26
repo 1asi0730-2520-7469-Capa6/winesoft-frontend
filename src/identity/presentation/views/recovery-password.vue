@@ -89,14 +89,15 @@ function onBack() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #b0356d 0%, #9f295a 100%);
+npm install  /* Fondo hero usando azul marino */
+  background: var(--ws-bg-dark);
   padding: 32px 16px;
   box-sizing: border-box;
 }
 
 .card {
-  background: #fff;
-  color: #222;
+  background: var(--ws-white);
+  color: var(--ws-text-dark);
   padding: 28px;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
@@ -114,20 +115,20 @@ function onBack() {
 .card-header h1 {
   margin: 0 0 6px 0;
   font-size: 1.8rem;
-  color: #2b2b2b;
+  color: var(--ws-text-dark);
 }
 
 .subtitle {
   margin: 0;
   font-size: 0.95rem;
-  color: #555;
+  color: rgba(17,24,39,0.7);
 }
 
 .field-label {
   display: block;
   font-weight: 600;
   margin: 12px 0 6px 0;
-  color: #333;
+  color: var(--ws-text-dark);
 }
 
 .input-row {
@@ -140,18 +141,18 @@ function onBack() {
   padding: 10px 12px;
   font-size: 1rem;
   border-radius: 8px;
-  border: 1px solid #d0d0d0;
+  border: 1px solid #e6e6e6;
   box-shadow: none;
   outline: none;
   transition: border-color 0.18s, box-shadow 0.18s;
 }
 .field-input:focus {
-  border-color: #b0356d;
-  box-shadow: 0 0 0 4px rgba(176, 53, 109, 0.08);
+  border-color: var(--ws-blue);
+  box-shadow: 0 0 0 6px rgba(58,79,255,0.08);
 }
 
 .error {
-  color: #b0356d;
+  color: var(--ws-brand-purple-dark);
   margin: 8px 0 0 0;
   font-size: 0.9rem;
 }
@@ -164,8 +165,8 @@ function onBack() {
 }
 
 button.primary {
-  background: linear-gradient(90deg, #b0356d 0%, #8f2a56 100%);
-  color: #fff;
+  background: linear-gradient(90deg, var(--ws-blue) 0%, var(--ws-purple-soft) 100%);
+  color: var(--ws-white);
   border: none;
   padding: 10px 16px;
   border-radius: 8px;
@@ -180,7 +181,7 @@ button.primary:disabled {
 button.back {
   background: transparent;
   border: none;
-  color: #6b6b6b;
+  color: rgba(17,24,39,0.7);
   padding: 8px 12px;
   cursor: pointer;
   text-decoration: underline;
@@ -188,16 +189,16 @@ button.back {
 
 .sent-msg {
   margin-top: 16px;
-  background: #f6f9fb;
+  background: var(--ws-gray-100);
   padding: 12px;
   border-radius: 8px;
-  color: #1f4b59;
-  border: 1px solid #e2eef2;
+  color: var(--ws-text-dark);
+  border: 1px solid #e9eef6;
 }
 
 .small {
   margin: 6px 0 0 0;
-  color: #3b6b73;
+  color: rgba(17,24,39,0.7);
   font-size: 0.95rem;
 }
 

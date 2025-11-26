@@ -168,21 +168,21 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* ...existing styles copied from register.vue... */
-.register-page { min-height: calc(100vh - 60px); background: #b0356d; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
-.register-title { font-size: 48px; color: #fff; margin: 12px 0 20px 0; }
-.register-card { width: 100%; max-width: 1100px; background: #3a3737; border: 4px solid #000; padding: 28px; box-sizing: border-box; position: relative; }
+.register-page { min-height: calc(100vh - 60px); background: var(--ws-bg-dark); padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+.register-title { font-size: 48px; color: var(--ws-white); margin: 12px 0 20px 0; }
+.register-card { width: 100%; max-width: 1100px; background: rgba(255,255,255,0.04); border: 4px solid rgba(0,0,0,0.8); padding: 28px; box-sizing: border-box; position: relative; }
 .register-columns { display: flex; gap: 40px; }
 .col { flex: 1; display: flex; flex-direction: column; }
-.field-label { font-size: 32px; color: #fff; margin-bottom: 10px; }
-.field-input { height: 52px; font-size: 20px; padding: 8px 12px; border: none; background: #e6e6e6; color: #333; margin-bottom: 24px; }
-.tooltip { position: absolute; top: 28px; left: 100%; margin-left: 28px; width: 360px; background: rgba(0,0,0,0.65); border-radius: 10px; padding: 16px; color: #fff; margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.7); transform-origin: top right; transform: scale(0.96); opacity: 0; transition: transform 150ms ease, opacity 150ms ease; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.45); }
+.field-label { font-size: 32px; color: var(--ws-white); margin-bottom: 10px; }
+.field-input { height: 52px; font-size: 20px; padding: 8px 12px; border: none; background: var(--ws-gray-100); color: var(--ws-text-dark); margin-bottom: 24px; }
+.tooltip { position: absolute; top: 28px; left: 100%; margin-left: 28px; width: 360px; background: rgba(17,24,39,0.9); border-radius: 10px; padding: 16px; color: var(--ws-white); margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.5); transform-origin: top right; transform: scale(0.96); opacity: 0; transition: transform 150ms ease, opacity 150ms ease; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.45); }
 .tooltip.show { transform: scale(1); opacity: 1; }
-.tooltip::before { content: ""; position: absolute; left: -12px; top: 20px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid rgba(0,0,0,0.65); }
+.tooltip::before { content: ""; position: absolute; left: -12px; top: 20px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid rgba(17,24,39,0.9); }
 .tooltip.flip-left { left: auto; right: 100%; margin-left: 0; margin-right: 28px; transform-origin: top left; }
-.tooltip.flip-left::before { left: auto; right: -12px; border-right: none; border-left: 12px solid rgba(0,0,0,0.65); }
-.mismatch { color: #ff2e2e; margin-top: 8px; font-size: 16px; }
+.tooltip.flip-left::before { left: auto; right: -12px; border-right: none; border-left: 12px solid rgba(17,24,39,0.9); }
+.mismatch { color: #ff4d4f; margin-top: 8px; font-size: 16px; }
 .actions { display: flex; align-items: center; justify-content: flex-end; flex: 1; }
-.actions button { background: #b0356d; color: #fff; border: 2px solid #000; padding: 14px 48px; font-size: 28px; cursor: pointer; transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.2s ease; }
+.actions button { background: var(--ws-blue); color: var(--ws-white); border: 2px solid rgba(0,0,0,0.8); padding: 14px 48px; font-size: 28px; cursor: pointer; transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.2s ease; }
 .actions button.disabled { background: #9e9e9e; color: #e9e9e9; cursor: not-allowed; opacity: 0.9; }
 .actions button.animate { animation: highlight 600ms ease; }
 @keyframes highlight { 0% { transform: scale(0.98); filter: brightness(0.7); } 60% { transform: scale(1.02); filter: brightness(1.05); } 100% { transform: scale(1); filter: none; } }

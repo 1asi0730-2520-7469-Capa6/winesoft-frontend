@@ -34,7 +34,7 @@ function normalizeLocale(raw) {
   return s.split('-')[0];
 }
 
-// Fallback local header labels (fuente de verdad para la cabecera)
+// Fallback local header labels
 const headerLabels = {
   en: { signUp: 'Sign up', signIn: 'Sign in' },
   es: { signUp: 'Crear Cuenta', signIn: 'Iniciar sesión' }
@@ -51,7 +51,7 @@ const headerSignIn = computed(() => {
 
 // Debug: log values when locale changes to help verificar traducciones
 watch(locale, (newLocale) => {
-  const l = (newLocale && typeof newLocale === 'string') ? newLocale.split('-')[0] : (newLocale && newLocale.value ? String(newLocale.value).split('-')[0] : 'en');
+  console.log('[i18n debug] locale ->', newLocale);
   console.log('[i18n debug] headerSignUp ->', headerSignUp.value);
   console.log('[i18n debug] headerSignIn ->', headerSignIn.value);
 });
@@ -112,6 +112,17 @@ watch(locale, (newLocale) => {
   top: 0;
   left: 0;
   width: 100%;
+}
+
+
+.bg-primary {
+
+  background: #1a2341;
+  color: var(--ws-white);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
 }
 
 .logo {

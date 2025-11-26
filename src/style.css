@@ -3,9 +3,20 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /* Paleta WineSoft proporcionada */
+  --ws-bg-dark: #0B1D39; /* Azul Marino (Fondo principal del hero) */
+  --ws-blue: #3A4FFF; /* Azul Intermedio (Botones + gradientes) */
+  --ws-purple-soft: #8F7BFF; /* Morado Suave (Hover/gradiente del botón) */
+  --ws-white: #FFFFFF; /* Blanco */
+  --ws-gray-100: #F5F7FA; /* Gris Muy Claro (fondos interiores) */
+  --ws-text-dark: #111827; /* Negro Suave (Texto principal y títulos) */
+  --ws-brand-purple: #6C4CF6; /* Morado Branding WineSoft (logo/header) */
+  --ws-brand-purple-dark: #4B2AD0; /* Morado Oscuro Secundario (Login/Sign In) */
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Valores por defecto (tema oscuro) */
+  color: var(--ws-white);
+  background-color: var(--ws-bg-dark);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +26,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--ws-blue);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--ws-purple-soft);
 }
 
 body {
@@ -42,12 +53,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  /* Botones por defecto usan el azul/intermedio */
+  background-color: var(--ws-blue);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  /* Borde en hover usando morado suave para contraste */
+  border-color: var(--ws-purple-soft);
 }
 button:focus,
 button:focus-visible {
@@ -67,13 +80,15 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* Tema claro: textos oscuros y fondos claros */
+    color: var(--ws-text-dark);
+    background-color: var(--ws-white);
   }
   a:hover {
-    color: #747bff;
+    color: var(--ws-brand-purple);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--ws-gray-100);
+    color: var(--ws-text-dark);
   }
 }

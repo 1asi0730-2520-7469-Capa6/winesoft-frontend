@@ -27,7 +27,8 @@ const { t } = useI18n();
   left: unset;
   right: unset;
   transform: none;
-  background: #b23a6b; /* Color rosado personalizado */
+
+  background: #1a2341;
   color: #fff;
   display: flex;
   flex-direction: column;
