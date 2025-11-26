@@ -89,7 +89,7 @@ function onBack() {
   display: flex;
   align-items: center;
   justify-content: center;
-npm install  /* Fondo hero usando azul marino */
+npm install
   background: var(--ws-bg-dark);
   padding: 32px 16px;
   box-sizing: border-box;
