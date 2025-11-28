@@ -61,11 +61,11 @@ const goToStock = () => {
   min-height: 100vh;
   padding-top: 60px;
   padding-bottom: 80px;
-  background: linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
-  color: #ededed;
+  background: linear-gradient(180deg, var(--ws-bg-dark) 0%, var(--ws-bg-dark-end) 100%);
+  color: var(--ws-white);
 }
 .home-card {
-  background: rgba(28, 28, 28, 0.9);
+  background: rgba(11, 29, 57, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   padding: 2.5rem 2.5rem 2rem 2.5rem;

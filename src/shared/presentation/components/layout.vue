@@ -52,8 +52,6 @@ const headerSignIn = computed(() => {
 // Debug: log values when locale changes to help verificar traducciones
 watch(locale, (newLocale) => {
   console.log('[i18n debug] locale ->', newLocale);
-  console.log('[i18n debug] headerSignUp ->', headerSignUp.value);
-  console.log('[i18n debug] headerSignIn ->', headerSignIn.value);
 });
 </script>
 
@@ -69,7 +67,7 @@ watch(locale, (newLocale) => {
         </template>
 
         <template #end>
-          <div v-if="!isAuthView" class="flex-column mr-3">
+          <div v-if="!isAuthView" class="nav-items mr-3">
             <pv-button
                 v-for="item in items"
                 :key="item.label"
@@ -96,8 +94,8 @@ watch(locale, (newLocale) => {
     <div class="main-content">
       <router-view/>
     </div>
+    <footer-content />
   </div>
-  <footer-content class="footer-fixed"/>
 </template>
 
 <style scoped>
@@ -114,15 +112,19 @@ watch(locale, (newLocale) => {
   width: 100%;
 }
 
-
 .bg-primary {
-
-  background: #1a2341;
+  background: linear-gradient(90deg, var(--ws-bg-dark), var(--ws-brand-purple-dark));
   color: var(--ws-white);
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 10px 18px;
+}
+
+.nav-items {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .logo {
@@ -132,14 +134,10 @@ watch(locale, (newLocale) => {
 
 .main-content {
   margin-top: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 0; /* eliminar espacio extra para footer fijo */
   flex: 1 0 auto;
 }
 
-.footer-fixed {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-}
 
 .auth-actions > * {
   margin-left: 12px;

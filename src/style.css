@@ -3,18 +3,17 @@
   line-height: 1.5;
   font-weight: 400;
 
-  /* Paleta WineSoft proporcionada */
-  --ws-bg-dark: #0B1D39; /* Azul Marino (Fondo principal del hero) */
-  --ws-blue: #3A4FFF; /* Azul Intermedio (Botones + gradientes) */
-  --ws-purple-soft: #8F7BFF; /* Morado Suave (Hover/gradiente del botón) */
-  --ws-white: #FFFFFF; /* Blanco */
-  --ws-gray-100: #F5F7FA; /* Gris Muy Claro (fondos interiores) */
-  --ws-text-dark: #111827; /* Negro Suave (Texto principal y títulos) */
-  --ws-brand-purple: #6C4CF6; /* Morado Branding WineSoft (logo/header) */
-  --ws-brand-purple-dark: #4B2AD0; /* Morado Oscuro Secundario (Login/Sign In) */
+  --ws-bg-dark: #0B1D39;
+  --ws-bg-dark-end: #0a1326;
+  --ws-blue: #3A4FFF;
+  --ws-purple-soft: #8F7BFF;
+  --ws-white: #FFFFFF;
+  --ws-gray-100: #F5F7FA;
+  --ws-text-dark: #111827;
+  --ws-brand-purple: #6C4CF6;
+  --ws-brand-purple-dark: #4B2AD0;
 
   color-scheme: light dark;
-  /* Valores por defecto (tema oscuro) */
   color: var(--ws-white);
   background-color: var(--ws-bg-dark);
 
@@ -35,8 +34,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -53,13 +50,11 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  /* Botones por defecto usan el azul/intermedio */
   background-color: var(--ws-blue);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  /* Borde en hover usando morado suave para contraste */
   border-color: var(--ws-purple-soft);
 }
 button:focus,
@@ -71,16 +66,19 @@ button:focus-visible {
   padding: 2em;
 }
 
+html, body, #app {
+  height: 100%;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 2rem 0; /* eliminar padding-bottom para que el footer quede al final */
   text-align: center;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    /* Tema claro: textos oscuros y fondos claros */
     color: var(--ws-text-dark);
     background-color: var(--ws-white);
   }
