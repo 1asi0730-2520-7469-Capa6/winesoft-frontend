@@ -1,9 +1,11 @@
 {
   "option": {
     "home": "Inicio",
+    "about": "Acerca de",
     "supplies": "Suministros",
     "stockMovements": "Movimientos de Stock",
-    "inventory": "Inventario"
+    "inventory": "Inventario",
+    "analytics": "Analíticas"
   },
   "authoring-phrase": {
     "intro": "Hecho con",
@@ -113,12 +115,12 @@
     "owner": "Dueño",
     "provider": "Proveedor"
   },
-  "dashboard": {
-    "title": "Dashboard de Métricas",
-    "loading": "Cargando métricas...",
+  "analytics": {
+    "title": "Analíticas de Métricas",
+    "loading": "Cargando analíticas...",
     "generateReport": "Generar Reporte",
     "errorGeneratingReport": "No se puede generar el reporte: datos no cargados o existen errores.",
-    "reportGeneratedTitle": "Reporte de Dashboard - WineSoft",
+    "reportGeneratedTitle": "Reporte de Analíticas - WineSoft",
     "reportGeneratedDate": "Generado el: {date}",
     "reportSectionSummary": "Resumen",
     "reportSupplyName": "Suministro",

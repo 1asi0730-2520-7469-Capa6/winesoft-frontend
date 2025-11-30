@@ -55,7 +55,7 @@
     }
   ],
 
-  "dashboard": {
+  "analytics": {
     "summary": {
       "monthlyCosts": 14200.50
     },

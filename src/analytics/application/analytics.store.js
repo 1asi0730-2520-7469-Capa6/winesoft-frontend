@@ -1,23 +1,23 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { DashboardApi } from "../infrastructure/dashboard-api.js";
-import { DashboardAssembler } from "../infrastructure/dashboard.assembler.js";
-import { Dashboard } from "../domain/model/dashboard.entity.js";
+import { AnalyticsApi } from "../infrastructure/analytics-api.js";
+import { AnalyticsAssembler } from "../infrastructure/analytics.assembler.js";
+import { Analytics } from "../domain/model/analytics.entity.js";
 import { formatISO } from 'date-fns';
 
-const dashboardApi = new DashboardApi();
+const analyticsApi = new AnalyticsApi();
 
 /**
- * Pinia store for managing dashboard state.
+ * Pinia store for managing analytics state.
  */
-export const useDashboardStore = defineStore("dashboard", () => {
+export const useAnalyticsStore = defineStore("analytics", () => {
     // State
-    const data = ref(new Dashboard());
+    const data = ref(new Analytics());
     const errors = ref([]);
     const dataLoaded = ref(false);
 
     // Actions
-    function fetchDashboardData(startDate = null, endDate = null) {
+    function fetchAnalyticsData(startDate = null, endDate = null) {
 
         dataLoaded.value = false;
         errors.value = [];
@@ -25,10 +25,10 @@ export const useDashboardStore = defineStore("dashboard", () => {
         const startStr = startDate ? formatISO(startDate, { representation: 'date' }) : null;
         const endStr = endDate ? formatISO(endDate, { representation: 'date' }) : null;
 
-        dashboardApi
-            .getDashboardData()
+        analyticsApi
+            .getAnalyticsData()
             .then((response) => {
-                data.value = DashboardAssembler.toEntityFromResponse(response);
+                data.value = AnalyticsAssembler.toEntityFromResponse(response);
                 dataLoaded.value = true;
             })
             .catch((error) => {
@@ -43,6 +43,6 @@ export const useDashboardStore = defineStore("dashboard", () => {
         errors,
         dataLoaded,
         // Actions
-        fetchDashboardData,
+        fetchAnalyticsData,
     };
 });

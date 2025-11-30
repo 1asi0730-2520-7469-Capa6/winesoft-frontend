@@ -1,16 +1,16 @@
-import { Dashboard, SupplyLevel, DailyRotation, Order } from "../domain/model/dashboard.entity.js";
+import { Analytics, SupplyLevel, DailyRotation, Order } from "../domain/model/analytics.entity.js";
 
 /**
  * Assembler class: Used to convert raw data coming from the API
- * into objects of our own classes Dashboard, SupplyLevel, etc.
+ * into objects of our own classes Analytics, SupplyLevel, etc.
  * It's like a translator between the API and our code.
  * @class
  */
 
-export class DashboardAssembler {
+export class AnalyticsAssembler {
     static toEntityFromResource(resource) {
         const summary = resource.summary || { pendingOrders: 0, monthlyCosts: 0 };
-        return new Dashboard({
+        return new Analytics({
             summary: {
                 monthlyCosts: summary.monthlyCosts
             },
@@ -31,18 +31,18 @@ export class DashboardAssembler {
     }
     /**
      * Converts the FULL API RESPONSE (including status, data, etc.)
-     * into ONE Dashboard class object.
+     * into ONE Analytics class object.
      * @param {Object} response - The complete response from the API call
-     * @returns {Dashboard} - A Dashboard object. Returns an empty one if there's an error.
+     * @returns {Analytics} - A Analytics object. Returns an empty one if there's an error.
      */
     static toEntityFromResponse(response) {
         if (response.status !== 200) {
             console.error(`${response.status}: ${response.statusText}`);
-            return new Dashboard();
+            return new Analytics();
         }
         // If the response was successful (200 OK),
         // call the other function (toEntityFromResource) to convert
-        // just the data part (response.data) into a Dashboard object.
+        // just the data part (response.data) into a Analytics object.
         return this.toEntityFromResource(response.data);
     }
 }

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
-import { useDashboardStore } from '../../application/dashboard.store.js';
+import { useAnalyticsStore } from '../../application/analytics.store.js';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
@@ -8,9 +8,9 @@ import jsPDF from 'jspdf';
 import { subDays, startOfMonth, endOfMonth, subMonths, format } from 'date-fns';
 
 const { t } = useI18n();
-const store = useDashboardStore();
-const { data: dashboardData, dataLoaded, errors } = storeToRefs(store);
-const { fetchDashboardData } = store;
+const store = useAnalyticsStore();
+const { data: analyticsData, dataLoaded, errors } = storeToRefs(store);
+const { fetchAnalyticsData } = store;
 const router = useRouter();
 
 // --- ESTADO DEL FILTRO DE FECHAS ---
@@ -27,38 +27,35 @@ initializeDates();
 
 const dateRangeDisplay = computed(() => {
   if (!selectedDates.value || selectedDates.value.length < 2 || !selectedDates.value[0] || !selectedDates.value[1]) {
-    return t('dashboard.rangeSelect'); // Nueva clave i18n
+    return t('analytics.rangeSelect');
   }
   const start = format(selectedDates.value[0], 'dd/MM/yyyy');
   const end = format(selectedDates.value[1], 'dd/MM/yyyy');
   return `${start} - ${end}`;
 });
 
-// Predefined options for the panel
 const presetRanges = computed(() => [
-  { label: t('dashboard.rangeToday'), value: 'today' },
-  { label: t('dashboard.rangeYesterday'), value: 'yesterday' },
-  { label: t('dashboard.rangeLast7D'), value: 'last7d' },
-  { label: t('dashboard.rangeLast30D'), value: 'last30d' },
-  { label: t('dashboard.rangeThisMonth'), value: 'thisMonth' },
-  { label: t('dashboard.rangeLastMonth'), value: 'lastMonth' },
-  { label: t('dashboard.rangeCustom'), value: 'custom' },
+  { label: t('analytics.rangeToday'), value: 'today' },
+  { label: t('analytics.rangeYesterday'), value: 'yesterday' },
+  { label: t('analytics.rangeLast7D'), value: 'last7d' },
+  { label: t('analytics.rangeLast30D'), value: 'last30d' },
+  { label: t('analytics.rangeThisMonth'), value: 'thisMonth' },
+  { label: t('analytics.rangeLastMonth'), value: 'lastMonth' },
+  { label: t('analytics.rangeCustom'), value: 'custom' },
 ]);
 
-// Function to apply the filter
 const applyFilter = (hidePopover = true) => {
   if (hidePopover) {
     popoverRef.value?.hide();
   }
   if (selectedDates.value && selectedDates.value.length === 2 && selectedDates.value[0] && selectedDates.value[1]) {
     console.log("Aplicando filtro:", selectedDates.value[0], selectedDates.value[1]);
-    fetchDashboardData(selectedDates.value[0], selectedDates.value[1]);
+    fetchAnalyticsData(selectedDates.value[0], selectedDates.value[1]);
   } else {
     console.warn("Attempt to apply filter with invalid dates.");
   }
 };
 
-// Function for managing preset selection
 const selectPreset = (presetValue) => {
   selectedPreset.value = presetValue;
   const today = new Date();
@@ -80,16 +77,15 @@ const selectPreset = (presetValue) => {
       start = startOfMonth(subMonths(startOfThisMonth, 1));
       end = endOfMonth(start); break;
     case 'custom':
-      return; // No filter applies, wait for the 'Apply' button
+      return;
     default:
       start = subDays(today, 29); break;
   }
   selectedDates.value = [start, end];
-  applyFilter(); // Applies directly to presets
+  applyFilter();
 };
 
 onMounted(() => {
-  // Initial load with default dates
   applyFilter(false);
 });
 
@@ -100,7 +96,7 @@ const colorNormal = '#6b1f43';
 //Computed Properties for Graphics and Cards
 
 const supplyChartData = computed(() => {
-  const levels = dashboardData.value?.supplyLevels || [];
+  const levels = analyticsData.value?.supplyLevels || [];
   const labels = levels.map(s => s.name);
   const data = levels.map(s => s.current);
   const backgroundColors = levels.map(s =>
@@ -108,21 +104,19 @@ const supplyChartData = computed(() => {
   );
   return {
     labels: labels,
-    datasets: [ { label: t('dashboard.supplyStock'), data: data, backgroundColor: backgroundColors, borderColor: backgroundColors, borderWidth: 1 } ]
+    datasets: [ { label: t('analytics.supplyStock'), data: data, backgroundColor: backgroundColors, borderColor: backgroundColors, borderWidth: 1 } ]
   };
 });
 const supplyChartOptions = ref({
   responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: {}, y: {} }
 });
 
-// Alerts List (Low Stock) - NOT filtered by date
 const lowStockSuppliesList = computed(() => {
-  return (dashboardData.value?.supplyLevels || []).filter(s => s.current < s.minStock);
+  return (analyticsData.value?.supplyLevels || []).filter(s => s.current < s.minStock);
 });
 
-// Line Chart (Daily Rotation) - filter by date
 const rotationChartData = computed(() => {
-  const rotation = dashboardData.value?.dailyRotation || [];
+  const rotation = analyticsData.value?.dailyRotation || [];
   const labels = rotation.map(d =>
       new Date(d.date.replace(/-/g, '/')).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit' })
   );
@@ -130,7 +124,7 @@ const rotationChartData = computed(() => {
   return {
     labels: labels,
     datasets: [ {
-      label: t('dashboard.dailyMovements'), data: data, fill: 'origin',
+      label: t('analytics.dailyMovements'), data: data, fill: 'origin',
       borderColor: colorRojoEscaso, backgroundColor: 'rgba(176, 53, 109, 0.2)', tension: 0
     } ]
   };
@@ -139,120 +133,97 @@ const rotationChartOptions = ref({
   responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' }, tooltip: {} }, elements: { point: { radius: 3 } }, scales: { x: {}, y: {} }
 });
 
-// Monthly Cost Card - filter by date
 const formattedMonthlyCosts = computed(() => {
-  const costs = dashboardData.value?.summary?.monthlyCosts;
+  const costs = analyticsData.value?.summary?.monthlyCosts;
   if (costs === undefined || costs === null) return 'N/A';
   return new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'USD' }).format(costs);
 });
 
-// Order Table - filtered by date
-const ordersData = computed(() => dashboardData.value?.orders || []);
+const ordersData = computed(() => analyticsData.value?.orders || []);
 
-// Button Functions
 function generateReport() {
-  // Verify that the data is ready and there are no errors.
   if (!dataLoaded.value || errors.value.length > 0) {
-    // It displays an alert if it cannot be generated
-    alert(t('dashboard.errorGeneratingReport'));
+    alert(t('analytics.errorGeneratingReport'));
     return;
   }
 
-  // Create the PDF object
-  const doc = new jsPDF('p', 'mm', 'a4'); // 'p' = portrait, 'mm' = milímetros, 'a4' = tamaño
-  const margin = 15; // Margen de la página
-  let currentY = margin; // Posición vertical inicial para escribir
+  const doc = new jsPDF('p', 'mm', 'a4');
+  const margin = 15;
+  let currentY = margin;
 
-  // Título y Fecha
-  doc.setFontSize(18); // Tamaño de fuente grande para el título
-  doc.text(t('dashboard.reportGeneratedTitle'), margin, currentY); // Escribe el título
-  currentY += 10; // Mueve la posición Y hacia abajo
-  doc.setFontSize(10); // Tamaño más pequeño para la fecha
-  // Escribe la fecha, usando i18n
-  doc.text(t('dashboard.reportGeneratedDate', { date: new Date().toLocaleDateString('es-PE') }), margin, currentY);
-  currentY += 15; // Deja espacio
-
-  // Sección Resumen
-  doc.setFontSize(14); // Tamaño para subtítulo
-  doc.text(t('dashboard.reportSectionSummary'), margin, currentY);
-  currentY += 8;
-  doc.setFontSize(12); // Tamaño para el contenido del resumen
-  // Escribe el total de costos
-  doc.text(`${t('dashboard.monthlyTotal')}: ${formattedMonthlyCosts.value}`, margin + 5, currentY);
+  doc.setFontSize(18);
+  doc.text(t('analytics.reportGeneratedTitle'), margin, currentY);
+  currentY += 10;
+  doc.setFontSize(10);
+  doc.text(t('analytics.reportGeneratedDate', { date: new Date().toLocaleDateString('es-PE') }), margin, currentY);
   currentY += 15;
 
-  // Supply Levels Section
   doc.setFontSize(14);
-  doc.text(t('dashboard.supplyLevelsTitle'), margin, currentY);
+  doc.text(t('analytics.reportSectionSummary'), margin, currentY);
   currentY += 8;
-  doc.setFontSize(10); // Tamaño para la tabla
-  // Encabezados de la tabla en negrita
-  doc.setFont(undefined, 'bold');
-  doc.text(t('dashboard.reportSupplyName'), margin + 5, currentY);
-  doc.text(t('dashboard.reportSupplyCurrent'), margin + 80, currentY); // Ajusta posición X si es necesario
-  doc.text(t('dashboard.reportSupplyMin'), margin + 110, currentY);
-  doc.text(t('dashboard.reportSupplyStatus'), margin + 140, currentY);
-  doc.setFont(undefined, 'normal'); // Quita negrita
-  currentY += 6; // Espacio antes de los datos
+  doc.setFontSize(12);
+  doc.text(`${t('analytics.monthlyTotal')}: ${formattedMonthlyCosts.value}`, margin + 5, currentY);
+  currentY += 15;
 
-  // Iterate over the supply list to fill the table
-  dashboardData.value.supplyLevels.forEach(supply => {
-    // If the current line exceeds the page height (minus the margin), create a new page
-    if (currentY > (doc.internal.pageSize.height - margin)) {
-      doc.addPage();
-      currentY = margin; // Reinicia Y al margen superior
-    }
-    const isLow = supply.current < supply.minStock; // Verifica si el stock es bajo
-    if (isLow) {
-      doc.setTextColor(176, 53, 109); // Pone el texto en color vino si está bajo
-    }
-    // Escribe los datos de cada suministro
-    doc.text(supply.name, margin + 5, currentY);
-    doc.text(String(supply.current), margin + 80, currentY);
-    doc.text(String(supply.minStock), margin + 110, currentY);
-    doc.text(isLow ? t('dashboard.reportStatusLow') : t('dashboard.reportStatusOK'), margin + 140, currentY);
-    if (isLow) {
-      doc.setTextColor(0, 0, 0); // Vuelve a poner el texto en negro
-    }
-    currentY += 6; // Mueve Y para la siguiente línea
-  });
-  currentY += 10; // Espacio después de la tabla
-
-  // Daily Rotation Section
-  // Check if there is enough space for this section; if not, start a new page.
-  if (currentY > (doc.internal.pageSize.height - margin - 30)) { // -30 para título + algo de tabla
-    doc.addPage();
-    currentY = margin;
-  }
   doc.setFontSize(14);
-  doc.text(t('dashboard.dailyRotationTitle'), margin, currentY);
+  doc.text(t('analytics.supplyLevelsTitle'), margin, currentY);
   currentY += 8;
   doc.setFontSize(10);
-  // Encabezados de la tabla
   doc.setFont(undefined, 'bold');
-  doc.text(t('dashboard.reportDate'), margin + 5, currentY);
-  doc.text(t('dashboard.reportMovements'), margin + 50, currentY);
+  doc.text(t('analytics.reportSupplyName'), margin + 5, currentY);
+  doc.text(t('analytics.reportSupplyCurrent'), margin + 80, currentY);
+  doc.text(t('analytics.reportSupplyMin'), margin + 110, currentY);
+  doc.text(t('analytics.reportSupplyStatus'), margin + 140, currentY);
   doc.setFont(undefined, 'normal');
   currentY += 6;
 
-  // Iterate over the daily rotation list
-  dashboardData.value.dailyRotation.forEach(rotation => {
-    // Salto de página si es necesario
+  analyticsData.value.supplyLevels.forEach(supply => {
     if (currentY > (doc.internal.pageSize.height - margin)) {
       doc.addPage();
       currentY = margin;
     }
-    // Format the date
+    const isLow = supply.current < supply.minStock;
+    if (isLow) {
+      doc.setTextColor(176, 53, 109);
+    }
+    doc.text(supply.name, margin + 5, currentY);
+    doc.text(String(supply.current), margin + 80, currentY);
+    doc.text(String(supply.minStock), margin + 110, currentY);
+    doc.text(isLow ? t('analytics.reportStatusLow') : t('analytics.reportStatusOK'), margin + 140, currentY);
+    if (isLow) {
+      doc.setTextColor(0, 0, 0);
+    }
+    currentY += 6;
+  });
+  currentY += 10;
+
+  if (currentY > (doc.internal.pageSize.height - margin - 30)) {
+    doc.addPage();
+    currentY = margin;
+  }
+  doc.setFontSize(14);
+  doc.text(t('analytics.dailyRotationTitle'), margin, currentY);
+  currentY += 8;
+  doc.setFontSize(10);
+  doc.setFont(undefined, 'bold');
+  doc.text(t('analytics.reportDate'), margin + 5, currentY);
+  doc.text(t('analytics.reportMovements'), margin + 50, currentY);
+  doc.setFont(undefined, 'normal');
+  currentY += 6;
+
+  analyticsData.value.dailyRotation.forEach(rotation => {
+    if (currentY > (doc.internal.pageSize.height - margin)) {
+      doc.addPage();
+      currentY = margin;
+    }
     const formattedDate = new Date(rotation.date.replace(/-/g, '/')).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    // Escribe los datos
     doc.text(formattedDate, margin + 5, currentY);
     doc.text(String(rotation.movements), margin + 50, currentY);
     currentY += 6;
   });
 
-  // Save the PDF
-  const fileName = `Reporte_Dashboard_WineSoft_${new Date().toISOString().split('T')[0]}.pdf`;
-  doc.save(fileName); // Download the generated PDF file
+  const fileName = `Reporte_Analytics_WineSoft_${new Date().toISOString().split('T')[0]}.pdf`;
+  doc.save(fileName);
 }
 
 
@@ -260,7 +231,6 @@ function goToRequestSupplies() {
   alert('Redirigiendo a la solicitud de insumos (placeholder)...');
 }
 
-// Helpers Tabla Órdenes
 function getStatusSeverity(status) {
   switch (status?.toUpperCase()) {
     case 'PENDING': return 'warning';
@@ -280,9 +250,9 @@ function formatDate(dateString) {
 </script>
 
 <template>
-  <div class="p-4 dashboard-layout">
-    <div class="dashboard-header">
-      <h1>{{ t('dashboard.title') }}</h1>
+  <div class="p-4 analytics-layout">
+    <div class="analytics-header">
+      <h1>{{ t('analytics.title') }}</h1>
       <div class="header-controls">
 
         <pv-button
@@ -304,7 +274,7 @@ function formatDate(dateString) {
               />
             </div>
             <div class="col-8 calendar-container p-fluid pl-2">
-              <label for="daterange">{{ t('dashboard.rangeCustomLabel') }}</label>
+              <label for="daterange">{{ t('analytics.rangeCustomLabel') }}</label>
               <pv-date-picker
                   v-model="selectedDates"
                   selectionMode="range"
@@ -319,7 +289,7 @@ function formatDate(dateString) {
               />
               <div class="flex justify-content-end mt-3">
                 <pv-button
-                    :label="t('dashboard.applyFilter')"
+                    :label="t('analytics.applyFilter')"
                     icon="pi pi-check"
                     class="p-button-sm"
                     @click="applyFilter(true)"
@@ -331,7 +301,7 @@ function formatDate(dateString) {
         </pv-popover>
 
         <pv-button
-            :label="t('dashboard.generateReport')"
+            :label="t('analytics.generateReport')"
             icon="pi pi-file-pdf"
             severity="secondary"
             @click="generateReport"
@@ -343,19 +313,19 @@ function formatDate(dateString) {
 
     <div v-if="!dataLoaded" class="col-span-12 loading-message">
       <pv-spinner style="width: 50px; height: 50px" strokeWidth="8" />
-      <p>{{ t('dashboard.loading') }}</p>
+      <p>{{ t('analytics.loading') }}</p>
     </div>
 
     <div v-if="dataLoaded && errors.length" class="col-span-12 text-red-500 mb-4 p-error p-3 border-round">
-      Error loading dashboard: {{ errors.map(e => e.message).join(', ') }}
+      Error loading analytics: {{ errors.map(e => e.message).join(', ') }}
     </div>
 
-    <div class="dashboard-grid" v-if="dataLoaded && errors.length === 0">
+    <div class="analytics-grid" v-if="dataLoaded && errors.length === 0">
 
-      <pv-card class="dashboard-card col-span-12">
+      <pv-card class="analytics-card col-span-12">
         <template #title>
           <div class="card-header">
-            <span>{{ t('dashboard.dailyRotationTitle') }}</span>
+            <span>{{ t('analytics.dailyRotationTitle') }}</span>
             <div class="card-controls"> <i class="pi pi-arrows-alt"></i> <i class="pi pi-window-minimize"></i> <i class="pi pi-window-maximize"></i> </div>
           </div>
         </template>
@@ -366,53 +336,53 @@ function formatDate(dateString) {
         </template>
       </pv-card>
 
-      <pv-card class="dashboard-card col-span-12">
+      <pv-card class="analytics-card col-span-12">
         <template #title>
           <div class="card-header">
-            <span>{{ t('dashboard.monthlyCostsTitle') }}</span>
+            <span>{{ t('analytics.monthlyCostsTitle') }}</span>
             <div class="card-controls"> <i class="pi pi-arrows-alt"></i> <i class="pi pi-window-minimize"></i> <i class="pi pi-window-maximize"></i> </div>
           </div>
         </template>
         <template #content>
           <div class="costs-summary single-cost">
             <div class="cost-item">
-              <span class="cost-label">{{ t('dashboard.monthlyTotal') }} ({{ dateRangeDisplay }})</span>
+              <span class="cost-label">{{ t('analytics.monthlyTotal') }} ({{ dateRangeDisplay }})</span>
               <span class="cost-value total">{{ formattedMonthlyCosts }}</span>
             </div>
           </div>
         </template>
       </pv-card>
 
-      <pv-card class="dashboard-card col-span-12">
+      <pv-card class="analytics-card col-span-12">
         <template #title>
           <div class="card-header">
-            <span>{{ t('dashboard.ordersTitle') }}</span>
+            <span>{{ t('analytics.ordersTitle') }}</span>
             <div class="card-controls"> <i class="pi pi-arrows-alt"></i> <i class="pi pi-window-minimize"></i> <i class="pi pi-window-maximize"></i> </div>
           </div>
         </template>
         <template #content>
           <pv-data-table :value="ordersData" responsiveLayout="scroll" stripedRows :paginator="ordersData.length > 5" :rows="5" size="small">
-            <pv-column field="id" :header="t('dashboard.orderId')" sortable style="width: 20%"></pv-column>
-            <pv-column field="status" :header="t('dashboard.orderStatus')" sortable style="width: 25%">
+            <pv-column field="id" :header="t('analytics.orderId')" sortable style="width: 20%"></pv-column>
+            <pv-column field="status" :header="t('analytics.orderStatus')" sortable style="width: 25%">
               <template #body="slotProps">
                 <pv-tag :severity="getStatusSeverity(slotProps.data.status)" :value="slotProps.data.status"></pv-tag>
               </template>
             </pv-column>
-            <pv-column field="orderDate" :header="t('dashboard.orderDate')" sortable style="width: 30%">
+            <pv-column field="orderDate" :header="t('analytics.orderDate')" sortable style="width: 30%">
               <template #body="slotProps">
                 {{ formatDate(slotProps.data.orderDate) }}
               </template>
             </pv-column>
-            <pv-column field="productId" :header="t('dashboard.orderProductId')" style="width: 15%"></pv-column>
-            <pv-column field="quantity" :header="t('dashboard.orderQuantity')" style="width: 10%"></pv-column>
+            <pv-column field="productId" :header="t('analytics.orderProductId')" style="width: 15%"></pv-column>
+            <pv-column field="quantity" :header="t('analytics.orderQuantity')" style="width: 10%"></pv-column>
           </pv-data-table>
         </template>
       </pv-card>
 
-      <pv-card class="dashboard-card col-span-12 md:col-span-8">
+      <pv-card class="analytics-card col-span-12 md:col-span-8">
         <template #title>
           <div class="card-header">
-            <span>{{ t('dashboard.supplyLevelsTitle') }}</span>
+            <span>{{ t('analytics.supplyLevelsTitle') }}</span>
             <div class="card-controls"> <i class="pi pi-arrows-alt"></i> <i class="pi pi-window-minimize"></i> <i class="pi pi-window-maximize"></i> </div>
           </div>
         </template>
@@ -423,10 +393,10 @@ function formatDate(dateString) {
         </template>
       </pv-card>
 
-      <pv-card class="dashboard-card col-span-12 md:col-span-4">
+      <pv-card class="analytics-card col-span-12 md:col-span-4">
         <template #title>
           <div class="card-header">
-            <span>{{ t('dashboard.alertsTitle') }}</span>
+            <span>{{ t('analytics.alertsTitle') }}</span>
             <div class="card-controls"> <i class="pi pi-arrows-alt"></i> <i class="pi pi-window-minimize"></i> <i class="pi pi-window-maximize"></i> </div>
           </div>
         </template>
@@ -437,13 +407,13 @@ function formatDate(dateString) {
                 <i class="pi pi-exclamation-triangle p-error"></i>
                 <div class="alert-text">
                   <span class="font-medium">{{ supply.name }}</span>
-                  <small>{{ t('dashboard.lowStockAlert') }} ({{ supply.current }}/{{ supply.minStock }})</small>
+                  <small>{{ t('analytics.lowStockAlert') }} ({{ supply.current }}/{{ supply.minStock }})</small>
                 </div>
               </div>
             </div>
-            <p v-else class="no-alerts">{{ t('dashboard.noLowStock') }}</p>
+            <p v-else class="no-alerts">{{ t('analytics.noLowStock') }}</p>
             <pv-button
-                :label="t('dashboard.requestSupplies')"
+                :label="t('analytics.requestSupplies')"
                 icon="pi pi-shopping-cart"
                 class="p-button-sm mt-auto"
                 @click="goToRequestSupplies"
@@ -457,10 +427,10 @@ function formatDate(dateString) {
 
 <style scoped>
 
-.dashboard-layout {
+.analytics-layout {
   min-height: calc(100vh - 60px);
 }
-.dashboard-header {
+.analytics-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -469,7 +439,7 @@ function formatDate(dateString) {
   margin-bottom: 1.5rem;
   padding: 0 0.5rem;
 }
-.dashboard-header h1 {
+.analytics-header h1 {
   color: #333333;
   font-size: 2rem;
   margin: 0;
@@ -490,7 +460,7 @@ function formatDate(dateString) {
   align-items: center;
   gap: 1rem;
 }
-.dashboard-grid {
+.analytics-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1.5rem;
@@ -500,22 +470,22 @@ function formatDate(dateString) {
   border: none;
 }
 .preset-list {
-  border-right: 1px solid var(--surface-d);
+  border-right: 1px solid var(--surface);
 }
 .preset-list .p-button-text {
   justify-content: flex-start;
   border-radius: 4px;
   margin-bottom: 0.25rem;
-  color: var(--text-color);
+  color: var(--text-base);
   width: 100%;
   text-align: left;
 }
 .preset-list .p-button-text:hover {
-  background-color: var(--surface-hover);
+  background-color: var(--surface-light);
 }
 .preset-list .preset-active {
-  background-color: color-mix(in srgb, var(--primary-color) 15%, transparent);
-  color: var(--primary-color);
+  background-color: color-mix(in srgb, var(--primary) 15%, transparent);
+  color: var(--primary);
   font-weight: 600;
 }
 .calendar-container {
@@ -524,7 +494,7 @@ function formatDate(dateString) {
 .calendar-container label {
   font-weight: 600;
   font-size: 0.875rem;
-  color: var(--text-color-secondary);
+  color: var(--text-muted);
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -538,7 +508,7 @@ function formatDate(dateString) {
   .md\:col-span-8 { grid-column: span 8; }
   .md\:col-span-9 { grid-column: span 9; }
 }
-.dashboard-card {
+.analytics-card {
   background: #ffffff;
   color: #333333;
   border-radius: 10px;
@@ -548,13 +518,13 @@ function formatDate(dateString) {
   flex-direction: column;
   overflow: hidden;
 }
-:deep(.dashboard-card .p-card-body) {
+:deep(.analytics-card .p-card-body) {
   padding: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-:deep(.dashboard-card .p-card-content) {
+:deep(.analytics-card .p-card-content) {
   padding: 1.5rem;
   flex-grow: 1;
   display: flex;

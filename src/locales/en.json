@@ -5,7 +5,7 @@
     "supplies": "Supplies",
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
-    "dashboard": "Dashboard"
+    "analytics": "Analytics"
   },
   "authoring-phrase": {
     "intro": "Made with",
@@ -115,12 +115,12 @@
     "owner": "Owner",
     "provider": "Provider"
   },
-  "dashboard": {
-    "title": "Metrics Dashboard",
-    "loading": "Loading metrics...",
+  "analytics": {
+    "title": "Analytics Dashboard",
+    "loading": "Loading analytics...",
     "generateReport": "Generate Report",
     "errorGeneratingReport": "Cannot generate report: data not loaded or errors occurred.",
-    "reportGeneratedTitle": "WineSoft Dashboard Report",
+    "reportGeneratedTitle": "WineSoft Analytics Report",
     "reportGeneratedDate": "Generated on: {date}",
     "reportSectionSummary": "Summary",
     "reportSupplyName": "Supply Name",
