@@ -15,6 +15,7 @@ const items = [{label: "option.home", to: "/home", icon: "pi pi-home"},
                {label: "option.dashboard", to: "/dashboard"},
                {label: "option.supplies", to: "/inventory/supplies", icon: "pi pi-box"},
                {label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},
+               {label: 'option.orders', to: '/purchase/orders', icon: 'pi pi-shopping-cart'},
               ];
 
 const isAuthView = computed(() => {
