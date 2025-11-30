@@ -1,55 +1,99 @@
 <script setup>
-import {useI18n} from "vue-i18n";
-import {ref, computed} from "vue";
+import {useI18n}from "vue-i18n";
+import {ref, computed, watch} from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
 import NotificationCenter from "./notification-center.vue";
 
-const {t} = useI18n();
+const {t, locale} = useI18n();
 const drawer = ref(false);
 const router = useRouter();
 const route = useRoute();
-
-const items = [{label: "option.home", to: "/home", icon: "pi pi-home"},
-               {label: "option.dashboard", to: "/dashboard"},
-               {label: "option.supplies", to: "/inventory/supplies", icon: "pi pi-box"},
-               {label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},
-              ];
+const items = [
+  {label: 'option.home', to: '/home'},
+  {label: 'option.supplies', to: '/inventory/supplies'},
+  {label: 'option.stockMovements', to: '/inventory/stock-movements'},
+  {label: 'option.orders', to: '/orders'},
+];
 
 const isAuthView = computed(() => {
   const p = route.path.toLowerCase();
-  return p === '/login' || p === '/register';
+  return p === '/sign-up' || p === '/sign-in';
 });
 
-function goToLogin() {
-  router.push({ path: '/login' });
+function goToSignUp() {
+  router.push({ path: '/sign-up' });
 }
-function goToRegister() {
-  router.push({ path: '/register' });
+function goToSignIn() {
+  router.push({ path: '/sign-in' });
 }
+
+function normalizeLocale(raw) {
+  const s = raw && raw.value ? String(raw.value) : String(raw || 'en');
+  return s.split('-')[0];
+}
+
+// Fallback local header labels
+const headerLabels = {
+  en: { signUp: 'Sign up', signIn: 'Sign in' },
+  es: { signUp: 'Crear Cuenta', signIn: 'Iniciar sesión' }
+};
+
+const headerSignUp = computed(() => {
+  const l = normalizeLocale(locale) || 'en';
+  return (headerLabels[l] && headerLabels[l].signUp) || 'Sign up';
+});
+const headerSignIn = computed(() => {
+  const l = normalizeLocale(locale) || 'en';
+  return (headerLabels[l] && headerLabels[l].signIn) || 'Sign in';
+});
+
+// Debug: log values when locale changes to help verificar traducciones
+watch(locale, (newLocale) => {
+  console.log('[i18n debug] locale ->', newLocale);
+});
 </script>
 <template>
-  <div class="layout-container">
-    <aside class="sidebar">
-      <div class="sidebar-header"><img src="/winesoft-logo.png" alt="WineSoft Logo" class="logo"/>
-        <h2 class="app-title">WineSoft</h2></div>
-      <nav class="nav-menu">
-        <router-link v-for="item in items" :key="item.label" :to="item.to" class="nav-link" active-class="active"><i
-            :class="item.icon"></i> <span>{{ t(item.label) }}</span></router-link>
-      </nav>
-      <div class="sidebar-footer">
-        <language-switcher/>
-      </div>
-    </aside>
-    <div class="main-section">
-      <main class="content-area">
-        <router-view/>
-      </main>
-      <footer>
-        <footer-content/>
-      </footer>
+  <pv-toast/>
+  <pv-confirm-dialog/>
+  <div class="layout-flex">
+    <div class="header">
+      <pv-toolbar class="bg-primary">
+        <template #start>
+          <img class="logo" src="/winesoft-logo.png" alt="WineSoft Logo"/>
+          <h3>WineSoft</h3>
+        </template>
+
+        <template #end>
+          <div v-if="!isAuthView" class="nav-items mr-3">
+            <pv-button
+                v-for="item in items"
+                :key="item.label"
+                as-child
+                v-slot="slotProps"
+            >
+              <router-link :to="item.to" :class="slotProps['class']">
+                {{ t(item.label) }}
+              </router-link>
+            </pv-button>
+          </div>
+
+          <div v-else class="auth-actions mr-3">
+            <pv-button class="p-button-text p-button-plain" @click="goToSignUp">{{ headerSignUp }}</pv-button>
+            <pv-button class="p-button-text p-button-plain" @click="goToSignIn">{{ headerSignIn }}</pv-button>
+          </div>
+
+          <notification-center v-if="!isAuthView" class="mr-3" />
+          <language-switcher/>
+        </template>
+      </pv-toolbar>
+      <pv-drawer v-model="drawer"/>
     </div>
+    <div class="main-content">
+      <router-view/>
+    </div>
+    <footer-content />
   </div>
 </template>
 
@@ -87,6 +131,21 @@ function goToRegister() {
   text-align: center;
 }
 
+.bg-primary {
+  background: linear-gradient(90deg, var(--ws-bg-dark), var(--ws-brand-purple-dark));
+  color: var(--ws-white);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+}
+
+.nav-items {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .logo {
   height: 65px;
   width: auto;
@@ -94,54 +153,12 @@ function goToRegister() {
   filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
 }
 
-.app-title {
-  font-weight: 600;
-  font-size: 1.4rem;
-  background: linear-gradient(90deg, #60a5fa, #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.main-content {
+  margin-top: 60px;
+  padding-bottom: 0;
+  flex: 1 0 auto;
 }
 
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0 1rem;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0.6rem;
-  color: #c7d2fe;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.nav-link:hover {
-  background: rgba(139, 92, 246, 0.15);
-  color: #a78bfa;
-  transform: translateX(4px);
-}
-
-.sidebar-footer {
-  margin-top: auto;
-  padding: 1rem;
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.main-section {
-  flex: 1;
-  margin-left: 250px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
 
 .content-area {
   flex: 1;

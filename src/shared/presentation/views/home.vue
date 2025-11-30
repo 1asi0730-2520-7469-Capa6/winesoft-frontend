@@ -6,30 +6,34 @@ const {t} = useI18n();
 
 <template>
   <div class="home-container">
-    <section class="welcome-card">
-      <img src="/winesoft-logo.png" alt="WineSoft Logo" class="logo"/>
-      <h1 class="title">WineSoft</h1>
-      <p class="subtitle">
-        {{ t("home.title") }}
-      </p>
-      <p class="subtitle">
-        {{ t("home.content") }}
-      </p>
-
-      <div class="actions">
-        <router-link to="/inventory/supplies">
-          <pv-button>
-            {{ t("home.manage-supplies") }}
-          </pv-button>
-        </router-link>
-
-        <router-link to="/inventory/stock-movements">
-          <pv-button>
-            {{ t("home.view-stock") }}
-          </pv-button>
-        </router-link>
-      </div>
-    </section>
+    <transition name="fade">
+      <pv-card v-if="show" class="home-card shadow-4 home-card-large">
+        <template #title>
+          <h1 class="text-5xl font-bold text-primary text-center mb-2">
+            {{ t('home.title') }}
+          </h1>
+        </template>
+        <template #content>
+          <p class="text-xl text-gray-300 text-center mt-2 leading-relaxed max-w-3xl mx-auto">
+            {{ t('home.content') }}
+          </p>
+          <div class="mt-8 flex justify-center gap-5 home-options-center">
+            <pv-button
+                :label="`📦 ${t('home.manage-supplies')}`"
+                icon="pi pi-box"
+                severity="primary"
+                @click="goToSupplies"
+            />
+            <pv-button
+                :label="`📊 ${t('home.views-stock')}`"
+                icon="pi pi-chart-line"
+                severity="secondary"
+                @click="goToStock"
+            />
+          </div>
+        </template>
+      </pv-card>
+    </transition>
   </div>
 </template>
 
@@ -38,18 +42,15 @@ const {t} = useI18n();
 .home-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-  min-height: 100%;
-  background: radial-gradient(circle at top left, #141029 0%, #0b0918 100%);
-  color: #f5f3ff;
-  padding: 2rem;
+  min-height: 100vh;
+  padding-top: 60px;
+  padding-bottom: 80px;
+  background: linear-gradient(180deg, var(--ws-bg-dark) 0%, var(--ws-bg-dark-end) 100%);
+  color: var(--ws-white);
 }
-
-.welcome-card {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+.home-card {
+  background: rgba(11, 29, 57, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   padding: 3rem 2.5rem;
   max-width: 600px;

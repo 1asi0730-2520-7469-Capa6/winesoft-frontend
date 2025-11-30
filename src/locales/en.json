@@ -5,6 +5,7 @@
     "supplies": "Supplies",
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
+    "orders": "Orders"
     "dashboard": "Dashboard"
   },
   "authoring-phrase": {
@@ -60,6 +61,26 @@
     "delete-header": "Confirm Deletion",
     "confirm-delete": "Are you sure you want to delete movement with ID {id}?"
   },
+  "orders": {
+    "title": "Order Management",
+    "list": "Orders List",
+    "form": "Order Form",
+    "id": "ID",
+    "supplyId": "Supply ID",
+    "supplierId": "Supplier ID",
+    "quantity": "Quantity",
+    "status": "Status",
+    "actions": "Actions",
+    "new": "Create Order",
+    "edit": "Edit Order",
+    "save": "Save Order",
+    "cancel": "Cancel",
+    "delete-header": "Confirm Deletion",
+    "confirm-delete": "Are you sure you want to delete order with ID {id}?",
+    "status-pending": "Pending",
+    "status-in-transit": "In Transit",
+    "status-delivered": "Delivered"
+  },
   "errors": {
     "occurred": "Errors occurred"
   },
@@ -76,23 +97,10 @@
     "clearAll": "Clear all"
   },
   "auth": {
-    "login": "Login",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "signIn": "Sign in"
   },
-  "login": {
-    "discoverLine1": "Want to know more",
-    "discoverLine2": "visit our Landing Page",
-    "moreInfo": "More information",
-    "welcome": "Welcome to WineSoft!!!",
-    "sub": "Sign in to access the platform",
-    "email": "Email",
-    "emailPlaceholder": "Email address",
-    "password": "Password",
-    "passwordPlaceholder": "Password",
-    "signIn": "Sign In",
-    "createAccount": "Create an account"
-  },
-  "register": {
+  "signUp": {
     "title": "Create Account",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
@@ -115,6 +123,31 @@
     "owner": "Owner",
     "provider": "Provider"
   },
+  "signIn": {
+    "discoverLine1": "Want to know more",
+    "discoverLine2": "visit our Landing Page",
+    "moreInfo": "More information",
+    "welcome": "Welcome to WineSoft!!!",
+    "sub": "Sign in to access the platform",
+    "email": "Email",
+    "emailPlaceholder": "Email address",
+    "password": "Password",
+    "passwordPlaceholder": "Password",
+    "signIn": "Sign In",
+    "createAccount": "Create an account",
+    "forgotPassword": "Forgot your password?"
+  },
+  "recovery": {
+    "title": "Reset your password",
+    "subtitle": "Enter the email associated with your account and we'll send instructions to reset your password.",
+    "email": "Email address",
+    "emailPlaceholder": "you@company.com",
+    "send": "Send reset link",
+    "sending": "Sending...",
+    "back": "Back to sign up",
+    "sentTitle": "Check your inbox",
+    "sentMessage": "We sent a password reset link to {email}. Follow the instructions to reset your password.",
+    "invalidEmail": "Please enter a valid email address"
   "dashboard": {
     "title": "Metrics Dashboard",
     "loading": "Loading metrics...",
