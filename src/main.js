@@ -25,29 +25,29 @@ import Chart from "primevue/chart";
 const WineSoftPreset = definePreset(Material, {
     semantic: {
         primary: {
-            50:  '#f9ebf1',
-            100: '#f2d6e3',
-            200: '#e6adc7',
-            300: '#d986aa',
-            400: '#c85d8c',
-            500: '#b0356d',   // tono principal vino
-            600: '#8d2958',
-            700: '#6b1f43',
-            800: '#49152e',
-            900: '#270a19'
+            50:  '#f3f0ff',
+            100: '#e6e0ff',
+            200: '#cdbbff',
+            300: '#b399ff',
+            400: '#9476ff',
+            500: '#6C4CF6',   // Morado Branding WineSoft (texto en el header)
+            600: '#5a3fe0',
+            700: '#482fa8',
+            800: '#342170',
+            900: '#211338'
         },
         surface: {
-            0:   '#121212', // fondo general oscuro
-            50:  '#1C1C1C',
-            100: '#222222',
-            200: '#2C2C2C'
+            0:   '#0B1D39', // fondo principal (azul marino)
+            50:  '#0f263f',
+            100: '#142a46',
+            200: '#172f52'
         }
     },
     colorScheme: {
         dark: {
-            surface: '#121212',
-            textColor: '#EDEDED',
-            primaryColor: '#b0356d',
+            surface: '#0B1D39',
+            textColor: '#FFFFFF',
+            primaryColor: '#3A4FFF',
             primaryColorText: '#ffffff'
         }
     }

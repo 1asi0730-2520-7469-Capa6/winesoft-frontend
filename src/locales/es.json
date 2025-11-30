@@ -60,6 +60,26 @@
     "delete-header": "Confirmar Eliminación",
     "confirm-delete": "¿Estás seguro de eliminar el movimiento con ID {id}?"
   },
+"orders": {
+    "title": "Gestión de Pedidos",
+    "new": "Crear Pedido",
+    "edit": "Editar Pedido",
+    "save": "Guardar Pedido",
+    "cancel": "Cancelar",
+    "id": "ID",
+    "supply": "Insumo",
+    "supplier": "Proveedor",
+    "quantity": "Cantidad",
+    "status": "Estado",
+    "actions": "Acciones",
+    "delete-header": "Confirmar Eliminación",
+    "confirm-delete": "¿Estás seguro de eliminar el pedido {id}?",
+
+    "status-pending": "Pendiente",
+    "status-shipped": "Enviado",
+    "status-delivered": "Entregado",
+    "status-cancelled": "Cancelado"
+  },
   "errors": {
     "occurred": "Ocurrieron errores"
   },
@@ -76,23 +96,10 @@
     "clearAll": "Borrar todas"
   },
   "auth": {
-    "login": "Iniciar Sesion",
-    "signUp": "Crear una cuenta"
+    "signUp": "Crear Cuenta",
+    "signIn": "Iniciar sesión"
   },
-  "login": {
-    "discoverLine1": "Deseas conocer más",
-    "discoverLine2": "visite nuestra LandingPage",
-    "moreInfo": "Más información",
-    "welcome": "¡Bienvenido a WineSoft!!!",
-    "sub": "Inicia sesión para poder acceder a la plataforma",
-    "email": "Correo Electrónico",
-    "emailPlaceholder": "Correo Electrónico",
-    "password": "Contraseña",
-    "passwordPlaceholder": "Contraseña",
-    "signIn": "Ingresar",
-    "createAccount": "Crear una cuenta"
-  },
-  "register": {
+  "signUp": {
     "title": "Crear Cuenta",
     "firstName": "Nombres",
     "firstNamePlaceholder": "Nombres",
@@ -115,26 +122,31 @@
     "owner": "Dueño",
     "provider": "Proveedor"
   },
-  "orders": {
-    "title": "Gestión de Pedidos",
-    "new": "Crear Pedido",
-    "edit": "Editar Pedido",
-    "save": "Guardar Pedido",
-    "cancel": "Cancelar",
-    "id": "ID",
-    "supply": "Insumo",
-    "supplier": "Proveedor",
-    "quantity": "Cantidad",
-    "status": "Estado",
-    "actions": "Acciones",
-    "delete-header": "Confirmar Eliminación",
-    "confirm-delete": "¿Estás seguro de eliminar el pedido {id}?",
-
-    "status-pending": "Pendiente",
-    "status-shipped": "Enviado",
-    "status-delivered": "Entregado",
-    "status-cancelled": "Cancelado"
+  "signIn": {
+    "discoverLine1": "Deseas conocer más",
+    "discoverLine2": "visite nuestra LandingPage",
+    "moreInfo": "Más información",
+    "welcome": "¡Bienvenido a WineSoft!!!",
+    "sub": "Inicia sesión para poder acceder a la plataforma",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "Correo Electrónico",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Contraseña",
+    "signIn": "Ingresar",
+    "createAccount": "Crear una cuenta",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
   },
+  "recovery": {
+    "title": "Restablecer tu contraseña",
+    "subtitle": "Introduce el correo asociado a tu cuenta y te enviaremos instrucciones para restablecer la contraseña.",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tucorreo@empresa.com",
+    "send": "Enviar enlace de restablecimiento",
+    "sending": "Enviando...",
+    "back": "Volver a registrarse",
+    "sentTitle": "Revisa tu bandeja de entrada",
+    "sentMessage": "Hemos enviado un enlace para restablecer la contraseña a {email}. Sigue las instrucciones para cambiar tu contraseña.",
+    "invalidEmail": "Por favor ingresa una dirección de correo válida"
   "dashboard": {
     "title": "Dashboard de Métricas",
     "loading": "Cargando métricas...",
