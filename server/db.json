@@ -54,7 +54,10 @@
       "date": "2025-10-13"
     }
   ],
-
+  "orders": [
+    { "id": 1001, "supplyName": "Red Wine", "supplier": "Distribuidora X", "quantity": 50, "status": "PENDING", "date": "2025-10-28" },
+    { "id": 1002, "supplyName": "White Wine", "supplier": "Proveedor Y", "quantity": 100, "status": "SHIPPED", "date": "2025-10-27" }
+  ],
   "dashboard": {
     "summary": {
       "monthlyCosts": 14200.50
