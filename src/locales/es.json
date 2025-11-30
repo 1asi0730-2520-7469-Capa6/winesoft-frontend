@@ -4,7 +4,7 @@
     "supplies": "Suministros",
     "stockMovements": "Movimientos de Stock",
     "inventory": "Inventario",
-    "orders": "Pedidos"
+    "orders": "Pedidos de Compra"
   },
   "authoring-phrase": {
     "intro": "Hecho con",
@@ -18,7 +18,8 @@
     "title": "Bienvenido a WineSoft 🍷",
     "content": "Administra tus suministros y controla el movimiento de stock de tu bodega con facilidad. Mantén todo organizado y optimiza tu inventario en tiempo real.",
     "manage-supplies": "Gestionar Insumos",
-    "view-stock": "Ver Stock"
+    "view-stock": "Ver Stock",
+    "manage-orders": "Gestionar Pedidos"
   },
   "supplies": {
     "title": "Gestión de Insumos",
@@ -59,25 +60,25 @@
     "delete-header": "Confirmar Eliminación",
     "confirm-delete": "¿Estás seguro de eliminar el movimiento con ID {id}?"
   },
-  "orders": {
+"orders": {
     "title": "Gestión de Pedidos",
-    "list": "Lista de Pedidos",
-    "form": "Formulario de Pedido",
-    "id": "ID",
-    "supplyId": "ID de Suministro",
-    "supplierId": "ID de Proveedor",
-    "quantity": "Cantidad",
-    "status": "Estado",
-    "actions": "Acciones",
     "new": "Crear Pedido",
     "edit": "Editar Pedido",
     "save": "Guardar Pedido",
     "cancel": "Cancelar",
+    "id": "ID",
+    "supply": "Insumo",
+    "supplier": "Proveedor",
+    "quantity": "Cantidad",
+    "status": "Estado",
+    "actions": "Acciones",
     "delete-header": "Confirmar Eliminación",
-    "confirm-delete": "¿Estás seguro de eliminar el pedido con ID {id}?",
+    "confirm-delete": "¿Estás seguro de eliminar el pedido {id}?",
+
     "status-pending": "Pendiente",
-    "status-in-transit": "En Tránsito",
-    "status-delivered": "Entregado"
+    "status-shipped": "Enviado",
+    "status-delivered": "Entregado",
+    "status-cancelled": "Cancelado"
   },
   "errors": {
     "occurred": "Ocurrieron errores"

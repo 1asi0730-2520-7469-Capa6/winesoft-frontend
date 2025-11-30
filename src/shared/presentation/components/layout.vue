@@ -10,12 +10,13 @@ const {t, locale} = useI18n();
 const drawer = ref(false);
 const router = useRouter();
 const route = useRoute();
-const items = [
-  {label: 'option.home', to: '/home'},
-  {label: 'option.supplies', to: '/inventory/supplies'},
-  {label: 'option.stockMovements', to: '/inventory/stock-movements'},
-  {label: 'option.orders', to: '/orders'},
-];
+
+const items = [{label: "option.home", to: "/home", icon: "pi pi-home"},
+               {label: "option.dashboard", to: "/dashboard"},
+               {label: "option.supplies", to: "/inventory/supplies", icon: "pi pi-box"},
+               {label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},
+               {label: 'option.orders', to: '/purchase/orders', icon: 'pi pi-shopping-cart'},
+              ];
 
 const isAuthView = computed(() => {
   const p = route.path.toLowerCase();

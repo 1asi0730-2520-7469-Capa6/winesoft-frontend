@@ -1,7 +1,28 @@
 <script setup>
-import {useI18n} from "vue-i18n";
+import { useI18n } from "vue-i18n";
+import { ref, onMounted } from "vue";
+import router from "../../../router.js";
 
-const {t} = useI18n();
+const { t } = useI18n();
+const show = ref(false);
+
+onMounted(() => {
+  setTimeout(() => (show.value = true), 150);
+});
+
+const goToSupplies = () => {
+  router.push("/inventory/supplies");
+};
+
+const goToStock = () => {
+  router.push("/inventory/stock-movements");
+};
+
+
+const goToOrders = () => {
+  router.push("/purchase/orders");
+};
+
 </script>
 
 <template>
@@ -30,6 +51,12 @@ const {t} = useI18n();
                 severity="secondary"
                 @click="goToStock"
             />
+            <pv-button
+                :label="`🛒 ${t('option.orders')}`"
+                icon="pi pi-shopping-cart"
+                severity="help"
+                @click="goToOrders"
+            />
           </div>
         </template>
       </pv-card>
@@ -38,9 +65,9 @@ const {t} = useI18n();
 </template>
 
 <style scoped>
-
 .home-container {
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   min-height: 100vh;
   padding-top: 60px;
@@ -52,38 +79,24 @@ const {t} = useI18n();
   background: rgba(11, 29, 57, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
-  padding: 3rem 2.5rem;
-  max-width: 600px;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
   width: 100%;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
-  border: 1px solid rgba(147, 197, 253, 0.15);
+  max-width: 900px;
+  margin: 0;
 }
-
-.logo {
-  width: 100px;
-  margin-bottom: 1.2rem;
-  filter: drop-shadow(0 0 5px rgba(147, 197, 253, 0.3));
+.home-card-large {
+  min-height: 420px;
 }
-
-.title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
-  background: linear-gradient(90deg, #60a5fa, #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subtitle {
-  color: #cbd5e1;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-}
-
-.actions {
+.home-options-center {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>
