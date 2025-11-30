@@ -483,11 +483,7 @@ function formatDate(dateString) {
 .preset-list .p-button-text:hover {
   background-color: var(--surface-light);
 }
-.preset-list .preset-active {
-  background-color: color-mix(in srgb, var(--primary) 15%, transparent);
-  color: var(--primary);
-  font-weight: 600;
-}
+
 .calendar-container {
   padding-left: 0.75rem;
 }
@@ -498,9 +494,7 @@ function formatDate(dateString) {
   display: block;
   margin-bottom: 0.5rem;
 }
-:deep(.p-datepicker-inline) {
-  width: 100%;
-}
+
 .col-span-12 { grid-column: span 12; }
 @media (min-width: 768px) {
   .md\:col-span-3 { grid-column: span 3; }
@@ -518,19 +512,7 @@ function formatDate(dateString) {
   flex-direction: column;
   overflow: hidden;
 }
-:deep(.analytics-card .p-card-body) {
-  padding: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-:deep(.analytics-card .p-card-content) {
-  padding: 1.5rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
+
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -642,14 +624,7 @@ function formatDate(dateString) {
 .alerts-content .p-button-sm {
   width: 100%;
 }
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  min-height: 150px;
-  flex-grow: 1;
-}
+
 :deep(.p-chart .p-chart-legend li span) { color: #333333 !important; }
 :deep(.p-chart .p-chart-legend li) { color: #333333 !important; }
 :deep(.p-chart .p-chart-axis-x > div) { color: #555555 !important; }
