@@ -5,7 +5,8 @@
     "supplies": "Supplies",
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "orders": "Purchase Orders"
   },
   "authoring-phrase": {
     "intro": "Made with",
@@ -19,7 +20,8 @@
     "title": "Welcome to WineSoft 🍷",
     "content": "Easily manage your supplies and track your winery stock movements. Keep everything organized and optimize your inventory in real time.",
     "manage-supplies": "Manage Supplies",
-    "view-stock": "View Stock"
+    "view-stock": "View Stock",
+    "manage-orders": "Manage Orders"
   },
   "supplies": {
     "title": "Supply Management",
@@ -115,6 +117,25 @@
     "owner": "Owner",
     "provider": "Provider"
   },
+  "orders": {
+    "title": "Purchase Orders Management",
+    "new": "New Order",
+    "edit": "Edit Order",
+    "save": "Save Order",
+    "cancel": "Cancel",
+    "id": "ID",
+    "supply": "Supply",
+    "supplier": "Supplier",
+    "quantity": "Quantity",
+    "status": "Status",
+    "actions": "Actions",
+    "delete-header": "Confirm Deletion",
+    "confirm-delete": "Are you sure you want to delete order {id}?",
+    "status-pending": "Pending",
+    "status-shipped": "Shipped",
+    "status-delivered": "Delivered",
+    "status-cancelled": "Cancelled"
+  },
   "dashboard": {
     "title": "Metrics Dashboard",
     "loading": "Loading metrics...",
@@ -158,4 +179,5 @@
     "orderProductId": "Product ID",
     "orderQuantity": "Quantity"
   }
+
 }
