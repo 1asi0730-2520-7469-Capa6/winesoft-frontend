@@ -6,6 +6,7 @@
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
     "analytics": "Analytics"
+    "orders": "Purchase Orders"
   },
   "authoring-phrase": {
     "intro": "Made with",
@@ -19,7 +20,8 @@
     "title": "Welcome to WineSoft 🍷",
     "content": "Easily manage your supplies and track your winery stock movements. Keep everything organized and optimize your inventory in real time.",
     "manage-supplies": "Manage Supplies",
-    "view-stock": "View Stock"
+    "view-stock": "View Stock",
+    "manage-orders": "Manage Orders"
   },
   "supplies": {
     "title": "Supply Management",
@@ -60,6 +62,25 @@
     "delete-header": "Confirm Deletion",
     "confirm-delete": "Are you sure you want to delete movement with ID {id}?"
   },
+  "orders": {
+    "title": "Purchase Orders Management",
+    "new": "New Order",
+    "edit": "Edit Order",
+    "save": "Save Order",
+    "cancel": "Cancel",
+    "id": "ID",
+    "supply": "Supply",
+    "supplier": "Supplier",
+    "quantity": "Quantity",
+    "status": "Status",
+    "actions": "Actions",
+    "delete-header": "Confirm Deletion",
+    "confirm-delete": "Are you sure you want to delete order {id}?",
+    "status-pending": "Pending",
+    "status-shipped": "Shipped",
+    "status-delivered": "Delivered",
+    "status-cancelled": "Cancelled"
+  },
   "errors": {
     "occurred": "Errors occurred"
   },
@@ -76,23 +97,10 @@
     "clearAll": "Clear all"
   },
   "auth": {
-    "login": "Login",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "signIn": "Sign in"
   },
-  "login": {
-    "discoverLine1": "Want to know more",
-    "discoverLine2": "visit our Landing Page",
-    "moreInfo": "More information",
-    "welcome": "Welcome to WineSoft!!!",
-    "sub": "Sign in to access the platform",
-    "email": "Email",
-    "emailPlaceholder": "Email address",
-    "password": "Password",
-    "passwordPlaceholder": "Password",
-    "signIn": "Sign In",
-    "createAccount": "Create an account"
-  },
-  "register": {
+  "signUp": {
     "title": "Create Account",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
@@ -114,6 +122,32 @@
     "userTypeTitle": "What type of user are you?",
     "owner": "Owner",
     "provider": "Provider"
+  },
+  "signIn": {
+    "discoverLine1": "Want to know more",
+    "discoverLine2": "visit our Landing Page",
+    "moreInfo": "More information",
+    "welcome": "Welcome to WineSoft!!!",
+    "sub": "Sign in to access the platform",
+    "email": "Email",
+    "emailPlaceholder": "Email address",
+    "password": "Password",
+    "passwordPlaceholder": "Password",
+    "signIn": "Sign In",
+    "createAccount": "Create an account",
+    "forgotPassword": "Forgot your password?"
+  },
+  "recovery": {
+    "title": "Reset your password",
+    "subtitle": "Enter the email associated with your account and we'll send instructions to reset your password.",
+    "email": "Email address",
+    "emailPlaceholder": "you@company.com",
+    "send": "Send reset link",
+    "sending": "Sending...",
+    "back": "Back to sign up",
+    "sentTitle": "Check your inbox",
+    "sentMessage": "We sent a password reset link to {email}. Follow the instructions to reset your password.",
+    "invalidEmail": "Please enter a valid email address"
   },
   "analytics": {
     "title": "Analytics Dashboard",

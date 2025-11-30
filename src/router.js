@@ -1,21 +1,25 @@
 import Home from "./shared/presentation/views/home.vue";
-import Login from "./shared/presentation/views/login.vue";
-import Register from "./shared/presentation/views/register.vue";
+import SignUp from "./identity/presentation/views/sign-in.vue";
+import SignIn from "./identity/presentation/views/sign-up.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import inventoryRoutes from "./inventory/presentation/inventory.routes.js";
 import analyticsRoutes from "./analytics/presentation/analytics.routes.js";
+import purchaseRoutes from "./purchase/presentation/purchase.routes.js";
 
 const pageNotFound = () => import('./shared/presentation/views/page-not-found.vue');
 
 const routes = [
     { path: '/home',            name: 'home',       component: Home,            meta: { title: 'Home' } },
-    { path: '/login',           name: 'login',      component: Login,           meta: { title: 'Login' } },
-    { path: '/register',        name: 'register',   component: Register,        meta: { title: 'Register' } },
-    { path: '/register/user-type', name: 'register-user-type', component: () => import('./shared/presentation/views/register/user-type.vue'), meta: { title: 'Tipo de Usuario' } },
+    { path: '/sign-up',         name: 'sign-up',    component: SignUp,          meta: { title: 'Sign Up' } },
+    { path: '/sign-in',         name: 'sign-in',    component: SignIn,          meta: { title: 'Sign In' } },
+    { path: '/sign-in/user-type', name: 'sign-in-user-type', component: () => import('./identity/presentation/views/sign-in/user-type.vue'), meta: { title: 'Tipo de Usuario' } },
+    { path: '/recovery-password', name: 'recovery-password', component: () => import('./identity/presentation/views/recovery-password.vue'), meta: { title: 'Recuperar Contraseña' } },
     { path: '/inventory',      name: 'inventory', children: inventoryRoutes },
-    { path: '/',                redirect: '/login'},
+    { path: '/orders',         name: 'orders',    children: ordersRoutes },
+    { path: '/',                redirect: '/sign-in'},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: pageNotFound,    meta: { title: 'Page Not Found' } },
     { path: '/analytics', name: 'analytics-main', children: analyticsRoutes },
+    { path: '/purchase/orders', name: 'purchase', children: purchaseRoutes },
 ];
 
 const router = createRouter({
