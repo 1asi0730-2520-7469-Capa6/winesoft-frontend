@@ -11,6 +11,9 @@
     "use": "utilizando",
     "author": "por el Equipo de desarrollo de {brand}"
   },
+  "footer": {
+    "rights": "Todos los derechos reservados"
+  },
   "home": {
     "title": "Bienvenido a WineSoft 🍷",
     "content": "Administra tus suministros y controla el movimiento de stock de tu bodega con facilidad. Mantén todo organizado y optimiza tu inventario en tiempo real.",
@@ -18,21 +21,23 @@
     "view-stock": "Ver Stock"
   },
   "supplies": {
-    "title": "Gestión de Suministros",
+    "title": "Gestión de Insumos",
     "list": "Lista de Suministros",
-    "form": "Formulario de Suministro",
+    "form": "Formulario de Insumo",
     "id": "ID",
-    "productId": "ID del Producto",
+    "supplyName": "Nombre del Insumo",
     "quantity": "Cantidad",
+    "unit": "Unidad",
     "supplier": "Proveedor",
+    "price": "Precio",
     "date": "Fecha",
     "actions": "Acciones",
-    "new": "Agregar Suministro",
-    "edit": "Editar Suministro",
-    "save": "Guardar Suministro",
+    "new": "Agregar Insumo",
+    "edit": "Editar Insumo",
+    "save": "Guardar Insumo",
     "cancel": "Cancelar",
     "delete-header": "Confirmar Eliminación",
-    "confirm-delete": "¿Estás seguro de eliminar el suministro con ID {id}?"
+    "confirm-delete": "¿Estás seguro de eliminar el insumo con ID {id}?"
   },
   "stockMovements": {
     "title": "Movimientos de Stock",
@@ -141,5 +146,47 @@
     "sentTitle": "Revisa tu bandeja de entrada",
     "sentMessage": "Hemos enviado un enlace para restablecer la contraseña a {email}. Sigue las instrucciones para cambiar tu contraseña.",
     "invalidEmail": "Por favor ingresa una dirección de correo válida"
+  "dashboard": {
+    "title": "Dashboard de Métricas",
+    "loading": "Cargando métricas...",
+    "generateReport": "Generar Reporte",
+    "errorGeneratingReport": "No se puede generar el reporte: datos no cargados o existen errores.",
+    "reportGeneratedTitle": "Reporte de Dashboard - WineSoft",
+    "reportGeneratedDate": "Generado el: {date}",
+    "reportSectionSummary": "Resumen",
+    "reportSupplyName": "Suministro",
+    "reportSupplyCurrent": "Actual",
+    "reportSupplyMin": "Mín.",
+    "reportSupplyStatus": "Estado",
+    "reportStatusLow": "BAJO",
+    "reportStatusOK": "OK",
+    "reportDate": "Fecha",
+    "reportMovements": "Movimientos",
+    "monthlyCostsTitle": "Resumen de Costos",
+    "monthlyTotal": "Total en Rango",
+    "supplyLevelsTitle": "Niveles de Suministro (Actual)",
+    "supplyStock": "Stock Actual",
+    "alertsTitle": "Alertas de Stock Bajo",
+    "lowStockAlert": "Stock Bajo",
+    "noLowStock": "No hay insumos con stock bajo.",
+    "requestSupplies": "Solicitar Insumos",
+    "dailyRotationTitle": "Rotación Diaria de Suministros",
+    "dailyMovements": "Movimientos por Día",
+    "rangeSelect": "Seleccionar Rango",
+    "rangeToday": "Hoy",
+    "rangeYesterday": "Ayer",
+    "rangeLast7D": "Últimos 7 Días",
+    "rangeLast30D": "Últimos 30 Días",
+    "rangeThisMonth": "Este Mes",
+    "rangeLastMonth": "Mes Pasado",
+    "rangeCustom": "Personalizado",
+    "rangeCustomLabel": "Rango Personalizado",
+    "applyFilter": "Aplicar",
+    "ordersTitle": "Órdenes Recientes (Filtradas)",
+    "orderId": "ID Orden",
+    "orderStatus": "Estado",
+    "orderDate": "Fecha",
+    "orderProductId": "ID Producto",
+    "orderQuantity": "Cantidad"
   }
 }

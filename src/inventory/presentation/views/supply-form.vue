@@ -11,16 +11,18 @@ const router = useRouter();
 const store = useInventoryStore();
 const { errors, addSupply, updateSupply } = store;
 
-const form = ref({ productId: null, quantity: 0, supplier: "", date: "" });
+const form = ref({ supplyName: null, quantity: 0, unit:"", supplier: "", price: 0, date: "" });
 const isEdit = computed(() => !!route.params.id);
 
 onMounted(() => {
   if (isEdit.value) {
     const supply = store.getSupplyById(route.params.id);
     if (supply) {
-      form.value.productId = supply.productId;
+      form.value.supplyName = supply.supplyName;
       form.value.quantity = supply.quantity;
+      form.value.unit = supply.unit;
       form.value.supplier = supply.supplier;
+      form.value.price = supply.price;
       form.value.date = supply.date;
     } else router.push({ name: "inventory-supplies" });
   }
@@ -29,9 +31,11 @@ onMounted(() => {
 const saveSupply = () => {
   const supply = new Supply({
     id: isEdit.value ? parseInt(route.params.id) : null,
-    productId: form.value.productId,
+    supplyName: form.value.supplyName,
     quantity: form.value.quantity,
+    unit: form.value.unit,
     supplier: form.value.supplier,
+    price: form.value.price,
     date: form.value.date,
   });
   if (isEdit.value) updateSupply(supply);
@@ -49,16 +53,24 @@ const navigateBack = () => {
     <h1>{{ isEdit ? t("supplies.edit") : t("supplies.new") }}</h1>
     <form @submit.prevent="saveSupply">
       <div class="field mb-3">
-        <label for="productId">{{ t("supplies.productId") }}</label>
-        <pv-input-number id="productId" v-model="form.productId" required class="w-full" />
+        <label for="supplyName">{{ t("supplies.supplyName") }}</label>
+        <pv-input-text id="supplyName" v-model="form.supplyName" required class="w-full" />
       </div>
       <div class="field mb-3">
         <label for="quantity">{{ t("supplies.quantity") }}</label>
         <pv-input-number id="quantity" v-model="form.quantity" required class="w-full" />
       </div>
       <div class="field mb-3">
+        <label for="unit">{{ t("supplies.unit") }}</label>
+        <pv-input-text id="unit" v-model="form.unit" required class="w-full" />
+      </div>
+      <div class="field mb-3">
         <label for="supplier">{{ t("supplies.supplier") }}</label>
         <pv-input-text id="supplier" v-model="form.supplier" required class="w-full" />
+      </div>
+      <div class="field mb-3">
+        <label for="price">{{ t("supplies.price") }}</label>
+        <pv-input-number id="price" v-model="form.price" required class="w-full" />
       </div>
       <div class="field mb-3">
         <label for="date">{{ t("supplies.date") }}</label>

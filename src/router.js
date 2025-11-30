@@ -4,6 +4,7 @@ import SignIn from "./identity/presentation/views/sign-up.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import inventoryRoutes from "./inventory/presentation/inventory.routes.js";
 import ordersRoutes from "./orders/presentation/orders.routes.js";
+import dashboardRoutes from "./dashboard/presentation/dashboard.routes.js";
 
 const pageNotFound = () => import('./shared/presentation/views/page-not-found.vue');
 
@@ -17,6 +18,7 @@ const routes = [
     { path: '/orders',         name: 'orders',    children: ordersRoutes },
     { path: '/',                redirect: '/sign-in'},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: pageNotFound,    meta: { title: 'Page Not Found' } },
+    { path: '/dashboard', name: 'dashboard-main', children: dashboardRoutes },
 ];
 
 const router = createRouter({

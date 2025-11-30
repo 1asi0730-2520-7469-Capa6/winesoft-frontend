@@ -1,7 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    --primary: #7b5bf2;          /* violeta claro */
+    --primary-dark: #4b3ca5;     /* violeta profundo */
+    --accent: #9f7aea;           /* lila acento */
+    --bg-dark: #0d1224;          /* azul oscuro casi negro */
+    --bg-darker: #070b1a;        /* fondo profundo */
+    --surface: #11182e;          /* paneles, tarjetas */
+    --surface-light: #1b2340;    /* hover suave */
+    --text-base: #e5e7eb;        /* texto claro */
+    --text-muted: #a1a1aa;       /* texto secundario */
+    --border: #2c3458;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --radius: 0.75rem;
+}
+
+html, body, #app {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-base);
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
+}
 
   --ws-bg-dark: #0B1D39;
   --ws-bg-dark-end: #0a1326;
@@ -17,10 +56,11 @@
   color: var(--ws-white);
   background-color: var(--ws-bg-dark);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    background: radial-gradient(circle at top left, #1b2340 0%, #0d1224 100%);
+    overflow-y: auto;
 }
 
 a {
@@ -38,9 +78,11 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+:deep(.p-datatable-tbody > tr) {
+    transition: background 0.2s ease;
+}
+:deep(.p-datatable-tbody > tr:hover) {
+    background: var(--surface-light);
 }
 
 button {
@@ -57,13 +99,16 @@ button {
 button:hover {
   border-color: var(--ws-purple-soft);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+:deep(.p-button-primary:hover) {
+    opacity: 0.9;
 }
 
-.card {
-  padding: 2em;
+:deep(.p-button-danger) {
+    background: var(--danger);
+    border: none;
+}
+:deep(.p-button-danger:hover) {
+    background: #b91c1c;
 }
 
 html, body, #app {
@@ -73,7 +118,7 @@ html, body, #app {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem 2rem 0; /* eliminar padding-bottom para que el footer quede al final */
+  padding: 2rem 2rem 0;
   text-align: center;
 }
 

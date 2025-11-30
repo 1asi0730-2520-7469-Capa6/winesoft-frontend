@@ -8,18 +8,19 @@ import { definePreset } from '@primeuix/themes';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import {
-    Button, Calendar,
-    Card,
+    Button, DatePicker,
+    Card, Popover,
     Checkbox,
     Column,
     ConfirmationService,
     ConfirmDialog, DataTable, Dialog,
     DialogService, Drawer, FileUpload, FloatLabel, IconField, InputIcon, InputNumber, InputText, Menu,
-    Rating, Row, Select, SelectButton, Tag, Textarea, Toast,
+    Rating, Row, Select, SelectButton, Tag, Textarea, ProgressSpinner, Toast,
     ToastService, Toolbar, Tooltip
 } from "primevue";
 import router from "./router.js";
 import pinia from "./pinia.js";
+import Chart from "primevue/chart";
 
 const WineSoftPreset = definePreset(Material, {
     semantic: {
@@ -66,7 +67,8 @@ createApp(App)
     .use(ToastService)
     .component('pv-button', Button)
     .component('pv-card', Card)
-    .component('pv-calendar', Calendar)
+    .component('pv-date-picker', DatePicker)
+    .component('pv-popover', Popover)
     .component('pv-column', Column)
     .component('pv-confirm-dialog', ConfirmDialog)
     .component('pv-checkbox', Checkbox)
@@ -88,6 +90,8 @@ createApp(App)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
+    .component('pv-chart', Chart)
+    .component('pv-spinner', ProgressSpinner)
     .directive('tooltip', Tooltip)
     .use(i18n)
     .use(router)

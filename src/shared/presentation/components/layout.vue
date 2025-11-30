@@ -54,7 +54,6 @@ watch(locale, (newLocale) => {
   console.log('[i18n debug] locale ->', newLocale);
 });
 </script>
-
 <template>
   <pv-toast/>
   <pv-confirm-dialog/>
@@ -99,17 +98,37 @@ watch(locale, (newLocale) => {
 </template>
 
 <style scoped>
-.layout-flex {
-  min-height: 100vh;
+.layout-container {
   display: flex;
-  flex-direction: column;
+  height: 100vh;
+  background-color: #0d0d0d;
+  font-family: "Poppins", sans-serif;
+  color: #f2f2f2;
+  overflow: hidden;
 }
 
-.header {
-  position: absolute;
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #111633 0%, #1e1b4b 60%, #312e81 100%);
+  color: #e0e7ff;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.6);
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  bottom: 0;
+  border-right: 1px solid rgba(147, 197, 253, 0.15);
+  z-index: 10;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .bg-primary {
@@ -128,18 +147,24 @@ watch(locale, (newLocale) => {
 }
 
 .logo {
-  height: 40px;
+  height: 65px;
   width: auto;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
 }
 
 .main-content {
   margin-top: 60px;
-  padding-bottom: 0; /* eliminar espacio extra para footer fijo */
+  padding-bottom: 0;
   flex: 1 0 auto;
 }
 
 
-.auth-actions > * {
-  margin-left: 12px;
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  background: radial-gradient(circle at top left, #120f24 0%, #0b0918 100%);
+  color: #eaeaea;
 }
 </style>

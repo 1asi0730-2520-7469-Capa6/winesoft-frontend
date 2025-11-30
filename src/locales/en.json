@@ -6,11 +6,15 @@
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
     "orders": "Orders"
+    "dashboard": "Dashboard"
   },
   "authoring-phrase": {
     "intro": "Made with",
     "use": "using",
     "author": "by {brand} Development Team"
+  },
+  "footer": {
+    "rights": "All rights reserved"
   },
   "home": {
     "title": "Welcome to WineSoft 🍷",
@@ -23,9 +27,11 @@
     "list": "Supplies List",
     "form": "Supply Form",
     "id": "ID",
-    "productId": "Product ID",
+    "supplyName": "Supply Name",
     "quantity": "Quantity",
+    "unit": "Unit",
     "supplier": "Supplier",
+    "price": "Price",
     "date": "Date",
     "actions": "Actions",
     "new": "Add Supply",
@@ -142,5 +148,47 @@
     "sentTitle": "Check your inbox",
     "sentMessage": "We sent a password reset link to {email}. Follow the instructions to reset your password.",
     "invalidEmail": "Please enter a valid email address"
+  "dashboard": {
+    "title": "Metrics Dashboard",
+    "loading": "Loading metrics...",
+    "generateReport": "Generate Report",
+    "errorGeneratingReport": "Cannot generate report: data not loaded or errors occurred.",
+    "reportGeneratedTitle": "WineSoft Dashboard Report",
+    "reportGeneratedDate": "Generated on: {date}",
+    "reportSectionSummary": "Summary",
+    "reportSupplyName": "Supply Name",
+    "reportSupplyCurrent": "Current",
+    "reportSupplyMin": "Min.",
+    "reportSupplyStatus": "Status",
+    "reportStatusLow": "LOW",
+    "reportStatusOK": "OK",
+    "reportDate": "Date",
+    "reportMovements": "Movements",
+    "monthlyCostsTitle": "Costs Summary",
+    "monthlyTotal": "Total in Range",
+    "supplyLevelsTitle": "Supply Levels (Current)",
+    "supplyStock": "Current Stock",
+    "alertsTitle": "Low Stock Alerts",
+    "lowStockAlert": "Low Stock",
+    "noLowStock": "No supplies are low on stock.",
+    "requestSupplies": "Request Supplies",
+    "dailyRotationTitle": "Daily Supply Rotation",
+    "dailyMovements": "Movements per Day",
+    "rangeSelect": "Select Range",
+    "rangeToday": "Today",
+    "rangeYesterday": "Yesterday",
+    "rangeLast7D": "Last 7 Days",
+    "rangeLast30D": "Last 30 Days",
+    "rangeThisMonth": "This Month",
+    "rangeLastMonth": "Last Month",
+    "rangeCustom": "Custom",
+    "rangeCustomLabel": "Custom Range",
+    "applyFilter": "Apply",
+    "ordersTitle": "Recent Orders (Filtered)",
+    "orderId": "Order ID",
+    "orderStatus": "Status",
+    "orderDate": "Date",
+    "orderProductId": "Product ID",
+    "orderQuantity": "Quantity"
   }
 }
