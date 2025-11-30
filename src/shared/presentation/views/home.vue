@@ -18,7 +18,7 @@ const goToStock = () => {
   router.push("/inventory/stock-movements");
 };
 
-// Función agregada para ir a Pedidos
+
 const goToOrders = () => {
   router.push("/purchase/orders");
 };
