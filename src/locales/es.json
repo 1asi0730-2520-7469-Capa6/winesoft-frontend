@@ -1,9 +1,11 @@
 {
   "option": {
     "home": "Inicio",
+    "about": "Acerca de",
     "supplies": "Suministros",
     "stockMovements": "Movimientos de Stock",
     "inventory": "Inventario",
+    "analytics": "Analíticas"
     "orders": "Pedidos de Compra"
   },
   "authoring-phrase": {
@@ -147,22 +149,18 @@
     "sentTitle": "Revisa tu bandeja de entrada",
     "sentMessage": "Hemos enviado un enlace para restablecer la contraseña a {email}. Sigue las instrucciones para cambiar tu contraseña.",
     "invalidEmail": "Por favor ingresa una dirección de correo válida"
-  "dashboard": {
-    "title": "Dashboard de Métricas",
-    "loading": "Cargando métricas...",
+  },
+  "analytics": {
+    "title": "Analíticas de Métricas",
+    "loading": "Cargando analíticas...",
     "generateReport": "Generar Reporte",
     "errorGeneratingReport": "No se puede generar el reporte: datos no cargados o existen errores.",
-    "reportGeneratedTitle": "Reporte de Dashboard - WineSoft",
-    "reportGeneratedDate": "Generado el: {date}",
-    "reportSectionSummary": "Resumen",
-    "reportSupplyName": "Suministro",
-    "reportSupplyCurrent": "Actual",
-    "reportSupplyMin": "Mín.",
-    "reportSupplyStatus": "Estado",
-    "reportStatusLow": "BAJO",
-    "reportStatusOK": "OK",
-    "reportDate": "Fecha",
-    "reportMovements": "Movimientos",
+    "reportPeriod": "Periodo del Reporte",
+    "selectWidgets": "Seleccionar Widgets a Incluir",
+    "selectAll": "Seleccionar Todos",
+    "deselectAll": "Deseleccionar todo",
+    "reportLanguage": "Idioma del Reporte",
+    "cancel": "Cancelar",
     "monthlyCostsTitle": "Resumen de Costos",
     "monthlyTotal": "Total en Rango",
     "supplyLevelsTitle": "Niveles de Suministro (Actual)",
@@ -183,10 +181,11 @@
     "rangeCustom": "Personalizado",
     "rangeCustomLabel": "Rango Personalizado",
     "applyFilter": "Aplicar",
-    "ordersTitle": "Órdenes Recientes (Filtradas)",
+    "ordersTitle": "Ordenes de compra (últimos 7 días)",
     "orderId": "ID Orden",
     "orderStatus": "Estado",
     "orderDate": "Fecha",
+    "orderSupplier": "Proveedor",
     "orderProductId": "ID Producto",
     "orderQuantity": "Cantidad"
   }

@@ -5,7 +5,7 @@
     "supplies": "Supplies",
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
-    "dashboard": "Dashboard",
+    "analytics": "Analytics"
     "orders": "Purchase Orders"
   },
   "authoring-phrase": {
@@ -148,22 +148,18 @@
     "sentTitle": "Check your inbox",
     "sentMessage": "We sent a password reset link to {email}. Follow the instructions to reset your password.",
     "invalidEmail": "Please enter a valid email address"
-  "dashboard": {
-    "title": "Metrics Dashboard",
-    "loading": "Loading metrics...",
+  },
+  "analytics": {
+    "title": "Analytics Dashboard",
+    "loading": "Loading analytics...",
     "generateReport": "Generate Report",
     "errorGeneratingReport": "Cannot generate report: data not loaded or errors occurred.",
-    "reportGeneratedTitle": "WineSoft Dashboard Report",
-    "reportGeneratedDate": "Generated on: {date}",
-    "reportSectionSummary": "Summary",
-    "reportSupplyName": "Supply Name",
-    "reportSupplyCurrent": "Current",
-    "reportSupplyMin": "Min.",
-    "reportSupplyStatus": "Status",
-    "reportStatusLow": "LOW",
-    "reportStatusOK": "OK",
-    "reportDate": "Date",
-    "reportMovements": "Movements",
+    "reportPeriod": "Report Period",
+    "selectWidgets": "Select Widgets to Include",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "reportLanguage": "Report Language",
+    "cancel": "Cancel",
     "monthlyCostsTitle": "Costs Summary",
     "monthlyTotal": "Total in Range",
     "supplyLevelsTitle": "Supply Levels (Current)",
@@ -184,12 +180,12 @@
     "rangeCustom": "Custom",
     "rangeCustomLabel": "Custom Range",
     "applyFilter": "Apply",
-    "ordersTitle": "Recent Orders (Filtered)",
+    "ordersTitle": "Purchase Orders (last 7 days)",
     "orderId": "Order ID",
     "orderStatus": "Status",
     "orderDate": "Date",
+    "orderSupplier": "Supplier",
     "orderProductId": "Product ID",
     "orderQuantity": "Quantity"
   }
-
 }
