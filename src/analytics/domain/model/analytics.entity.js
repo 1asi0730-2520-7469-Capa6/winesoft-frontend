@@ -6,13 +6,13 @@
 * @property {number} quantity
 */
 export class Order {
-    constructor({ id, status, orderDate, productId, quantity, total }) {
-        this.id = id;
+    constructor({ orderId, status, date, productId, quantity, supplier }) {
+        this.orderId = orderId;
         this.status = status;
-        this.orderDate = orderDate;
+        this.date = date;
         this.productId = productId;
         this.quantity = quantity;
-        this.total = total;
+        this.supplier = supplier;
     }
 }
 
@@ -26,11 +26,17 @@ export class Order {
  * @property {number} minStock - The minimum amount we want to have before it's considered low.
  */
 export class SupplyLevel {
-    constructor({ id, name, current, minStock }) {
-        this.id = id; // Store the id
-        this.name = name; // Store the name
-        this.current = current; // Store the current amount
-        this.minStock = minStock; // Store the minimum desired amount
+    constructor({ name, currentStock }) {
+        this.name = name;
+        this.currentStock = currentStock;
+    }
+}
+
+export class LowStockAlert {
+    constructor({ productName, currentStock, threshold }) {
+        this.productName = productName;
+        this.currentStock = currentStock;
+        this.threshold = threshold;
     }
 }
 
@@ -41,10 +47,18 @@ export class SupplyLevel {
  * @property {string} date - The date this activity happened.
  * @property {number} movements - How many total movements (in or out) occurred on this date.
  */
-export class DailyRotation {
-    constructor({ date, movements }) {
-        this.date = date; // Store the date
-        this.movements = movements; // Store the number of movements
+export class SupplyRotation {
+    constructor({ day, movements }) {
+        this.day = day;
+        this.movements = movements;
+    }
+}
+
+export class CostsSummary {
+    constructor({ totalCost, startDate, endDate }) {
+        this.totalCost = totalCost;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 }
 /**
@@ -63,10 +77,12 @@ export class Analytics {
      */
     // This runs when we create the main Analytics object.
     // It sets default values if nothing is provided.
-    constructor({ summary = { monthlyCosts: 0 }, supplyLevels = [], dailyRotation = [], orders = [] } = {} ) {
-        this.summary = summary; // Store the summary info
-        this.supplyLevels = supplyLevels; // Store the list of supply levels
-        this.dailyRotation = dailyRotation;
-        this.orders = orders;// Store the list of daily rotations
+    constructor({costsSummary = null, supplyLevels = [], lowStockAlerts = [],
+                    supplyRotation = [], orders = []} = {}) {
+        this.costsSummary = costsSummary;
+        this.supplyLevels = supplyLevels;
+        this.lowStockAlerts = lowStockAlerts;
+        this.supplyRotation = supplyRotation;
+        this.orders = orders;
     }
 }
