@@ -6,7 +6,8 @@
     "stockMovements": "Movimientos de Stock",
     "inventory": "Inventario",
     "analytics": "Analíticas",
-    "orders": "Pedidos de Compra"
+    "orders": "Pedidos de Compra",
+    "profiles": "Perfil"
   },
   "authoring-phrase": {
     "intro": "Hecho con",
@@ -206,7 +207,12 @@
       "branch": "Sede / Sucursal",
       "branchPlaceholder": "Ej. Almacén Central",
       "taxId": "RUC / NIF",
-      "address": "Dirección Fiscal",
+      "fiscalAddressTitle": "Dirección Fiscal",
+      "street": "Calle",
+      "number": "Número",
+      "city": "Ciudad",
+      "country": "País",
+      "postalCode": "Código Postal",
       "phone": "Teléfono",
       "validations": {
         "requiredName": "La razón social es obligatoria.",

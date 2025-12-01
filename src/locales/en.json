@@ -6,7 +6,8 @@
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
     "analytics": "Analytics",
-    "orders": "Purchase Orders"
+    "orders": "Purchase Orders",
+    "profiles": "Profile"
   },
   "authoring-phrase": {
     "intro": "Made with",
@@ -206,7 +207,12 @@
       "branch": "Branch / Office",
       "branchPlaceholder": "Ex. Central Warehouse",
       "taxId": "Tax ID",
-      "address": "Fiscal Address",
+      "fiscalAddressTitle": "Fiscal Address",
+      "street": "Street",
+      "number": "Number",
+      "city": "City",
+      "country": "Country",
+      "postalCode": "Postal Code",
       "phone": "Phone",
       "validations": {
         "requiredName": "Legal name is required.",
