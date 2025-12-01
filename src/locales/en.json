@@ -188,5 +188,42 @@
     "orderSupplier": "Supplier",
     "orderProductId": "Product ID",
     "orderQuantity": "Quantity"
+  },
+  "profiles": {
+    "title": "Company Directory",
+    "new": "New Company",
+    "empty": "No registered profiles found.",
+    "columns": {
+      "id": "ID",
+      "entity": "Company / Branch",
+      "taxId": "Tax ID",
+      "address": "Fiscal Address",
+      "phone": "Phone"
+    },
+    "form": {
+      "title": "Register Company",
+      "businessName": "Legal Name",
+      "branch": "Branch / Office",
+      "branchPlaceholder": "Ex. Central Warehouse",
+      "taxId": "Tax ID",
+      "address": "Fiscal Address",
+      "phone": "Phone",
+      "validations": {
+        "requiredName": "Legal name is required.",
+        "requiredTaxId": "Tax ID is required.",
+        "requiredAddress": "Fiscal address is required.",
+        "requiredPhone": "Contact phone is required."
+      }
+    },
+    "toast": {
+      "createdSummary": "Success",
+      "createdDetail": "Company profile created successfully.",
+      "errorSummary": "Error",
+      "errorDetail": "Could not create profile."
+    }
+  },
+  "shared": {
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }
