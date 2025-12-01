@@ -188,5 +188,42 @@
     "orderSupplier": "Proveedor",
     "orderProductId": "ID Producto",
     "orderQuantity": "Cantidad"
+  },
+  "profiles": {
+    "title": "Directorio de Empresas",
+    "new": "Nueva Empresa",
+    "empty": "No se encontraron perfiles registrados.",
+    "columns": {
+      "id": "ID",
+      "entity": "Empresa / Sede",
+      "taxId": "RUC / NIF",
+      "address": "Dirección Fiscal",
+      "phone": "Teléfono"
+    },
+    "form": {
+      "title": "Registrar Empresa",
+      "businessName": "Razón Social",
+      "branch": "Sede / Sucursal",
+      "branchPlaceholder": "Ej. Almacén Central",
+      "taxId": "RUC / NIF",
+      "address": "Dirección Fiscal",
+      "phone": "Teléfono",
+      "validations": {
+        "requiredName": "La razón social es obligatoria.",
+        "requiredTaxId": "El RUC/NIF es obligatorio.",
+        "requiredAddress": "La dirección fiscal es obligatoria.",
+        "requiredPhone": "El teléfono de contacto es obligatorio."
+      }
+    },
+    "toast": {
+      "createdSummary": "Éxito",
+      "createdDetail": "Perfil de empresa creado correctamente.",
+      "errorSummary": "Error",
+      "errorDetail": "No se pudo crear el perfil."
+    }
+  },
+  "shared": {
+    "cancel": "Cancelar",
+    "save": "Guardar"
   }
 }
