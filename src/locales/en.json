@@ -5,8 +5,8 @@
     "supplies": "Supplies",
     "stockMovements": "Stock Movements",
     "inventory": "Inventory",
-    "orders": "Orders"
-    "dashboard": "Dashboard"
+    "analytics": "Analytics",
+    "orders": "Purchase Orders"
   },
   "authoring-phrase": {
     "intro": "Made with",
@@ -20,7 +20,9 @@
     "title": "Welcome to WineSoft 🍷",
     "content": "Easily manage your supplies and track your winery stock movements. Keep everything organized and optimize your inventory in real time.",
     "manage-supplies": "Manage Supplies",
-    "view-stock": "View Stock"
+    "view-stock": "View Stock",
+    "views-stock": "View Stock",
+    "manage-orders": "Manage Orders"
   },
   "supplies": {
     "title": "Supply Management",
@@ -62,24 +64,23 @@
     "confirm-delete": "Are you sure you want to delete movement with ID {id}?"
   },
   "orders": {
-    "title": "Order Management",
-    "list": "Orders List",
-    "form": "Order Form",
-    "id": "ID",
-    "supplyId": "Supply ID",
-    "supplierId": "Supplier ID",
-    "quantity": "Quantity",
-    "status": "Status",
-    "actions": "Actions",
-    "new": "Create Order",
+    "title": "Purchase Orders Management",
+    "new": "New Order",
     "edit": "Edit Order",
     "save": "Save Order",
     "cancel": "Cancel",
+    "id": "ID",
+    "supply": "Supply",
+    "supplier": "Supplier",
+    "quantity": "Quantity",
+    "status": "Status",
+    "actions": "Actions",
     "delete-header": "Confirm Deletion",
-    "confirm-delete": "Are you sure you want to delete order with ID {id}?",
+    "confirm-delete": "Are you sure you want to delete order {id}?",
     "status-pending": "Pending",
-    "status-in-transit": "In Transit",
-    "status-delivered": "Delivered"
+    "status-shipped": "Shipped",
+    "status-delivered": "Delivered",
+    "status-cancelled": "Cancelled"
   },
   "errors": {
     "occurred": "Errors occurred"
@@ -148,22 +149,18 @@
     "sentTitle": "Check your inbox",
     "sentMessage": "We sent a password reset link to {email}. Follow the instructions to reset your password.",
     "invalidEmail": "Please enter a valid email address"
-  "dashboard": {
-    "title": "Metrics Dashboard",
-    "loading": "Loading metrics...",
+  },
+  "analytics": {
+    "title": "Analytics Dashboard",
+    "loading": "Loading analytics...",
     "generateReport": "Generate Report",
     "errorGeneratingReport": "Cannot generate report: data not loaded or errors occurred.",
-    "reportGeneratedTitle": "WineSoft Dashboard Report",
-    "reportGeneratedDate": "Generated on: {date}",
-    "reportSectionSummary": "Summary",
-    "reportSupplyName": "Supply Name",
-    "reportSupplyCurrent": "Current",
-    "reportSupplyMin": "Min.",
-    "reportSupplyStatus": "Status",
-    "reportStatusLow": "LOW",
-    "reportStatusOK": "OK",
-    "reportDate": "Date",
-    "reportMovements": "Movements",
+    "reportPeriod": "Report Period",
+    "selectWidgets": "Select Widgets to Include",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "reportLanguage": "Report Language",
+    "cancel": "Cancel",
     "monthlyCostsTitle": "Costs Summary",
     "monthlyTotal": "Total in Range",
     "supplyLevelsTitle": "Supply Levels (Current)",
@@ -184,10 +181,11 @@
     "rangeCustom": "Custom",
     "rangeCustomLabel": "Custom Range",
     "applyFilter": "Apply",
-    "ordersTitle": "Recent Orders (Filtered)",
+    "ordersTitle": "Purchase Orders (last 7 days)",
     "orderId": "Order ID",
     "orderStatus": "Status",
     "orderDate": "Date",
+    "orderSupplier": "Supplier",
     "orderProductId": "Product ID",
     "orderQuantity": "Quantity"
   }

@@ -10,12 +10,13 @@ const {t, locale} = useI18n();
 const drawer = ref(false);
 const router = useRouter();
 const route = useRoute();
-const items = [
-  {label: 'option.home', to: '/home'},
-  {label: 'option.supplies', to: '/inventory/supplies'},
-  {label: 'option.stockMovements', to: '/inventory/stock-movements'},
-  {label: 'option.orders', to: '/orders'},
-];
+
+const items = [{label: "option.home", to: "/home", icon: "pi pi-home"},
+               {label: "option.analytics", to: "/analytics"},
+               {label: "option.supplies", to: "/inventory/supplies", icon: "pi pi-box"},
+               {label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},
+               {label: 'option.orders', to: '/purchase/orders', icon: 'pi pi-shopping-cart'},
+              ];
 
 const isAuthView = computed(() => {
   const p = route.path.toLowerCase();
@@ -107,37 +108,35 @@ watch(locale, (newLocale) => {
   overflow: hidden;
 }
 
-.sidebar {
-  width: 250px;
-  background: linear-gradient(180deg, #111633 0%, #1e1b4b 60%, #312e81 100%);
-  color: #e0e7ff;
+/* Nuevo: contenedor principal que usa la plantilla */
+.layout-flex {
   display: flex;
   flex-direction: column;
-  padding: 1rem 0;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Header fijo, ahora pegado al borde superior sin espacios */
+.header {
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  border-right: 1px solid rgba(147, 197, 253, 0.15);
-  z-index: 10;
+  top: 0;       /* pegado arriba */
+  left: 0;      /* pegado a la izquierda */
+  right: 0;     /* pegado a la derecha */
+  z-index: 1200;
+  pointer-events: auto;
 }
 
-.sidebar-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
+/* Estilo del toolbar: sin border-radius para ocupar todo el ancho */
 .bg-primary {
-  background: linear-gradient(90deg, var(--ws-bg-dark), var(--ws-brand-purple-dark));
-  color: var(--ws-white);
+  background: linear-gradient(90deg, var(--ws-bg-dark, #0B1D39), var(--ws-brand-purple-dark, #4B2AD0));
+  color: var(--ws-white, #FFFFFF);
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 18px;
+  padding: 12px 28px;
+  border-radius: 0; /* quitar radio */
+  box-shadow: 0 6px 24px rgba(11,17,40,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 .nav-items {
@@ -147,16 +146,22 @@ watch(locale, (newLocale) => {
 }
 
 .logo {
-  height: 65px;
+  height: 48px;
   width: auto;
-  margin-bottom: 0.5rem;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+  margin-bottom: 0.25rem;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.35));
 }
 
+/* Asegurar que el contenido principal no quede oculto por el header fijo
+   y centrar el contenido dentro del área principal */
 .main-content {
-  margin-top: 60px;
-  padding-bottom: 0;
+  margin-top: 64px; /* igual a la altura del header */
+  padding: 2rem;
   flex: 1 0 auto;
+  display: flex;
+  justify-content: center; /* centrar horizontal */
+  align-items: center;     /* centrar vertical */
+  min-height: calc(100vh - 64px);
 }
 
 

@@ -14,6 +14,23 @@
     --success: #22c55e;
     --danger: #ef4444;
     --radius: 0.75rem;
+
+  --ws-bg-dark: #0B1D39;
+  --ws-bg-dark-end: #0a1326;
+  --ws-blue: #3A4FFF;
+  --ws-purple-soft: #8F7BFF;
+  --ws-white: #FFFFFF;
+  --ws-gray-100: #F5F7FA;
+  --ws-text-dark: #111827;
+  --ws-brand-purple: #6C4CF6;
+  --ws-brand-purple-dark: #4B2AD0;
+}
+
+/* Aplicar esquema de color y fondo usando variables definidas en :root */
+body {
+  color-scheme: light dark;
+  color: var(--ws-white);
+  background-color: var(--ws-bg-dark);
 }
 
 html, body, #app {
@@ -25,6 +42,20 @@ html, body, #app {
     background: var(--bg-dark);
     color: var(--text-base);
     overflow-x: hidden;
+}
+
+/* Nuevo: permitir que el header use todo el ancho del viewport */
+#app {
+  width: 100%;
+  max-width: 100%; /* ocupar todo el ancho */
+  margin: 0;
+  padding: 0; /* quitar padding lateral y superior para que el header pegue al borde */
+  text-align: center;
+}
+
+/* Footer: espacio inferior para que el contenido no quede pegado */
+.footer-spacer {
+  height: 120px;
 }
 
 ::-webkit-scrollbar {
@@ -41,20 +72,6 @@ html, body, #app {
     height: 100vh;
     background: linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
 }
-
-  --ws-bg-dark: #0B1D39;
-  --ws-bg-dark-end: #0a1326;
-  --ws-blue: #3A4FFF;
-  --ws-purple-soft: #8F7BFF;
-  --ws-white: #FFFFFF;
-  --ws-gray-100: #F5F7FA;
-  --ws-text-dark: #111827;
-  --ws-brand-purple: #6C4CF6;
-  --ws-brand-purple-dark: #4B2AD0;
-
-  color-scheme: light dark;
-  color: var(--ws-white);
-  background-color: var(--ws-bg-dark);
 
 .content-area {
     flex: 1;
@@ -85,20 +102,25 @@ body {
     background: var(--surface-light);
 }
 
+/* Botones globales estilo objetivo */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.35);
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  background-color: var(--ws-blue);
+  background-image: linear-gradient(90deg, var(--ws-brand-purple), var(--ws-brand-purple-dark));
+  color: var(--ws-white);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
+
 button:hover {
-  border-color: var(--ws-purple-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(76, 29, 167, 0.18);
 }
+
 :deep(.p-button-primary:hover) {
     opacity: 0.9;
 }
@@ -113,13 +135,6 @@ button:hover {
 
 html, body, #app {
   height: 100%;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem 2rem 0;
-  text-align: center;
 }
 
 @media (prefers-color-scheme: light) {
