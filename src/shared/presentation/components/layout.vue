@@ -58,8 +58,33 @@ watch(locale, (newLocale) => {
 <template>
   <pv-toast/>
   <pv-confirm-dialog/>
-  <div class="layout-flex">
-    <div class="header">
+  <div :class="['layout-flex', { 'with-side': !isAuthView }]">
+    <!-- Sidebar para vistas normales -->
+    <aside v-if="!isAuthView" class="side-nav">
+      <div class="side-top">
+        <img class="logo" src="/winesoft-logo.png" alt="WineSoft Logo"/>
+        <h3 class="brand">WineSoft</h3>
+      </div>
+
+      <nav class="side-menu">
+        <ul>
+          <li v-for="item in items" :key="item.to">
+            <router-link :to="item.to" class="side-link">
+              <i v-if="item.icon" :class="item.icon"></i>
+              <span>{{ t(item.label) }}</span>
+            </router-link>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="side-footer">
+        <notification-center />
+        <language-switcher />
+      </div>
+    </aside>
+
+    <!-- Toolbar superior para vistas de autenticación (sign-in / sign-up) -->
+    <div v-else class="header">
       <pv-toolbar class="bg-primary">
         <template #start>
           <img class="logo" src="/winesoft-logo.png" alt="WineSoft Logo"/>
@@ -91,6 +116,7 @@ watch(locale, (newLocale) => {
       </pv-toolbar>
       <pv-drawer v-model="drawer"/>
     </div>
+
     <div class="main-content">
       <router-view/>
     </div>
@@ -116,17 +142,45 @@ watch(locale, (newLocale) => {
   width: 100%;
 }
 
-/* Header fijo, ahora pegado al borde superior sin espacios */
-.header {
+/* Barra lateral (side-nav) */
+.side-nav {
   position: fixed;
-  top: 0;       /* pegado arriba */
-  left: 0;      /* pegado a la izquierda */
-  right: 0;     /* pegado a la derecha */
-  z-index: 1200;
-  pointer-events: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 220px;
+  background: linear-gradient(180deg, var(--ws-bg-dark, #120f24), var(--ws-brand-purple-dark, #4B2AD0));
+  color: var(--ws-white);
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1300;
+  box-shadow: 2px 0 24px rgba(4,6,20,0.6);
 }
+.side-top { text-align: center; margin-bottom: 24px; }
+.side-top .logo { height: 48px; width: auto; margin: 0 auto 8px; filter: drop-shadow(0 6px 10px rgba(75,42,208,0.18)); }
+.side-top .brand { margin: 0; font-size: 1.1rem; color: var(--ws-white); }
 
-/* Estilo del toolbar: sin border-radius para ocupar todo el ancho */
+.side-menu { flex: 1 1 auto; }
+.side-menu ul { list-style: none; padding: 0; margin: 0; }
+.side-menu li { margin: 12px 0; }
+.side-link {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  color: rgba(255,255,255,0.92);
+  border-radius: 10px;
+  text-decoration: none;
+}
+.side-link:hover { background: rgba(255,255,255,0.03); color: var(--ws-white); }
+.side-link i { width: 22px; text-align: center; }
+
+.side-footer { margin-top: 12px; display: flex; flex-direction: column; gap: 12px; }
+
+/* Estilos del header superior (solo para vistas auth) */
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 1200; pointer-events: auto; }
 .bg-primary {
   background: linear-gradient(90deg, var(--ws-bg-dark, #0B1D39), var(--ws-brand-purple-dark, #4B2AD0));
   color: var(--ws-white, #FFFFFF);
@@ -134,28 +188,17 @@ watch(locale, (newLocale) => {
   align-items: center;
   gap: 12px;
   padding: 12px 28px;
-  border-radius: 0; /* quitar radio */
+  border-radius: 0;
   box-shadow: 0 6px 24px rgba(11,17,40,0.25);
   border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
-.nav-items {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
+.nav-items { display: flex; gap: 12px; align-items: center; }
+.logo { height: 48px; width: auto; margin-bottom: 0.25rem; filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)); }
 
-.logo {
-  height: 48px;
-  width: auto;
-  margin-bottom: 0.25rem;
-  filter: drop-shadow(0 0 6px rgba(0,0,0,0.35));
-}
-
-/* Asegurar que el contenido principal no quede oculto por el header fijo
-   y centrar el contenido dentro del área principal */
+/* Ajustes del contenido principal según si hay sidebar o no */
 .main-content {
-  margin-top: 64px; /* igual a la altura del header */
+  margin-top: 64px; /* por el header */
   padding: 2rem;
   flex: 1 0 auto;
   display: flex;
@@ -164,12 +207,36 @@ watch(locale, (newLocale) => {
   min-height: calc(100vh - 64px);
 }
 
+/* Cuando hay sidebar, empujar el contenido a la derecha y quitar el margin-top (la sidebar ocupa todo el alto) */
+.with-side .main-content {
+  margin-top: 0;
+  margin-left: 220px;
+  min-height: 100vh;
+  padding-top: 3.5rem;
+  position: relative;
+  background: transparent; /* permitimos pseudo-elemento para el panel central */
+}
 
-.content-area {
-  flex: 1;
-  overflow-y: auto;
-  padding: 2rem;
-  background: radial-gradient(circle at top left, #120f24 0%, #0b0918 100%);
-  color: #eaeaea;
+/* Pseudo elemento que sirve como "panel" central extendido (rellena la zona central) */
+.with-side .main-content::before {
+  content: "";
+  position: fixed; /* fijo para cubrir toda el área visual restante */
+  top: 0;
+  left: 220px; /* empieza justo después del sidebar */
+  right: 0; /* llega hasta el borde derecho del viewport */
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(11,29,57,0.98), rgba(7,11,24,0.95));
+  box-shadow: 0 18px 80px rgba(2,6,23,0.55), inset 0 -8px 30px rgba(8,14,28,0.28);
+  border-radius: 0;
+  z-index: 0; /* por debajo del contenido (contenido tendrá z-index 2) */
+}
+
+/* Asegurar que el contenido del router-view esté encima del pseudo-elemento */
+.with-side .main-content > * { position: relative; z-index: 2; }
+
+/* Mobile tweak: cuando la sidebar reduce su ancho, ajustar el inicio del panel fijo */
+@media (max-width: 900px) {
+  .side-nav { width: 72px; }
+  .with-side .main-content::before { left: 72px; }
 }
 </style>
