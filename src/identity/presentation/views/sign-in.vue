@@ -1,4 +1,3 @@
-// filepath: src/identity/presentation/views/sign-in.vue
 <script setup>
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
@@ -29,7 +28,7 @@ const hasSpecial = computed(() => /[^A-Za-z0-9]/.test(password.value));
 const emailValid = computed(() => /@/.test(email.value));
 const passwordsMatch = computed(() => password.value === passwordConfirm.value && password.value.length > 0);
 const isPasswordValid = computed(() => hasLength.value && hasUpper.value && hasLower.value && hasSpecial.value);
-const isFormValid = computed(() => isPasswordValid.value && passwordsMatch.value && emailValid.value);
+const isFormValid = computed(() => isPasswordValid.value && passwordsMatch.value && emailValid.value && firstName.value.trim().length > 0 && lastName.value.trim().length > 0);
 
 const animateButton = ref(false);
 let prevValid = false;
@@ -42,6 +41,9 @@ watch(isFormValid, (newVal) => {
 });
 
 function onSiguiente() {
+  if (!isFormValid.value) return;
+  // keep existing navigation / behavior; placeholder
+  router.push({ path: '/home' });
 }
 
 async function positionPopover() {
@@ -51,11 +53,7 @@ async function positionPopover() {
   if (!pop) return;
   const rect = pop.getBoundingClientRect();
   const margin = 12;
-  if (rect.right + margin > window.innerWidth) {
-    flipLeft.value = true;
-  } else {
-    flipLeft.value = false;
-  }
+  flipLeft.value = rect.right + margin > window.innerWidth;
 }
 
 function onPasswordFocus() {
@@ -97,94 +95,139 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="register-page">
-    <div class="register-title">{{ t('signUp.title') }}</div>
+  <div class="register-page-modern">
+    <div class="register-wrap">
+      <div class="hero">
+        <img src="/winesoft-logo.png" alt="logo" class="hero-logo" />
+        <h2 class="hero-title">{{ t('signUp.title') }}</h2>
+        <p class="hero-sub">Create your WineSoft account — manage supplies and inventory with ease.</p>
+      </div>
 
-    <div class="register-card">
-      <div class="register-columns">
-        <div class="col left">
-          <label class="field-label">{{ t('signUp.firstName') }}</label>
-          <input class="field-input" v-model="firstName" :placeholder="t('signUp.firstNamePlaceholder')" />
+      <div class="card">
+        <div class="card-grid">
+          <div class="form-area">
+            <div class="row two-cols">
+              <div class="field">
+                <label>First name</label>
+                <input class="input" v-model="firstName" placeholder="First name" />
+              </div>
+              <div class="field">
+                <label>Create password</label>
+                <input ref="passwordInputRef" class="input" type="password" v-model="password" placeholder="Password" @focus="onPasswordFocus" @blur="onPasswordBlur" />
+              </div>
+            </div>
 
-          <label class="field-label">{{ t('signUp.lastName') }}</label>
-          <input class="field-input" v-model="lastName" :placeholder="t('signUp.lastNamePlaceholder')" />
+            <div class="row two-cols">
+              <div class="field">
+                <label>Last name</label>
+                <input class="input" v-model="lastName" placeholder="Last name" />
+              </div>
+              <div class="field">
+                <label>Confirm password</label>
+                <input class="input" type="password" v-model="passwordConfirm" placeholder="Confirm password" />
+              </div>
+            </div>
 
-          <label class="field-label">{{ t('signUp.email') }}</label>
-          <input class="field-input" v-model="email" :placeholder="t('signUp.emailPlaceholder')" />
-          <div v-if="email && !emailValid" class="mismatch">{{ t('signUp.emailInvalid') }}</div>
-        </div>
+            <div class="row">
+              <div class="field">
+                <label>Email</label>
+                <input class="input" v-model="email" placeholder="Email address" />
+                <div v-if="email && !emailValid" class="hint error">Invalid email</div>
+              </div>
+            </div>
 
-        <div class="col right" style="position: relative;">
-          <div
-            ref="popoverRef"
-            class="tooltip"
-            :class="[{show: showTooltip}, { 'flip-left': flipLeft }]"
-            role="status"
-            v-show="showTooltip"
-            @mouseenter="onTooltipEnter"
-            @mouseleave="onTooltipLeave"
-          >
-            <div class="tooltip-title">{{ t('signUp.passwordRequirementsTitle') }}</div>
-            <ul class="requirements">
-              <li :class="{ok: hasLength}">● {{ t('signUp.passwordReqLength') }}</li>
-              <li :class="{ok: hasUpper}">● {{ t('signUp.passwordReqUpper') }}</li>
-              <li :class="{ok: hasLower}">● {{ t('signUp.passwordReqLower') }}</li>
-              <li :class="{ok: hasSpecial}">● {{ t('signUp.passwordReqSpecial') }}</li>
-            </ul>
+            <div class="row actions">
+              <button class="btn primary" :disabled="!isFormValid" :class="{ animate: animateButton }" @click="onSiguiente">Next</button>
+            </div>
           </div>
 
-          <label class="field-label">{{ t('signUp.createPassword') }}</label>
-          <input
-            ref="passwordInputRef"
-            class="field-input"
-            type="password"
-            v-model="password"
-            :placeholder="t('signUp.passwordPlaceholder')"
-            @focus="onPasswordFocus"
-            @blur="onPasswordBlur"
-            @click="onPasswordFocus"
-          />
-
-          <label class="field-label">{{ t('signUp.confirmPassword') }}</label>
-          <input class="field-input" type="password" v-model="passwordConfirm" :placeholder="t('signUp.passwordPlaceholder')" />
-
-          <div v-if="passwordConfirm && !passwordsMatch" class="mismatch">{{ t('signUp.passwordMismatch') }}</div>
-
-          <div class="actions">
-            <button
-              :disabled="!isFormValid"
-              :class="[{disabled: !isFormValid}, {animate: animateButton} ]"
-              @click="onSiguiente"
+          <aside class="info-area">
+            <div
+              ref="popoverRef"
+              class="tooltip"
+              :class="[{show: showTooltip}, { 'flip-left': flipLeft }]"
+              role="status"
+              v-show="showTooltip"
+              @mouseenter="onTooltipEnter"
+              @mouseleave="onTooltipLeave"
             >
-              {{ t('signUp.next') }}
-            </button>
-          </div>
+              <div class="tooltip-title">{{ t('signUp.passwordRequirementsTitle') }}</div>
+              <ul class="requirements">
+                <li :class="{ok: hasLength}">● {{ t('signUp.passwordReqLength') }}</li>
+                <li :class="{ok: hasUpper}">● {{ t('signUp.passwordReqUpper') }}</li>
+                <li :class="{ok: hasLower}">● {{ t('signUp.passwordReqLower') }}</li>
+                <li :class="{ok: hasSpecial}">● {{ t('signUp.passwordReqSpecial') }}</li>
+              </ul>
+            </div>
+
+            <div class="info-box">
+              <h3>Why create an account?</h3>
+              <p>Securely manage your supplies, track stock movements and generate purchase orders.</p>
+              <ul>
+                <li>Real-time inventory</li>
+                <li>Order tracking</li>
+                <li>PDF reports</li>
+              </ul>
+            </div>
+
+          </aside>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <style scoped>
-/* ...existing styles copied from register.vue... */
-.register-page { min-height: calc(100vh - 60px); background: var(--ws-bg-dark); padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
-.register-title { font-size: 48px; color: var(--ws-white); margin: 12px 0 20px 0; }
-.register-card { width: 100%; max-width: 1100px; background: rgba(255,255,255,0.04); border: 4px solid rgba(0,0,0,0.8); padding: 28px; box-sizing: border-box; position: relative; }
-.register-columns { display: flex; gap: 40px; }
-.col { flex: 1; display: flex; flex-direction: column; }
-.field-label { font-size: 32px; color: var(--ws-white); margin-bottom: 10px; }
-.field-input { height: 52px; font-size: 20px; padding: 8px 12px; border: none; background: var(--ws-gray-100); color: var(--ws-text-dark); margin-bottom: 24px; }
-.tooltip { position: absolute; top: 28px; left: 100%; margin-left: 28px; width: 360px; background: rgba(17,24,39,0.9); border-radius: 10px; padding: 16px; color: var(--ws-white); margin-bottom: 8px; border: 1px solid rgba(0,0,0,0.5); transform-origin: top right; transform: scale(0.96); opacity: 0; transition: transform 150ms ease, opacity 150ms ease; z-index: 60; box-shadow: 0 8px 24px rgba(0,0,0,0.45); }
-.tooltip.show { transform: scale(1); opacity: 1; }
-.tooltip::before { content: ""; position: absolute; left: -12px; top: 20px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid rgba(17,24,39,0.9); }
-.tooltip.flip-left { left: auto; right: 100%; margin-left: 0; margin-right: 28px; transform-origin: top left; }
-.tooltip.flip-left::before { left: auto; right: -12px; border-right: none; border-left: 12px solid rgba(17,24,39,0.9); }
-.mismatch { color: #ff4d4f; margin-top: 8px; font-size: 16px; }
-.actions { display: flex; align-items: center; justify-content: flex-end; flex: 1; }
-.actions button { background: var(--ws-blue); color: var(--ws-white); border: 2px solid rgba(0,0,0,0.8); padding: 14px 48px; font-size: 28px; cursor: pointer; transition: transform 0.2s ease, background-color 0.3s ease, opacity 0.2s ease; }
-.actions button.disabled { background: #9e9e9e; color: #e9e9e9; cursor: not-allowed; opacity: 0.9; }
-.actions button.animate { animation: highlight 600ms ease; }
-@keyframes highlight { 0% { transform: scale(0.98); filter: brightness(0.7); } 60% { transform: scale(1.02); filter: brightness(1.05); } 100% { transform: scale(1); filter: none; } }
-@media (max-width: 900px) { .register-columns { flex-direction: column; } .actions { justify-content: center; margin-top: 12px; } .field-label { font-size: 22px; } .field-input { height: 44px; } .register-title { font-size: 36px; } .tooltip { position: relative; width: 100%; top: auto; right: auto; left: auto; transform: none; opacity: 1; box-shadow: none; } .tooltip::before { display: none; } }
+.register-page-modern { min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #071025 0%, #071427 100%); padding: 48px 24px; }
+.register-wrap { width: 100%; max-width: 1120px; }
+.hero { text-align: center; margin-bottom: 22px; color: var(--ws-white); }
+.hero-logo { height: 46px; margin-bottom: 10px; filter: drop-shadow(0 8px 22px rgba(123,91,242,0.18)); }
+.hero-title { font-size: 40px; margin: 0; font-weight: 700; letter-spacing: 0.2px; }
+.hero-sub { color: rgba(255,255,255,0.72); margin-top: 8px; max-width: 760px; margin-left: auto; margin-right: auto; }
+
+.card { background: linear-gradient(180deg, rgba(8,20,36,0.94), rgba(11,25,44,0.96)); border-radius: 16px; padding: 30px; box-shadow: 0 28px 80px rgba(8,12,30,0.7); border: 1px solid rgba(255,255,255,0.025); }
+.card-grid { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
+
+.form-area { padding: 6px 4px; }
+.row { display: flex; gap: 18px; margin-bottom: 16px; }
+.two-cols .field { flex: 1; }
+.field label { display: block; font-size: 13px; color: rgba(255,255,255,0.9); margin-bottom: 8px; font-weight: 600; }
+.input { width: 100%; padding: 14px 16px; border-radius: 12px; border: none; background: rgba(255,255,255,0.04); color: var(--ws-white); font-size: 15px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); transition: box-shadow 160ms ease, transform 120ms ease, background 120ms ease; }
+.input::placeholder { color: rgba(255,255,255,0.38); }
+.input:focus { outline: none; box-shadow: 0 8px 30px rgba(75,42,208,0.14); transform: translateY(-1px); background: rgba(255,255,255,0.03); }
+.hint { font-size: 13px; margin-top: 8px; }
+.hint.error { color: #ff6b6b; }
+
+.actions { justify-content: flex-end; }
+.btn { padding: 12px 24px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; letter-spacing: 0.25px; }
+.btn.primary { background: linear-gradient(90deg,#7b5bf2,#b94cbc); color: #fff; box-shadow: 0 14px 36px rgba(123,91,242,0.16); transition: transform 140ms cubic-bezier(.2,.9,.3,1), box-shadow 120ms ease; }
+.btn.primary:hover:not([disabled]) { transform: translateY(-3px); box-shadow: 0 20px 46px rgba(123,91,242,0.22); }
+.btn.primary:active:not([disabled]) { transform: translateY(-1px); }
+.btn[disabled] { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.62); cursor: not-allowed; box-shadow: none; }
+.btn.animate { animation: highlight 600ms ease; }
+@keyframes highlight { 0% { transform: scale(0.98); filter: brightness(0.85); } 60% { transform: scale(1.03); filter: brightness(1.05); } 100% { transform: scale(1); filter: none; } }
+
+.info-area { padding: 12px; display: flex; flex-direction: column; gap: 16px; }
+.tooltip { position: relative; display: none; }
+.tooltip-title { font-weight: 700; margin-bottom: 8px; }
+.requirements { padding-left: 12px; margin: 0 0 12px 0; }
+.requirements li { margin-bottom: 6px; opacity: 0.7; font-size: 14px; }
+.requirements li.ok { color: #7bf36b; opacity: 1; }
+.info-box { margin-top: 6px; padding: 14px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color: rgba(255,255,255,0.92); box-shadow: inset 0 1px 0 rgba(255,255,255,0.01); }
+.info-box h3 { margin: 0 0 8px 0; font-size: 16px; }
+.info-box p { margin: 0 0 8px 0; color: rgba(255,255,255,0.82); font-size: 14px; }
+.info-box ul { margin: 0; padding-left: 18px; font-size: 14px; }
+
+/* responsive adjustments */
+@media (max-width: 980px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .info-area { order: -1; }
+  .actions { justify-content: center; }
+}
+
+/* small screens: make inputs full width and increase spacing */
+@media (max-width: 420px) {
+  .input { padding: 12px; }
+  .hero-title { font-size: 28px; }
+}
 </style>
