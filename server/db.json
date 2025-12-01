@@ -54,10 +54,12 @@
       "date": "2025-10-13"
     }
   ],
-
+  "orders": [
+    { "id": 1001, "supplyName": "Red Wine", "supplier": "Distribuidora X", "quantity": 50, "status": "PENDING", "date": "2025-10-28" },
+    { "id": 1002, "supplyName": "White Wine", "supplier": "Proveedor Y", "quantity": 100, "status": "SHIPPED", "date": "2025-10-27" }
+  ],
   "dashboard": {
     "summary": {
-      "pendingOrders": 5,
       "monthlyCosts": 14200.50
     },
     "supplyLevels": [
@@ -75,7 +77,13 @@
       { "date": "2025-10-05", "movements": 7 },
       { "date": "2025-10-06", "movements": 10 },
       { "date": "2025-10-07", "movements": 9 }
+    ],
+    "orders": [
+      { "id": 1001, "status": "PENDING", "orderDate": "2025-10-28T10:00:00Z", "productId": 101, "quantity": 50 },
+      { "id": 1002, "status": "SHIPPED", "orderDate": "2025-10-27T14:30:00Z", "productId": 102, "quantity": 100 },
+      { "id": 1003, "status": "DELIVERED", "orderDate": "2025-10-25T09:15:00Z", "productId": 103, "quantity": 200 },
+      { "id": 1004, "status": "CANCELLED", "orderDate": "2025-10-24T11:00:00Z", "productId": 101, "quantity": 30 },
+      { "id": 1005, "status": "PENDING", "orderDate": "2025-10-28T12:00:00Z", "productId": 104, "quantity": 20 }
     ]
   }
-
 }

@@ -1,6 +1,7 @@
 import axios from "axios";  
 
-const platformApi = import.meta.env.VITE_WINESOFT_PLATFORM_API_URL;
+// Use the environment variable or fallback to the known backend URL
+const platformApi = import.meta.env.VITE_WINESOFT_PLATFORM_API_URL || 'https://winesoft-platform.onrender.com';
 
 /**
  * BaseApi class to handle HTTP requests using Axios.

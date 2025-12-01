@@ -7,6 +7,8 @@ const router = useRouter();
 const { t } = useI18n();
 const email = ref('');
 const password = ref('');
+const loading = ref(false);
+const errorMsg = ref('');
 
 const GITHUB_INFO_URL = 'https://github.com/1asi0730-2520-7469-Capa6/WineSoft-LandingPage';
 
@@ -14,8 +16,72 @@ function openMoreInfo() {
   window.open(GITHUB_INFO_URL, '_blank');
 }
 
-function onIngresar() {
-  router.push({ path: '/home' });
+async function onIngresar() {
+  errorMsg.value = '';
+  // simple form validation
+  if (!email.value || !password.value) {
+    errorMsg.value = t('login.email') + ' & ' + t('login.password') + ' are required';
+    return;
+  }
+
+  loading.value = true;
+
+  // Read API base from env (make sure .env.production points to base URL)
+  const base = import.meta.env.VITE_WINESOFT_PLATFORM_API_URL || '';
+  // If user typed an email, backend expects username key based on swagger screenshot
+  const payload = { username: email.value, password: password.value };
+
+  // Local fallback credentials
+  const LOCAL_USER = { username: 'admin', password: 'admin123' };
+
+  try {
+    // Try backend call only if base looks like a URL (starts with http)
+    if (base && base.startsWith('http')) {
+      // Ensure we don't send to the Swagger UI page by trimming any path like /swagger/index.html
+      const apiBase = base.replace(/\/swagger.*$/i, '').replace(/\/$/, '');
+      const signinUrl = `${apiBase}/api/iam/authentication/signin`;
+
+      const resp = await fetch(signinUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (resp.ok) {
+        // Optionally save token if backend returns one
+        try {
+          const data = await resp.json();
+          if (data && data.token) {
+            localStorage.setItem('ws_token', data.token);
+          }
+        } catch (e) {
+          // ignore parse errors
+        }
+        router.push({ path: '/home' });
+        return;
+      }
+    }
+
+    // If backend failed or base not configured, allow local admin credentials
+    if (email.value === LOCAL_USER.username && password.value === LOCAL_USER.password) {
+      localStorage.setItem('ws_token', 'local-admin-token');
+      router.push({ path: '/home' });
+      return;
+    }
+
+    // If we get here, auth failed
+    errorMsg.value = 'Credenciales inválidas o servicio no disponible.';
+  } catch (err) {
+    // network or unexpected error: allow local admin as fallback
+    if (email.value === LOCAL_USER.username && password.value === LOCAL_USER.password) {
+      localStorage.setItem('ws_token', 'local-admin-token');
+      router.push({ path: '/home' });
+      return;
+    }
+    errorMsg.value = 'Error de conexión al servidor';
+  } finally {
+    loading.value = false;
+  }
 }
 
 function onCrearCuenta() {
@@ -43,7 +109,12 @@ function onCrearCuenta() {
         <label class="input-label">{{ t('login.password') }}</label>
         <input v-model="password" type="password" class="text-input" :placeholder="t('login.passwordPlaceholder')" />
 
-        <button class="ingresar-btn" @click="onIngresar">{{ t('login.signIn') }}</button>
+        <div v-if="errorMsg" style="color:#ff4d4f;margin-top:8px">{{ errorMsg }}</div>
+
+        <button class="ingresar-btn" :disabled="loading || !email || !password" @click="onIngresar">
+          <span v-if="!loading">{{ t('login.signIn') }}</span>
+          <span v-else>...</span>
+        </button>
 
         <button class="link-btn" @click="onCrearCuenta">{{ t('login.createAccount') }}</button>
       </div>

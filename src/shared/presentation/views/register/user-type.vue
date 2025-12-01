@@ -9,7 +9,8 @@
     <div class="options">
       <button class="card" aria-label="Dueño" @click.prevent>
         <div class="img-wrap">
-          <img src="/dueño.jpeg" alt="Dueño" />
+          <!-- use safe filename (no ñ) that exists in /public -->
+          <img src="/dueno.jpeg" alt="Dueño" />
         </div>
         <div class="label">{{ t('register.owner') }}</div>
       </button>
