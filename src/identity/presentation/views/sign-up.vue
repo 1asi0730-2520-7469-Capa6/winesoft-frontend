@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
@@ -14,7 +14,12 @@ function openMoreInfo() {
   window.open(INFO_URL, '_blank', 'noopener,noreferrer');
 }
 
+const canSignIn = computed(() => {
+  return String(email.value || '').trim().length > 0 && String(password.value || '').trim().length > 0;
+});
+
 function onIngresar() {
+  if (!canSignIn.value) return; // prevent action when fields are empty
   router.push({ path: '/home' });
 }
 
@@ -28,50 +33,104 @@ function onRecuperar() {
 </script>
 
 <template>
-  <div class="login-page">
-    <div class="login-left">
-      <img src="/winesoft-logo.png" alt="WineSoft" class="logo" />
-      <h1 class="discover">{{ t('signIn.discoverLine1') }}<br/>{{ t('signIn.discoverLine2') }}</h1>
-
+  <div class="signin-layout">
+    <aside class="panel-left">
+      <img src="/winesoft-logo.png" alt="WineSoft" class="panel-logo" />
+      <h2 class="panel-title">WineSoft</h2>
+      <p class="panel-sub">Manage your winery supplies effortlessly</p>
       <button class="info-btn" @click="openMoreInfo">{{ t('signIn.moreInfo') }}</button>
-    </div>
+    </aside>
 
-    <div class="login-right">
-      <div class="login-card">
-        <h2>{{ t('signIn.welcome') }}</h2>
-        <p class="sub">{{ t('signIn.sub') }}</p>
+    <main class="panel-right">
+      <div class="card">
+        <header class="card-header">
+          <h1>{{ t('signIn.welcome') }}</h1>
+          <p class="muted">{{ t('signIn.sub') }}</p>
+        </header>
 
-        <label class="input-label">{{ t('signIn.email') }}</label>
-        <input v-model="email" class="text-input" :placeholder="t('signIn.emailPlaceholder')" />
+        <section class="card-body">
+          <label class="label">{{ t('signIn.email') }}</label>
+          <input v-model="email" class="input" :placeholder="t('signIn.emailPlaceholder')" />
 
-        <label class="input-label">{{ t('signIn.password') }}</label>
-        <input v-model="password" type="password" class="text-input" :placeholder="t('signIn.passwordPlaceholder')" />
+          <label class="label">{{ t('signSign.password') || t('signIn.password') }}</label>
+          <input v-model="password" type="password" class="input" :placeholder="t('signIn.passwordPlaceholder')" />
 
-        <button class="ingresar-btn" @click="onIngresar">{{ t('signIn.signIn') }}</button>
+          <button
+            class="btn primary"
+            :class="{ disabled: !canSignIn }"
+            :disabled="!canSignIn"
+            :aria-disabled="!canSignIn"
+            @click="onIngresar"
+          >
+            {{ t('signIn.signIn') }}
+          </button>
 
-        <button class="forgot-btn" @click="onRecuperar">{{ t('signIn.forgotPassword') }}</button>
-
-        <button class="link-btn" @click="onCrearCuenta">{{ t('signIn.createAccount') }}</button>
+          <div class="actions-row">
+            <button class="link" @click="onRecuperar">{{ t('signIn.forgotPassword') }}</button>
+            <button class="link" @click="onCrearCuenta">{{ t('signIn.createAccount') }}</button>
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
 <style scoped>
-/* ...existing styles copied from login.vue... */
-.login-page { display: flex; min-height: 100vh; background: var(--ws-bg-dark); color: var(--ws-white); align-items: center; justify-content: center; gap: 40px; padding: 40px; box-sizing: border-box; }
-.login-left { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; text-align: center; }
-.logo { width: 140px; max-width: 30%; margin-bottom: 24px; }
-.discover { font-size: 40px; font-weight: 300; line-height: 1.2; margin: 0 0 28px 0; color: var(--ws-white); max-width: 90%; }
-.info-btn { background: var(--ws-brand-purple); color: var(--ws-white); border: 4px solid #000; padding: 14px 36px; font-size: 24px; width: 420px; max-width: 85%; border-radius: 10px; cursor: pointer; }
-.login-right { width: 480px; display: flex; align-items: center; justify-content: center; }
-.login-card { background: rgba(255,255,255,0.04); color: var(--ws-white); padding: 32px; width: 100%; border: 4px solid #000; box-sizing: border-box; }
-.login-card h2 { font-size: 36px; margin: 0 0 16px 0; }
-.login-card .sub { font-size: 20px; margin-bottom: 18px; }
-.input-label { display: block; margin-top: 12px; color: rgba(255,255,255,0.8); font-size: 18px; }
-.text-input { width: 100%; padding: 14px; margin-top: 6px; font-size: 20px; box-sizing: border-box; border: none; background: var(--ws-gray-100); color: var(--ws-text-dark); }
-.ingresar-btn { margin-top: 20px; width: 100%; background: var(--ws-blue); color: var(--ws-white); padding: 14px; font-size: 28px; border: 2px solid #000; cursor: pointer; }
-.forgot-btn { margin-top: 8px; width: 100%; background: transparent; color: var(--ws-white); border: none; font-size: 16px; cursor: pointer; text-decoration: underline; }
-.link-btn { margin-top: 12px; background: transparent; color: var(--ws-white); border: none; font-size: 18px; cursor: pointer; }
-@media (max-width: 900px) { .login-page { flex-direction: column; padding: 24px; } .login-left { align-items: center; text-align: center; } .login-right { width: 100%; margin-top: 20px; } .logo { width: 90px; margin-bottom: 18px; } .discover { font-size: 28px; margin-bottom: 18px; } .info-btn { font-size: 20px; width: 80%; padding: 12px 20px; } }
+/* Layout */
+.signin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(7,11,24,1) 0%, rgba(11,29,57,1) 100%);
+  color: var(--ws-white);
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-left {
+  width: 320px;
+  padding: 48px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(180deg, rgba(75,42,208,0.12), rgba(75,42,208,0.08));
+  box-shadow: 0 8px 40px rgba(2,6,23,0.6);
+  border-right: 1px solid rgba(255,255,255,0.02);
+}
+.panel-logo { width: 78px; height: auto; filter: drop-shadow(0 6px 14px rgba(75,42,208,0.16)); }
+.panel-title { margin: 0; font-size: 20px; font-weight: 700; color: var(--ws-white); }
+.panel-sub { font-size: 14px; color: rgba(255,255,255,0.75); text-align: center; max-width: 220px; }
+.info-btn { margin-top: 12px; background: linear-gradient(90deg,var(--ws-brand-purple),var(--ws-brand-purple-dark)); color: #fff; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+
+.panel-right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; }
+.card {
+  width: 520px;
+  background: linear-gradient(180deg, rgba(7,13,30,0.95), rgba(9,20,36,0.95));
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(2,6,23,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.card-header h1 { margin: 0 0 6px 0; font-size: 28px; }
+.card-header .muted { margin: 0 0 18px 0; color: rgba(255,255,255,0.72); }
+
+/* Form */
+.label { display: block; margin-top: 12px; margin-bottom: 8px; font-size: 14px; color: rgba(255,255,255,0.85); }
+.input { width: 100%; padding: 12px 14px; border-radius: 10px; border: none; background: rgba(255,255,255,0.06); color: var(--ws-white); box-sizing: border-box; font-size: 16px; }
+.input::placeholder { color: rgba(255,255,255,0.5); }
+
+.btn { margin-top: 18px; width: 100%; padding: 12px 16px; font-size: 18px; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; }
+.btn.primary { background: linear-gradient(90deg, #7b5bf2, #b94cbc); color: white; box-shadow: 0 12px 30px rgba(75,42,208,0.16); }
+.btn.disabled, .btn[disabled] { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); cursor: not-allowed; box-shadow: none; }
+
+.actions-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+.link { background: transparent; border: none; color: rgba(255,255,255,0.8); cursor: pointer; text-decoration: underline; font-size: 14px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .signin-layout { flex-direction: column; padding: 24px; }
+  .panel-left { width: 100%; flex-direction: row; justify-content: space-between; padding: 18px; }
+  .panel-right { padding: 18px; }
+  .card { width: 100%; padding: 20px; }
+}
 </style>
