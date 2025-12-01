@@ -63,14 +63,6 @@ export const useAnalyticsStore = defineStore("analytics", () => {
             errors.value.push(error);
         }
     }
-    return {
-        data,
-        errors,
-        dataLoaded,
-        fetchAnalyticsData,
-        loadInitialData,
-        generatePdfReport
-    };
 
     async function generatePdfReport(startDate, endDate, widgets, language) {
         try {
@@ -92,12 +84,12 @@ export const useAnalyticsStore = defineStore("analytics", () => {
             return false;
         }
     }
-
     return {
         data,
         errors,
         dataLoaded,
         fetchAnalyticsData,
+        loadInitialData,
         generatePdfReport
     };
 });

@@ -15,7 +15,6 @@ const routes = [
     { path: '/sign-in/user-type', name: 'sign-in-user-type', component: () => import('./identity/presentation/views/sign-in/user-type.vue'), meta: { title: 'Tipo de Usuario' } },
     { path: '/recovery-password', name: 'recovery-password', component: () => import('./identity/presentation/views/recovery-password.vue'), meta: { title: 'Recuperar Contraseña' } },
     { path: '/inventory',      name: 'inventory', children: inventoryRoutes },
-    { path: '/orders',         name: 'orders',    children: ordersRoutes },
     { path: '/',                redirect: '/sign-in'},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: pageNotFound,    meta: { title: 'Page Not Found' } },
     { path: '/analytics', name: 'analytics-main', children: analyticsRoutes },
