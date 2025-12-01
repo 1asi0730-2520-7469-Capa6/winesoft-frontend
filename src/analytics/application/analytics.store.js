@@ -64,6 +64,7 @@ export const useAnalyticsStore = defineStore("analytics", () => {
         }
     }
 
+
     async function generatePdfReport(startDate, endDate, widgets, language) {
         try {
             const startStr = formatISO(startDate, { representation: 'date' });
@@ -90,6 +91,7 @@ export const useAnalyticsStore = defineStore("analytics", () => {
         errors,
         dataLoaded,
         fetchAnalyticsData,
+        loadInitialData,
         generatePdfReport
     };
 });
