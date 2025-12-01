@@ -24,7 +24,7 @@ const getStatusLabel = (status) => status; // Puedes agregar lógica de traducci
 
     <pv-data-table :value="store.orders" striped-rows paginator :rows="5">
       <pv-column field="id" :header="t('orders.id')" sortable />
-      <pv-column field="supplyName" header="Insumo" sortable />
+      <pv-column field="productName" header="Insumo" sortable />
       <pv-column field="supplier" :header="t('orders.supplier')" sortable />
       <pv-column field="quantity" :header="t('orders.quantity')" />
       <pv-column field="status" :header="t('orders.status')">

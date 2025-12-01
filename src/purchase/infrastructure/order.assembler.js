@@ -2,12 +2,18 @@ import { Order } from "../domain/model/order.entity.js";
 
 export class OrderAssembler {
     static toEntityFromResource(resource) {
-        return new Order({ ...resource });
+        return {
+            id: resource.id,
+            productId: resource.productId,
+            productName: resource.productName,
+            supplier: resource.supplier,
+            quantity: resource.quantity,
+            status: resource.status,
+            createdDate: resource.createdDate
+        };
     }
 
     static toEntitiesFromResponse(response) {
-        // json-server devuelve el array directamente en data
-        const resources = response.data;
-        return resources.map(resource => this.toEntityFromResource(resource));
+        return response.data.map(r => this.toEntityFromResource(r));
     }
 }
