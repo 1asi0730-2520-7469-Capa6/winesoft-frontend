@@ -67,10 +67,10 @@ const goToOrders = () => {
 <style scoped>
 .home-container {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  min-height: 100vh;
-  padding-top: 60px;
+  align-items: center; /* centrar vertical */
+  justify-content: center; /* centrar horizontal */
+  min-height: calc(100vh - 64px); /* restar altura del header fijo */
+  padding-top: 0; /* eliminar espacio superior que movía el contenido */
   padding-bottom: 80px;
   background: linear-gradient(180deg, var(--ws-bg-dark) 0%, var(--ws-bg-dark-end) 100%);
   color: var(--ws-white);
