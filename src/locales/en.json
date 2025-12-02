@@ -104,6 +104,7 @@
   },
   "signUp": {
     "title": "Create Account",
+    "subtitle": "Create your WineSoft account — manage supplies and inventory with ease.",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
     "lastName": "Last Name",
@@ -113,7 +114,7 @@
     "createPassword": "Create password",
     "passwordPlaceholder": "Password",
     "confirmPassword": "Confirm password",
-    "next": "Next",
+    "next": "Create Account",
     "passwordRequirementsTitle": "Password requirements",
     "passwordReqLength": "Between 8-20 characters",
     "passwordReqUpper": "Include uppercase and lowercase letters",
@@ -123,7 +124,10 @@
     "emailInvalid": "Not a valid email",
     "userTypeTitle": "What type of user are you?",
     "owner": "Owner",
-    "provider": "Provider"
+    "provider": "Provider",
+    "infoTitle": "Why create an account?",
+    "infoText": "Securely manage your supplies, track stock movements and generate purchase orders.",
+    "infoList": ["Real-time inventory","Order tracking","PDF reports"]
   },
   "signIn": {
     "discoverLine1": "Want to know more",
@@ -137,7 +141,14 @@
     "passwordPlaceholder": "Password",
     "signIn": "Sign In",
     "createAccount": "Create an account",
-    "forgotPassword": "Forgot your password?"
+    "forgotPassword": "Forgot your password?",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "invalidCredentials": "Invalid credentials",
+    "infoText": "Learn more about WineSoft on our Landing Page"
+  },
+  "common": {
+    "processing": "Processing..."
   },
   "recovery": {
     "title": "Reset your password",
