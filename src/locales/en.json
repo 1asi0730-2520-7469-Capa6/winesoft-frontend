@@ -113,7 +113,7 @@
     "createPassword": "Create password",
     "passwordPlaceholder": "Password",
     "confirmPassword": "Confirm password",
-    "next": "Next",
+    "next": "Create Account",
     "passwordRequirementsTitle": "Password requirements",
     "passwordReqLength": "Between 8-20 characters",
     "passwordReqUpper": "Include uppercase and lowercase letters",
