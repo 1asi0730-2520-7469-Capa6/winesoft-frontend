@@ -4,7 +4,10 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
 const router = useRouter();
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+// debug: ver cambios de locale
+try { watch(locale, (n) => console.log('[sign-in] locale ->', n)); } catch(e) {}
 
 const firstName = ref('');
 const lastName = ref('');
@@ -27,7 +30,9 @@ const hasSpecial = computed(() => /[^A-Za-z0-9]/.test(password.value));
 
 const emailValid = computed(() => /@/.test(email.value));
 const passwordsMatch = computed(() => password.value === passwordConfirm.value && password.value.length > 0);
-const isPasswordValid = computed(() => hasLength.value && hasUpper.value && hasLower.value && hasSpecial.value);
+// Aceptar cualquier contraseña no vacía (quitamos requisitos de mayúsculas/minúsculas/longitud/caracteres especiales)
+const isPasswordValid = computed(() => password.value.length > 0);
+// isFormValid ya no depende de hasLength/hasUpper/hasLower/hasSpecial
 const isFormValid = computed(() => isPasswordValid.value && passwordsMatch.value && emailValid.value && firstName.value.trim().length > 0 && lastName.value.trim().length > 0);
 
 const animateButton = ref(false);
@@ -100,44 +105,47 @@ onBeforeUnmount(() => {
       <div class="hero">
         <img src="/winesoft-logo.png" alt="logo" class="hero-logo" />
         <h2 class="hero-title">{{ t('signUp.title') }}</h2>
-        <p class="hero-sub">Create your WineSoft account — manage supplies and inventory with ease.</p>
+        <p class="hero-sub">{{ t('signUp.subtitle') }}</p>
       </div>
 
       <div class="card">
         <div class="card-grid">
           <div class="form-area">
+            <!-- 1: First name + Last name -->
             <div class="row two-cols">
               <div class="field">
-                <label>First name</label>
-                <input class="input" v-model="firstName" placeholder="First name" />
+                <label>{{ t('signUp.firstName') }}</label>
+                <input class="input" v-model="firstName" :placeholder="t('signUp.firstNamePlaceholder')" />
               </div>
               <div class="field">
-                <label>Create password</label>
-                <input ref="passwordInputRef" class="input" type="password" v-model="password" placeholder="Password" @focus="onPasswordFocus" @blur="onPasswordBlur" />
+                <label>{{ t('signUp.lastName') }}</label>
+                <input class="input" v-model="lastName" :placeholder="t('signUp.lastNamePlaceholder')" />
               </div>
             </div>
 
-            <div class="row two-cols">
-              <div class="field">
-                <label>Last name</label>
-                <input class="input" v-model="lastName" placeholder="Last name" />
-              </div>
-              <div class="field">
-                <label>Confirm password</label>
-                <input class="input" type="password" v-model="passwordConfirm" placeholder="Confirm password" />
-              </div>
-            </div>
-
+            <!-- 2: Email full width -->
             <div class="row">
-              <div class="field">
-                <label>Email</label>
-                <input class="input" v-model="email" placeholder="Email address" />
-                <div v-if="email && !emailValid" class="hint error">Invalid email</div>
+              <div class="field" style="width:100%;">
+                <label>{{ t('signUp.email') }}</label>
+                <input class="input" v-model="email" :placeholder="t('signUp.emailPlaceholder')" />
+                <div v-if="email && !emailValid" class="hint error">{{ t('signUp.emailInvalid') }}</div>
               </div>
             </div>
 
-            <div class="row actions">
-              <button class="btn primary" :disabled="!isFormValid" :class="{ animate: animateButton }" @click="onSiguiente">Next</button>
+            <!-- 3: Create password + Confirm password -->
+            <div class="row two-cols">
+              <div class="field">
+                <label>{{ t('signUp.createPassword') }}</label>
+                <input ref="passwordInputRef" class="input" type="password" v-model="password" :placeholder="t('signUp.passwordPlaceholder')" @focus="onPasswordFocus" @blur="onPasswordBlur" />
+              </div>
+              <div class="field">
+                <label>{{ t('signUp.confirmPassword') }}</label>
+                <input class="input" type="password" v-model="passwordConfirm" :placeholder="t('signUp.passwordPlaceholder')" />
+              </div>
+            </div>
+
+            <div class="row actions center">
+              <button class="btn primary" :disabled="!isFormValid" :class="{ animate: animateButton }" @click="onSiguiente">{{ t('signUp.next') }}</button>
             </div>
           </div>
 
@@ -161,12 +169,12 @@ onBeforeUnmount(() => {
             </div>
 
             <div class="info-box">
-              <h3>Why create an account?</h3>
-              <p>Securely manage your supplies, track stock movements and generate purchase orders.</p>
+              <h3>{{ t('signUp.infoTitle') }}</h3>
+              <p>{{ t('signUp.infoText') }}</p>
               <ul>
-                <li>Real-time inventory</li>
-                <li>Order tracking</li>
-                <li>PDF reports</li>
+                <li>{{ t('signUp.infoList.0') }}</li>
+                <li>{{ t('signUp.infoList.1') }}</li>
+                <li>{{ t('signUp.infoList.2') }}</li>
               </ul>
             </div>
 
@@ -199,6 +207,7 @@ onBeforeUnmount(() => {
 .hint.error { color: #ff6b6b; }
 
 .actions { justify-content: flex-end; }
+.actions.center { justify-content: center; }
 .btn { padding: 12px 24px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; letter-spacing: 0.25px; }
 .btn.primary { background: linear-gradient(90deg,#7b5bf2,#b94cbc); color: #fff; box-shadow: 0 14px 36px rgba(123,91,242,0.16); transition: transform 140ms cubic-bezier(.2,.9,.3,1), box-shadow 120ms ease; }
 .btn.primary:hover:not([disabled]) { transform: translateY(-3px); box-shadow: 0 20px 46px rgba(123,91,242,0.22); }

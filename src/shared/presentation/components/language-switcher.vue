@@ -1,23 +1,53 @@
 <script setup>
 import {useI18n} from "vue-i18n";
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
+import i18n from '../../../i18n.js';
 
-const { t, locale, availableLocales } = useI18n();
-const current = computed(() => (locale && locale.value ? String(locale.value).split('-')[0] : String(locale || 'en')));
-function setLocale(l) { locale.value = l; }
+const i18nHook = useI18n();
+const { locale, availableLocales: hookAvailable } = i18nHook || {};
+
+let rawAvailable = [];
+if (Array.isArray(hookAvailable) && hookAvailable.length > 0) {
+  rawAvailable = hookAvailable;
+} else if (Array.isArray(i18n.global && i18n.global.availableLocales) && i18n.global.availableLocales.length > 0) {
+  rawAvailable = i18n.global.availableLocales;
+} else {
+  try {
+    const possible = i18n.global && i18n.global.messages ? i18n.global.messages : null;
+    if (possible && typeof possible === 'object') {
+      rawAvailable = Object.keys(possible);
+    }
+  } catch (e) {
+    rawAvailable = [];
+  }
+}
+
+const locales = computed(() => Array.from(new Set(rawAvailable)).map(l => ({ code: String(l), short: String(l).split('-')[0] })));
+
+const currentFull = computed(() => (locale && locale.value) || (i18n && i18n.global && i18n.global.locale && i18n.global.locale.value) || 'en');
+const currentShort = computed(() => String(currentFull.value).split('-')[0]);
+
+try { watchEffect(() => console.log('[language-switcher] locales ->', locales.value, ' currentShort ->', currentShort.value)); } catch(e) {}
+
+function setLocale(l) {
+  try { if (locale) locale.value = l; } catch(e) {}
+  try { i18n.global.locale.value = l; } catch(e) {}
+  // debug
+  try { console.log('[language-switcher] setLocale ->', l); } catch(e) {}
+}
 </script>
 
 <template>
   <div class="language-switcher" role="tablist" aria-label="Language switcher">
     <button
-      v-for="(loc, i) in availableLocales"
-      :key="loc"
-      :class="['lang-btn', { active: current === loc, 'first': i === 0, 'last': i === availableLocales.length - 1 } ]"
-      @click="setLocale(loc)"
-      :aria-pressed="current === loc"
+      v-for="(loc, i) in locales"
+      :key="loc.code"
+      :class="['lang-btn', { active: currentShort === loc.short, 'first': i === 0, 'last': i === locales.length - 1 } ]"
+      @click="setLocale(loc.code)"
+      :aria-pressed="currentShort === loc.short"
       role="tab"
     >
-      {{ String(loc).toUpperCase() }}
+      {{ String(loc.short).toUpperCase() }}
     </button>
   </div>
 </template>

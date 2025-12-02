@@ -103,6 +103,7 @@
   },
   "signUp": {
     "title": "Crear Cuenta",
+    "subtitle": "Crea tu cuenta WineSoft — administra suministros e inventario con facilidad.",
     "firstName": "Nombres",
     "firstNamePlaceholder": "Nombres",
     "lastName": "Apellidos",
@@ -122,7 +123,14 @@
     "emailInvalid": "No es un correo válido",
     "userTypeTitle": "¿Qué tipo de usuario es usted?",
     "owner": "Dueño",
-    "provider": "Proveedor"
+    "provider": "Proveedor",
+    "infoTitle": "¿Por qué crear una cuenta?",
+    "infoText": "Administra tus suministros de forma segura, controla movimientos de stock y genera pedidos de compra.",
+    "infoList": [
+      "Inventario en tiempo real",
+      "Seguimiento de pedidos",
+      "Reportes PDF"
+    ]
   },
   "signIn": {
     "discoverLine1": "Deseas conocer más",

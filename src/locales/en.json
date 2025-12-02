@@ -103,6 +103,7 @@
   },
   "signUp": {
     "title": "Create Account",
+    "subtitle": "Create your WineSoft account — manage supplies and inventory with ease.",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
     "lastName": "Last Name",
@@ -122,7 +123,10 @@
     "emailInvalid": "Not a valid email",
     "userTypeTitle": "What type of user are you?",
     "owner": "Owner",
-    "provider": "Provider"
+    "provider": "Provider",
+    "infoTitle": "Why create an account?",
+    "infoText": "Securely manage your supplies, track stock movements and generate purchase orders.",
+    "infoList": ["Real-time inventory","Order tracking","PDF reports"]
   },
   "signIn": {
     "discoverLine1": "Want to know more",

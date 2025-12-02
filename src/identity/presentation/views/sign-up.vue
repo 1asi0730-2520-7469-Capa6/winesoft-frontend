@@ -52,7 +52,7 @@ function onRecuperar() {
           <label class="label">{{ t('signIn.email') }}</label>
           <input v-model="email" class="input" :placeholder="t('signIn.emailPlaceholder')" />
 
-          <label class="label">{{ t('signSign.password') || t('signIn.password') }}</label>
+          <label class="label">{{ t('signIn.password') }}</label>
           <input v-model="password" type="password" class="input" :placeholder="t('signIn.passwordPlaceholder')" />
 
           <button
