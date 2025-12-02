@@ -144,7 +144,14 @@
     "passwordPlaceholder": "Contraseña",
     "signIn": "Ingresar",
     "createAccount": "Crear una cuenta",
-    "forgotPassword": "¿Olvidaste tu contraseña?"
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "emailRequired": "El correo es obligatorio",
+    "passwordRequired": "La contraseña es obligatoria",
+    "invalidCredentials": "Credenciales inválidas",
+    "infoText": "Conoce más sobre WineSoft en nuestra Landing Page"
+  },
+  "common": {
+    "processing": "Procesando..."
   },
   "recovery": {
     "title": "Restablecer tu contraseña",

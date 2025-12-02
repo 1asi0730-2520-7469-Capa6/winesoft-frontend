@@ -17,7 +17,7 @@ const routes = [
     { path: '/inventory',      name: 'inventory', children: inventoryRoutes },
     { path: '/analytics', name: 'analytics-main', children: analyticsRoutes },
     { path: '/purchase/orders', name: 'purchase', children: purchaseRoutes },
-    { path: '/',                redirect: '/sign-up'},
+    { path: '/',                redirect: '/sign-in'},
     { path: '/:pathMatch(.*)*', name: 'not-found',  component: pageNotFound,    meta: { title: 'Page Not Found' } }
 ];
 

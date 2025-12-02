@@ -140,7 +140,14 @@
     "passwordPlaceholder": "Password",
     "signIn": "Sign In",
     "createAccount": "Create an account",
-    "forgotPassword": "Forgot your password?"
+    "forgotPassword": "Forgot your password?",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "invalidCredentials": "Invalid credentials",
+    "infoText": "Learn more about WineSoft on our Landing Page"
+  },
+  "common": {
+    "processing": "Processing..."
   },
   "recovery": {
     "title": "Reset your password",
