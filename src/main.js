@@ -16,7 +16,7 @@ import {
     ConfirmDialog, DataTable, Dialog,
     DialogService, Drawer, FileUpload, FloatLabel, IconField, InputIcon, InputNumber, InputText, Menu,
     Rating, Row, Select, SelectButton, Tag, Textarea, ProgressSpinner, Toast,
-    ToastService, Toolbar, Tooltip
+    ToastService, Toolbar, Tooltip, Calendar
 } from "primevue";
 import router from "./router.js";
 import pinia from "./pinia.js";
@@ -30,14 +30,14 @@ const WineSoftPreset = definePreset(Material, {
             200: '#cdbbff',
             300: '#b399ff',
             400: '#9476ff',
-            500: '#6C4CF6',   // Morado Branding WineSoft (texto en el header)
+            500: '#6C4CF6',
             600: '#5a3fe0',
             700: '#482fa8',
             800: '#342170',
             900: '#211338'
         },
         surface: {
-            0:   '#0B1D39', // fondo principal (azul marino)
+            0:   '#0B1D39',
             50:  '#0f263f',
             100: '#142a46',
             200: '#172f52'
@@ -58,7 +58,7 @@ createApp(App)
         theme: {
             preset: WineSoftPreset,
             options: {
-                darkModeSelector: '.dark' // opcional
+                darkModeSelector: '.dark'
             }
         }
     })
@@ -67,6 +67,7 @@ createApp(App)
     .use(ToastService)
     .component('pv-button', Button)
     .component('pv-card', Card)
+    .component('pv-calendar', Calendar)
     .component('pv-date-picker', DatePicker)
     .component('pv-popover', Popover)
     .component('pv-column', Column)

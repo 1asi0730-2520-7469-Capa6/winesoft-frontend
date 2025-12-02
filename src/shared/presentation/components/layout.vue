@@ -12,10 +12,11 @@ const router = useRouter();
 const route = useRoute();
 
 const items = [{label: "option.home", to: "/home", icon: "pi pi-home"},
-               {label: "option.analytics", to: "/analytics"},
+               {label: "option.analytics", to: "/analytics", icon: "pi pi-chart-line", },
                {label: "option.supplies", to: "/inventory/supplies", icon: "pi pi-box"},
-               {label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},
+               ///{label: "option.stockMovements", to: "/inventory/stock-movements", icon: "pi pi-chart-line"},
                {label: 'option.orders', to: '/purchase/orders', icon: 'pi pi-shopping-cart'},
+               {label: "option.profiles", to: '/profiles', icon: 'pi pi-user'},
               ];
 
 const isAuthView = computed(() => {

@@ -144,6 +144,8 @@ function onGoToSignIn() {
           <label class="label">{{ t('signUp.confirmPassword') }}</label>
           <input v-model="confirmPassword" type="password" class="input" :placeholder="t('signUp.confirmPassword')" />
           <p v-if="fieldErrors.confirmPassword" class="muted" style="color: #ffb4b4">{{ fieldErrors.confirmPassword }}</p>
+          <label class="label">{{ t('signIn.password') }}</label>
+          <input v-model="password" type="password" class="input" :placeholder="t('signIn.passwordPlaceholder')" />
 
           <button
             class="btn primary"
