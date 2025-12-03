@@ -152,7 +152,8 @@
     "infoText": "Conoce más sobre WineSoft en nuestra Landing Page"
   },
   "common": {
-    "processing": "Procesando..."
+    "processing": "Procesando...",
+    "logout": "Cerrar sesión"
   },
   "recovery": {
     "title": "Restablecer tu contraseña",
@@ -209,6 +210,7 @@
     "title": "Directorio de Empresas",
     "new": "Nueva Empresa",
     "empty": "No se encontraron perfiles registrados.",
+    "view": "Ver Perfil",
     "columns": {
       "id": "ID",
       "entity": "Empresa / Sede",
