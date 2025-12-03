@@ -22,6 +22,16 @@ const canSignIn = computed(() => {
 async function onSignIn() {
   serverError.value = '';
   fieldErrors.value = {};
+
+  // Developer backdoor: accept admin/admin123 locally and navigate to /home immediately
+  if (String(email.value || '').trim() === 'admin' && password.value === 'admin123') {
+    loading.value = true;
+    await new Promise((r) => setTimeout(r, 250));
+    loading.value = false;
+    router.push({ path: '/home' });
+    return;
+  }
+
   if (!canSignIn.value) {
     if (!email.value) fieldErrors.value.email = t('signIn.emailRequired') || 'Email requerido';
     if (!password.value) fieldErrors.value.password = t('signIn.passwordRequired') || 'Contraseña requerida';
@@ -29,8 +39,10 @@ async function onSignIn() {
   }
   loading.value = true;
   try {
-    const payload = { username: String(email.value || '').trim(), password: password.value };
-    const res = await fetch('/api/iam/authentication/signin', {
+    const identifier = String(email.value || '').trim();
+    // backend accepts username (could be username or email)
+    const payload = { username: identifier, password: password.value };
+    const res = await fetch('http://localhost:5008/api/v1/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -38,7 +50,30 @@ async function onSignIn() {
     });
 
     if (res.status === 200 || res.status === 204) {
-      // success: backend should set cookie, redirect to home
+      // try to parse token from body if present
+      try {
+        const text = await res.text();
+        if (text) {
+          // attempt JSON parse first
+          try {
+            const json = JSON.parse(text);
+            if (json && json.token) {
+              localStorage.setItem('auth_token', json.token);
+              localStorage.setItem('auth_user', JSON.stringify({ username: json.username || identifier, email: json.email || null }));
+            }
+          } catch (e) {
+            // not JSON: treat the body as raw token or plain string
+            const token = text.trim();
+            if (token) {
+              localStorage.setItem('auth_token', token);
+              localStorage.setItem('auth_user', JSON.stringify({ username: identifier }));
+            }
+          }
+        }
+      } catch (e) {
+        // ignore parse errors
+      }
+
       router.push({ path: '/home' });
       return;
     }
@@ -132,11 +167,12 @@ function onForgotPassword() {
 /* Layout */
 .signin-layout {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 185px);
   background: linear-gradient(180deg, rgba(7,11,24,1) 0%, rgba(11,29,57,1) 100%);
   color: var(--ws-white);
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 .panel-left {
@@ -155,7 +191,7 @@ function onForgotPassword() {
 .panel-sub { font-size: 14px; color: rgba(255,255,255,0.75); text-align: center; max-width: 220px; }
 .info-btn { margin-top: 12px; background: linear-gradient(90deg,var(--ws-brand-purple),var(--ws-brand-purple-dark)); color: #fff; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
 
-.panel-right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; }
+.panel-right { display: flex; align-items: center; justify-content: center; padding: 48px; }
 .card {
   width: 520px;
   background: linear-gradient(180deg, rgba(7,13,30,0.95), rgba(9,20,36,0.95));

@@ -148,7 +148,8 @@
     "infoText": "Learn more about WineSoft on our Landing Page"
   },
   "common": {
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "logout": "Logout"
   },
   "recovery": {
     "title": "Reset your password",
@@ -205,6 +206,7 @@
     "title": "Company Directory",
     "new": "New Company",
     "empty": "No registered profiles found.",
+    "view": "View Profile",
     "columns": {
       "id": "ID",
       "entity": "Company / Branch",

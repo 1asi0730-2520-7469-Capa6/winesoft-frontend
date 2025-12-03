@@ -11,7 +11,7 @@ const router = useRouter();
 const store = useInventoryStore();
 const { errors, addSupply, updateSupply } = store;
 
-const form = ref({ supplyName: null, quantity: 0, unit:"", supplier: "", price: 0, date: "" });
+const form = ref({ supplyName: null, quantity: 0, unit:"", supplier: "", price: 0, date: null });
 const isEdit = computed(() => !!route.params.id);
 
 onMounted(() => {
@@ -29,6 +29,10 @@ onMounted(() => {
 });
 
 const saveSupply = () => {
+  if (!form.value.date) {
+    console.error("La fecha es obligatoria");
+    return;
+  }
   const supply = new Supply({
     id: isEdit.value ? parseInt(route.params.id) : null,
     supplyName: form.value.supplyName,
@@ -74,7 +78,7 @@ const navigateBack = () => {
       </div>
       <div class="field mb-3">
         <label for="date">{{ t("supplies.date") }}</label>
-        <pv-calendar id="date" v-model="form.date" date-format="yy-mm-dd" show-icon class="w-full" />
+        <pv-date-picker id="date" v-model="form.date" date-format="yy-mm-dd" show-icon fluid class="w-full" required />
       </div>
       <pv-button type="submit" :label="t('supplies.save')" icon="pi pi-save" />
       <pv-button :label="t('supplies.cancel')" severity="secondary" class="ml-2" @click="navigateBack" />

@@ -41,21 +41,21 @@ const goToOrders = () => {
           <div class="mt-8 flex justify-center gap-5 home-options-center">
             <pv-button
                 class="home-btn"
-                :label="`📦 ${t('home.manage-supplies')}`"
+                :label="`${t('home.manage-supplies')}`"
                 icon="pi pi-box"
                 severity="primary"
                 @click="goToSupplies"
             />
             <pv-button
                 class="home-btn home-btn-neutral"
-                :label="`📊 ${t('home.views-stock')}`"
+                :label="`${t('home.views-stock')}`"
                 icon="pi pi-chart-line"
                 severity="secondary"
                 @click="goToStock"
             />
             <pv-button
                 class="home-btn"
-                :label="`🛒 ${t('option.orders')}`"
+                :label="`${t('option.orders')}`"
                 icon="pi pi-shopping-cart"
                 severity="help"
                 @click="goToOrders"
