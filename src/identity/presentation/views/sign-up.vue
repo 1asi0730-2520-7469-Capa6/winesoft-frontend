@@ -2,9 +2,11 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useAuthStore } from '../../application/auth.store.js';
 
 const router = useRouter();
 const { t } = useI18n();
+const auth = useAuthStore();
 
 const displayName = ref('');
 const email = ref('');
@@ -77,50 +79,29 @@ async function onCreateAccount() {
       displayName: String(displayName.value || '').trim()
     };
 
-    const res = await fetch('http://localhost:5008/api/v1/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // important to receive HttpOnly cookie
-      body: JSON.stringify(payload)
-    });
+    await auth.register(payload);
 
-    if (res.status === 201 || res.status === 200) {
-      // registration succeeded - show success message and send user to sign-in
-      try { window.alert('Registrado correctamente'); } catch (e) {}
-      router.push({ path: '/sign-in' });
-      return;
-    }
-
-    if (res.status === 409) {
-      serverError.value = 'El usuario ya existe.';
-      return;
-    }
-
-    if (res.status === 400) {
-      // try to read validation details
-      try {
-        const body = await res.json();
-        if (body && typeof body === 'object') {
-          // map known fields
-          if (body.errors) {
-            // ASP.NET style validation
-            for (const key in body.errors) {
-              fieldErrors.value[key] = (body.errors[key] && body.errors[key][0]) || String(body.errors[key]);
-            }
-          } else if (body.message) {
-            serverError.value = body.message;
-          }
-        }
-      } catch (e) {
-        serverError.value = t('errors.occurred') || 'Ocurrió un error';
-      }
-      return;
-    }
-
-    // other errors
-    serverError.value = `Error ${res.status}: ${res.statusText}`;
+    // registration succeeded - show success message and send user to sign-in
+    try { window.alert('Registrado correctamente'); } catch (e) {}
+    router.push({ path: '/sign-in' });
+    return;
   } catch (err) {
-    serverError.value = String(err.message || err);
+    // map known errors
+    serverError.value = auth.error || String(err && err.message ? err.message : err) || (t('errors.occurred') || 'Ocurrió un error');
+
+    // If the auth.error contains field details in JSON, try to extract
+    try {
+      const parsed = JSON.parse(serverError.value);
+      if (parsed && parsed.errors) {
+        for (const k in parsed.errors) {
+          fieldErrors.value[k] = (parsed.errors[k] && parsed.errors[k][0]) || String(parsed.errors[k]);
+        }
+        serverError.value = '';
+      }
+    } catch (e) {
+      // ignore parse
+    }
+
   } finally {
     loading.value = false;
   }

@@ -2,9 +2,11 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useAuthStore } from '../../application/auth.store.js';
 
 const router = useRouter();
 const { t } = useI18n();
+const auth = useAuthStore();
 
 const email = ref('');
 const password = ref('');
@@ -40,68 +42,14 @@ async function onSignIn() {
   loading.value = true;
   try {
     const identifier = String(email.value || '').trim();
-    // backend accepts username (could be username or email)
-    const payload = { username: identifier, password: password.value };
-    const res = await fetch('http://localhost:5008/api/v1/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(payload)
-    });
+    // Use auth store to login
+    await auth.login({ username: identifier, password: password.value });
 
-    if (res.status === 200 || res.status === 204) {
-      // try to parse token from body if present
-      try {
-        const text = await res.text();
-        if (text) {
-          // attempt JSON parse first
-          try {
-            const json = JSON.parse(text);
-            if (json && json.token) {
-              localStorage.setItem('auth_token', json.token);
-              localStorage.setItem('auth_user', JSON.stringify({ username: json.username || identifier, email: json.email || null }));
-            }
-          } catch (e) {
-            // not JSON: treat the body as raw token or plain string
-            const token = text.trim();
-            if (token) {
-              localStorage.setItem('auth_token', token);
-              localStorage.setItem('auth_user', JSON.stringify({ username: identifier }));
-            }
-          }
-        }
-      } catch (e) {
-        // ignore parse errors
-      }
-
-      router.push({ path: '/home' });
-      return;
-    }
-
-    if (res.status === 401) {
-      serverError.value = t('signIn.invalidCredentials') || 'Credenciales inválidas';
-      return;
-    }
-
-    // try to read message for 400 responses
-    if (res.status === 400) {
-      try {
-        const body = await res.json();
-        if (body && typeof body === 'object') {
-          if (body.message) serverError.value = body.message;
-          else if (body.errors) {
-            for (const k in body.errors) fieldErrors.value[k] = (body.errors[k] && body.errors[k][0]) || String(body.errors[k]);
-          }
-        }
-      } catch (e) {
-        serverError.value = t('errors.occurred') || 'Ocurrió un error';
-      }
-      return;
-    }
-
-    serverError.value = `Error ${res.status}: ${res.statusText}`;
+    router.push({ path: '/home' });
+    return;
   } catch (err) {
-    serverError.value = String(err && err.message ? err.message : err);
+    // use error from store or fallback
+    serverError.value = auth.error || String(err && err.message ? err.message : err) || (t('signIn.invalidCredentials') || 'Credenciales inválidas');
   } finally {
     loading.value = false;
   }
