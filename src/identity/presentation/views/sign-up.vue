@@ -163,8 +163,6 @@ function onGoToSignIn() {
           <label class="label">{{ t('signUp.confirmPassword') }}</label>
           <input v-model="confirmPassword" type="password" class="input" :placeholder="t('signUp.confirmPassword')" />
           <p v-if="fieldErrors.confirmPassword" class="muted" style="color: #ffb4b4">{{ fieldErrors.confirmPassword }}</p>
-          <label class="label">{{ t('signIn.password') }}</label>
-          <input v-model="password" type="password" class="input" :placeholder="t('signIn.passwordPlaceholder')" />
 
           <button
             class="btn primary"
@@ -180,7 +178,6 @@ function onGoToSignIn() {
           <p v-if="serverError" class="muted" style="color: #ffb4b4; margin-top: 10px">{{ serverError }}</p>
 
           <div class="actions-row" style="margin-top: 14px">
-            <button class="link" @click="onGoToSignIn">{{ t('signIn.signIn') }}</button>
             <button class="link" @click="onGoToSignIn">{{ t('signIn.signIn') }}</button>
           </div>
         </section>
