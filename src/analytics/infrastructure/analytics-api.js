@@ -16,8 +16,9 @@ export class AnalyticsApi extends BaseApi {
     }
 
     getPurchaseOrders() {
-        return this.http.get(`${this.#analyticsEndpointPath}/purchase-orders/last-7-days`);
+        return this.http.get(`${this.#analyticsEndpointPath}/last-week-purchase-orders`);
     }
+
 
     getSupplyLevels() {
         return this.http.get(`${this.#analyticsEndpointPath}/supply-levels`);
@@ -31,14 +32,14 @@ export class AnalyticsApi extends BaseApi {
         const params = {};
         if (startDate) params.StartDate = startDate;
         if (endDate) params.EndDate = endDate;
-        return this.http.get(`${this.#analyticsEndpointPath}/supply-rotation`, { params });
+        return this.http.get(`${this.#analyticsEndpointPath}/supply-rotation-metrics`, { params });
     }
 
     getCostsSummary(startDate = null, endDate = null) {
         const params = {};
         if (startDate) params.StartDate = startDate;
         if (endDate) params.EndDate = endDate;
-        return this.http.get(`${this.#analyticsEndpointPath}/costs-summary`, { params });
+        return this.http.get(`${this.#analyticsEndpointPath}/inventory-kpis`, { params });
     }
 
     generateReport(startDate, endDate, widgets, language) {
