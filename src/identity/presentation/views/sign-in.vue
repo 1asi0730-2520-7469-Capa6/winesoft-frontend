@@ -167,11 +167,12 @@ function onForgotPassword() {
 /* Layout */
 .signin-layout {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 185px);
   background: linear-gradient(180deg, rgba(7,11,24,1) 0%, rgba(11,29,57,1) 100%);
   color: var(--ws-white);
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 .panel-left {
@@ -190,7 +191,7 @@ function onForgotPassword() {
 .panel-sub { font-size: 14px; color: rgba(255,255,255,0.75); text-align: center; max-width: 220px; }
 .info-btn { margin-top: 12px; background: linear-gradient(90deg,var(--ws-brand-purple),var(--ws-brand-purple-dark)); color: #fff; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; }
 
-.panel-right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; }
+.panel-right { display: flex; align-items: center; justify-content: center; padding: 48px; }
 .card {
   width: 520px;
   background: linear-gradient(180deg, rgba(7,13,30,0.95), rgba(9,20,36,0.95));

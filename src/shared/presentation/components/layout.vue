@@ -81,6 +81,20 @@ function loadAuthUser() {
   }
 }
 
+const displayUsername = computed(() => {
+  if (!authUser.value) return '';
+  if (authUser.value.displayName) return authUser.value.displayName;
+  return authUser.value.username || authUser.value.email;
+});
+
+const displayEmail = computed(() => {
+  if (!authUser.value) return '';
+  if (authUser.value.email && authUser.value.email !== displayUsername.value) {
+    return authUser.value.email;
+  }
+  return '';
+});
+
 function logout() {
   try {
     localStorage.removeItem('auth_token');
@@ -128,14 +142,15 @@ onBeforeUnmount(() => {
       <!-- Profile block (new) -->
       <div class="side-profile" v-if="authUser">
         <div class="profile-info">
-          <div class="avatar">{{ (authUser.username || authUser.email || 'U').charAt(0).toUpperCase() }}</div>
+          <div class="avatar">{{(displayUsername || 'U').charAt(0).toUpperCase() }}</div>
           <div class="meta">
-            <div class="name">{{ authUser.username ? authUser.username : (authUser.email || '') }}</div>
-            <div v-if="authUser.username && authUser.email" class="email">{{ authUser.email }}</div>
-            <div class="role">{{ safeT('profile.view', 'Perfil') }}</div>
+            <div class="name" :title="displayUsername">{{ displayUsername }}</div>
+            <div v-if="displayEmail" class="email" :title="displayEmail">{{ displayEmail }}</div>
+            <div class="role">{{ safeT('profile.view', 'Ver Perfil') }}</div>
           </div>
         </div>
-        <button class="logout-btn" @click="logout">{{ safeT('common.logout', 'Cerrar sesión') }}</button>
+        <button class="logout-btn" @click="logout">
+          <i class="pi pi-sign-out mr-2"></i> {{ safeT('common.logout', 'Cerrar sesión') }}</button>
       </div>
 
       <div class="side-footer">
@@ -209,7 +224,7 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 220px;
+  width: 240px;
   background: linear-gradient(180deg, var(--ws-bg-dark, #120f24), var(--ws-brand-purple-dark, #4B2AD0));
   color: var(--ws-white);
   padding: 28px 18px;
@@ -221,9 +236,9 @@ onBeforeUnmount(() => {
 }
 .side-top { text-align: center; margin-bottom: 24px; }
 .side-top .logo { height: 48px; width: auto; margin: 0 auto 8px; filter: drop-shadow(0 6px 10px rgba(75,42,208,0.18)); }
-.side-top .brand { margin: 0; font-size: 1.1rem; color: var(--ws-white); }
+.side-top .brand { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--ws-white); }
 
-.side-menu { flex: 1 1 auto; }
+.side-menu { flex: 1 1 auto; overflow-y: auto; overflow-x: hidden;}
 .side-menu ul { list-style: none; padding: 0; margin: 0; }
 .side-menu li { margin: 12px 0; }
 .side-link {
@@ -235,32 +250,54 @@ onBeforeUnmount(() => {
   border-radius: 10px;
   text-decoration: none;
 }
-.side-link:hover { background: rgba(255,255,255,0.03); color: var(--ws-white); }
-.side-link i { width: 22px; text-align: center; }
+.side-link:hover .side-link.router-link-active {
+  background: rgba(255,255,255,0.1);
+  color: var(--ws-white);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.side-link i { font-size: 1.1rem; min-width: 20px; text-align: center; }
 
 .side-profile {
-  margin: 12px 0 8px;
-  padding: 12px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.02);
+  margin-top: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255,255,255,0.05);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
-.profile-info { display:flex; gap: 12px; align-items: center; }
+
+.profile-info { display:flex; gap: 12px; align-items: center; width: 100%; overflow: hidden;}
 .avatar {
   width: 44px; height: 44px; border-radius: 22px; display:flex; align-items:center; justify-content:center;
   background: linear-gradient(90deg,#7b5bf2,#b94cbc); color: white; font-weight: 700; font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); flex-shrink: 0;
 }
 .profile-info .name { font-weight: 700; }
 .profile-info .role { font-size: 12px; color: rgba(255,255,255,0.6); }
-.logout-btn {
-  margin-top: 6px; padding: 8px 10px; border-radius: 8px; border: none; cursor: pointer;
-  background: transparent; color: rgba(255,255,255,0.9); text-align: left;
-}
+
 .logout-btn:hover { background: rgba(255,255,255,0.02); }
 
-.side-footer { margin-top: 12px; display: flex; flex-direction: column; gap: 12px; }
+.meta {display: flex; flex-direction: column; justify-content: center; flex: 1;
+  min-width: 0; /* IMPORTANTE: Permite que el texto se corte con ellipsis */
+}
+.name {font-weight: 600;font-size: 0.9rem; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;color: var(--ws-white);
+}
+.email {font-size: 0.75rem; color: rgba(255,255,255,0.6); white-space: nowrap;overflow: hidden; text-overflow: ellipsis;margin-top: 2px;
+}
+.role {font-size: 0.7rem; color: var(#8F7BFF); margin-top: 2px; font-weight: 500;
+}
+.logout-btn { width: 100%; padding: 8px 12px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1); cursor: pointer;
+  background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+}
+.logout-btn:hover { background: rgba(255,50,50,0.2); border-color: rgba(255,50,50,0.3); color: #fff; }
+
+.side-footer { margin-top: 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; width: 100%;
+}
 
 /* Estilos del header superior (solo para vistas auth) */
 .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1200; pointer-events: auto; }
@@ -279,9 +316,18 @@ onBeforeUnmount(() => {
 .nav-items { display: flex; gap: 12px; align-items: center; }
 .logo { height: 48px; width: auto; margin-bottom: 0.25rem; filter: drop-shadow(0 0 6px rgba(0,0,0,0.35)); }
 
+.with-side .auth-content::before,
+.auth-content::before {
+  display: none !important;
+}
+.layout-flex:not(.with-side) .auth-content {
+  margin-left: 0 !important;
+}
+
 /* Ajustes del contenido principal según si hay sidebar o no */
-.main-content {
+.with-side.main-content {
   margin-top: 64px; /* por el header */
+  margin-left: 240px;
   padding: 2rem;
   flex: 1 0 auto;
   display: flex;
@@ -293,7 +339,8 @@ onBeforeUnmount(() => {
 /* Cuando hay sidebar, empujar el contenido a la derecha y quitar el margin-top (la sidebar ocupa todo el alto) */
 .with-side .main-content {
   margin-top: 0;
-  margin-left: 220px;
+  margin-left: 290px;
+  margin-right: 50px;
   min-height: 100vh;
   padding-top: 3.5rem;
   position: relative;
@@ -319,8 +366,11 @@ onBeforeUnmount(() => {
 
 /* Mobile tweak: cuando la sidebar reduce su ancho, ajustar el inicio del panel fijo */
 @media (max-width: 900px) {
-  .side-nav { width: 72px; }
-  .with-side .main-content::before { left: 72px; }
+  .side-nav { width: 80px; padding: 20px 10px; }
+  .side-top .brand, .side-link span, .side-profile, .side-footer { display: none; }
+  .side-link { justify-content: center; padding: 12px; }
+  .with-side .main-content { margin-left: 80px; }
+  .with-side .main-content::before { left: 80px; }
 }
 
 /* add email style */
