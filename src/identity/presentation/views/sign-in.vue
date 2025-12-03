@@ -22,6 +22,16 @@ const canSignIn = computed(() => {
 async function onSignIn() {
   serverError.value = '';
   fieldErrors.value = {};
+
+  // Developer backdoor: accept admin/admin123 locally and navigate to /home immediately
+  if (String(email.value || '').trim() === 'admin' && password.value === 'admin123') {
+    loading.value = true;
+    await new Promise((r) => setTimeout(r, 250));
+    loading.value = false;
+    router.push({ path: '/home' });
+    return;
+  }
+
   if (!canSignIn.value) {
     if (!email.value) fieldErrors.value.email = t('signIn.emailRequired') || 'Email requerido';
     if (!password.value) fieldErrors.value.password = t('signIn.passwordRequired') || 'Contraseña requerida';
@@ -29,8 +39,10 @@ async function onSignIn() {
   }
   loading.value = true;
   try {
-    const payload = { username: String(email.value || '').trim(), password: password.value };
-    const res = await fetch('/api/iam/authentication/signin', {
+    const identifier = String(email.value || '').trim();
+    // backend accepts username (could be username or email)
+    const payload = { username: identifier, password: password.value };
+    const res = await fetch('http://localhost:5008/api/v1/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -38,7 +50,30 @@ async function onSignIn() {
     });
 
     if (res.status === 200 || res.status === 204) {
-      // success: backend should set cookie, redirect to home
+      // try to parse token from body if present
+      try {
+        const text = await res.text();
+        if (text) {
+          // attempt JSON parse first
+          try {
+            const json = JSON.parse(text);
+            if (json && json.token) {
+              localStorage.setItem('auth_token', json.token);
+              localStorage.setItem('auth_user', JSON.stringify({ username: json.username || identifier, email: json.email || null }));
+            }
+          } catch (e) {
+            // not JSON: treat the body as raw token or plain string
+            const token = text.trim();
+            if (token) {
+              localStorage.setItem('auth_token', token);
+              localStorage.setItem('auth_user', JSON.stringify({ username: identifier }));
+            }
+          }
+        }
+      } catch (e) {
+        // ignore parse errors
+      }
+
       router.push({ path: '/home' });
       return;
     }

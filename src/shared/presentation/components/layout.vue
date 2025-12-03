@@ -1,6 +1,6 @@
 <script setup>
 import {useI18n}from "vue-i18n";
-import {ref, computed, watch} from "vue";
+import {ref, computed, watch, onMounted, onBeforeUnmount} from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
@@ -55,6 +55,53 @@ const headerSignIn = computed(() => {
 watch(locale, (newLocale) => {
   console.log('[i18n debug] locale ->', newLocale);
 });
+
+// Safe translation helper: return fallback when t(key) equals the key (missing translation)
+function safeT(key, fallback) {
+  try {
+    const val = t(key);
+    // When vue-i18n can't find the key it usually returns the key itself
+    if (!val || String(val) === String(key)) return fallback || '';
+    return val;
+  } catch (e) {
+    return fallback || '';
+  }
+}
+
+// --- New: profile state and logout ---
+const authUser = ref(null);
+
+function loadAuthUser() {
+  try {
+    const raw = localStorage.getItem('auth_user');
+    if (raw) authUser.value = JSON.parse(raw);
+    else authUser.value = null;
+  } catch (e) {
+    authUser.value = null;
+  }
+}
+
+function logout() {
+  try {
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_user');
+  } catch (e) {
+    // ignore
+  }
+  router.push({ path: '/sign-in' });
+}
+
+function onStorageEvent(e) {
+  if (e.key === 'auth_user' || e.key === 'auth_token') loadAuthUser();
+}
+
+onMounted(() => {
+  loadAuthUser();
+  window.addEventListener('storage', onStorageEvent);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener('storage', onStorageEvent);
+});
 </script>
 <template>
   <pv-toast/>
@@ -77,6 +124,19 @@ watch(locale, (newLocale) => {
           </li>
         </ul>
       </nav>
+
+      <!-- Profile block (new) -->
+      <div class="side-profile" v-if="authUser">
+        <div class="profile-info">
+          <div class="avatar">{{ (authUser.username || authUser.email || 'U').charAt(0).toUpperCase() }}</div>
+          <div class="meta">
+            <div class="name">{{ authUser.username ? authUser.username : (authUser.email || '') }}</div>
+            <div v-if="authUser.username && authUser.email" class="email">{{ authUser.email }}</div>
+            <div class="role">{{ safeT('profile.view', 'Perfil') }}</div>
+          </div>
+        </div>
+        <button class="logout-btn" @click="logout">{{ safeT('common.logout', 'Cerrar sesión') }}</button>
+      </div>
 
       <div class="side-footer">
         <notification-center />
@@ -178,6 +238,28 @@ watch(locale, (newLocale) => {
 .side-link:hover { background: rgba(255,255,255,0.03); color: var(--ws-white); }
 .side-link i { width: 22px; text-align: center; }
 
+.side-profile {
+  margin: 12px 0 8px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.profile-info { display:flex; gap: 12px; align-items: center; }
+.avatar {
+  width: 44px; height: 44px; border-radius: 22px; display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(90deg,#7b5bf2,#b94cbc); color: white; font-weight: 700; font-size: 18px;
+}
+.profile-info .name { font-weight: 700; }
+.profile-info .role { font-size: 12px; color: rgba(255,255,255,0.6); }
+.logout-btn {
+  margin-top: 6px; padding: 8px 10px; border-radius: 8px; border: none; cursor: pointer;
+  background: transparent; color: rgba(255,255,255,0.9); text-align: left;
+}
+.logout-btn:hover { background: rgba(255,255,255,0.02); }
+
 .side-footer { margin-top: 12px; display: flex; flex-direction: column; gap: 12px; }
 
 /* Estilos del header superior (solo para vistas auth) */
@@ -240,4 +322,7 @@ watch(locale, (newLocale) => {
   .side-nav { width: 72px; }
   .with-side .main-content::before { left: 72px; }
 }
+
+/* add email style */
+.email { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
 </style>

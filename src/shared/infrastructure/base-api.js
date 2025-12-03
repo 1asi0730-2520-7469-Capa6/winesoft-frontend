@@ -1,6 +1,6 @@
 import axios from "axios";  
 
-const platformApi = import.meta.env.VITE_WINESOFT_PLATFORM_API_URL;
+const platformApi = import.meta.env.VITE_WINESOFT_PLATFORM_API_URL || 'http://localhost:5008/api/v1';
 
 /**
  * BaseApi class to handle HTTP requests using Axios.
@@ -17,7 +17,24 @@ export class BaseApi {
      * Initializes the Axios instance with the base URL.
      */
     constructor() {
-        this.#http = axios.create({ baseURL: platformApi });
+        this.#http = axios.create({ baseURL: platformApi, withCredentials: true });
+
+        // Attach token from localStorage (if present) to each request
+        this.#http.interceptors.request.use((config) => {
+            try {
+                const token = localStorage.getItem('auth_token');
+                if (token) {
+                    if (!config.headers) config.headers = {};
+                    // only set if not already provided
+                    if (!config.headers.Authorization && !config.headers.authorization) {
+                        config.headers.Authorization = `Bearer ${token}`;
+                    }
+                }
+            } catch (e) {
+                // ignore localStorage access errors
+            }
+            return config;
+        }, (error) => Promise.reject(error));
     }
 
     /**
